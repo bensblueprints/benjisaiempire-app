@@ -4,8 +4,9 @@ WORKDIR /app
 RUN apk add --no-cache openssl libc6-compat
 
 FROM base AS deps
-COPY package.json package-lock.json* ./
-RUN if [ -f package-lock.json ]; then npm ci --include=dev; else npm install --include=dev; fi
+COPY package.json ./
+# install (no lockfile copied — Windows-generated lockfile mismatches alpine platform deps)
+RUN npm install --include=dev --no-audit --no-fund
 
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
