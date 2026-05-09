@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "30-Day Cold Calling Challenge — Included with $10 Insider · Benji's AI Empire",
   description: "100 calls. 30 days. Goal: 10 new clients. The master script + the cadence + watching me dial live on Tuesdays. Included with $10 Insider.",
   alternates: { canonical: "https://benjisaiempire.com/cold-call-30/" },
-  openGraph: { title: "30-Day Cold Calling Challenge — Included with $10 Insider", description: "100 calls. 30 days. Goal: 10 new clients. The master script + the live cadence.", url: "https://benjisaiempire.com/cold-call-30/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg" }], type: "website" }
+  openGraph: { title: "30-Day Cold Calling Challenge — Included with $10 Insider", description: "100 calls. 30 days. Goal: 10 new clients. The master script + the live cadence.", url: "https://benjisaiempire.com/cold-call-30/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -262,7 +262,7 @@ export default function Page() {
         <a class="cc-hero__cta" href="/insider/">Get this + everything for $10/mo</a>
       </div>
       <figure class="cc-hero__media">
-        <img src="/images/streaming-rig.jpg" alt="The streaming rig — every Tuesday cold call live runs from here." loading="eager" />
+        <img src="/images/streaming-rig.jpg?v=2" alt="The streaming rig — every Tuesday cold call live runs from here." loading="eager" />
         <figcaption class="cc-hero__cap">
           <span>Tuesday Cold Call Live</span><span>10 Clients · 30 Days</span>
         </figcaption>

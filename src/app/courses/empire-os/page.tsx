@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Empire OS — Included with $10 Insider · Benji's AI Empire",
   description: "How I run the agency. Systems, hires, finance, fulfillment. The boring stuff that compounds. The operating manual behind the YouTube. Included with $10 Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/empire-os/" },
-  openGraph: { title: "Empire OS — Course 04 / 04", description: "The operating manual behind the YouTube. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/empire-os/", images: [{ url: "https://benjisaiempire.com/images/hero-petronas-2.jpg" }], type: "article" }
+  openGraph: { title: "Empire OS — Course 04 / 04", description: "The operating manual behind the YouTube. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/empire-os/", images: [{ url: "https://benjisaiempire.com/images/hero-petronas-2.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -16,7 +16,7 @@ export default function Page() {
   /* ========== EMPIRE OS — CINEMATIC FULL-BLEED HERO + LEDGER ========== */
   .course-hero{
     position:relative; min-height:96vh;
-    background:url('/images/hero-petronas-2.jpg') center/cover no-repeat var(--ink);
+    background:url('/images/hero-petronas-2.jpg?v=2') center/cover no-repeat var(--ink);
     color:var(--cream); overflow:hidden; isolation:isolate;
     border-bottom:1px solid var(--line);
     display:flex; align-items:flex-end;
@@ -159,7 +159,7 @@ export default function Page() {
 
   .cta-strip{
     position:relative; overflow:hidden;
-    background:url('/images/broll-bangkok.jpg') center/cover no-repeat var(--ink-2);
+    background:url('/images/broll-bangkok.jpg?v=2') center/cover no-repeat var(--ink-2);
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     padding:clamp(80px,10vw,160px) clamp(28px,4vw,56px); text-align:center; color:var(--cream);
   }

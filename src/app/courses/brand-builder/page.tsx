@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "AI Brand Builder — Included with $10 Insider · Benji's AI Empire",
   description: "Blank page to a brand that converts. Positioning, voice, identity, content. AI as a co-pilot — not a crutch. Included with $10 Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/brand-builder/" },
-  openGraph: { title: "AI Brand Builder — Course 02 / 04", description: "Blank page to a brand that converts. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/brand-builder/", images: [{ url: "https://benjisaiempire.com/images/headshot-leaves.jpg" }], type: "article" }
+  openGraph: { title: "AI Brand Builder — Course 02 / 04", description: "Blank page to a brand that converts. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/brand-builder/", images: [{ url: "https://benjisaiempire.com/images/headshot-leaves.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -35,7 +35,7 @@ export default function Page() {
   .course-hero__left{
     padding:clamp(40px,6vw,88px) clamp(28px,4vw,56px);
     display:flex; flex-direction:column; justify-content:center;
-    background:url('/images/headshot-leaves.jpg') center/cover no-repeat;
+    background:url('/images/headshot-leaves.jpg?v=2') center/cover no-repeat;
     position:relative; min-height:480px;
   }
   .course-hero__left::before{

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "The Toolkit — Software I Actually Use | Benji's AI Empire",
   description: "Honest opinions on every piece of software I run the agency on. Real affiliate links. Member-only promo codes inside Insider.",
   alternates: { canonical: "https://benjisaiempire.com/partners/" },
-  openGraph: { title: "The Toolkit — What I Actually Use", description: "Real opinions on the stack. Affiliate links where they exist. Member promo codes inside Insider.", url: "https://benjisaiempire.com/partners/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg" }], type: "website" }
+  openGraph: { title: "The Toolkit — What I Actually Use", description: "Real opinions on the stack. Affiliate links where they exist. Member promo codes inside Insider.", url: "https://benjisaiempire.com/partners/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {

@@ -220,7 +220,7 @@ export default function Page() {
         <p class="tw-hero__price">$10<small>/ month · cancel any time</small></p>
       </div>
       <figure class="tw-hero__media">
-        <img src="/images/headshot-pointing.jpg" alt="Benji pointing — your turn." loading="eager" />
+        <img src="/images/headshot-pointing.jpg?v=2" alt="Benji pointing — your turn." loading="eager" />
       </figure>
     </div>
   </section>

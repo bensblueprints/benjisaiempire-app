@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Benji's AI Empire — Sales Calls Free · Everything Else $10 · Wholesale GHL $49",
   description: "Watch me cold-call live every Tuesday — free. Every course, prompt, script, and the GHL reseller account is $10/mo. Wholesale GHL @ $0.015/min for the first 100 operators.",
   alternates: { canonical: "https://benjisaiempire.com/" },
-  openGraph: { title: "Benji's AI Empire", description: "Sales call videos free. $10 for everything else. $49 wholesale GHL — first 100.", url: "https://benjisaiempire.com/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg" }], type: "website" }
+  openGraph: { title: "Benji's AI Empire", description: "Sales call videos free. $10 for everything else. $49 wholesale GHL — first 100.", url: "https://benjisaiempire.com/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -335,7 +335,7 @@ export default function Page() {
 
   .hero-section .hero-photo{
     position:absolute;inset:0;
-    background-image:url('/images/hero-empire.jpg');
+    background-image:url('/images/hero-empire.jpg?v=2');
     background-size:cover;
     background-position:center 38%;
     transform:scale(1.06);
@@ -2728,7 +2728,7 @@ export default function Page() {
 
     <!-- â”€â”€ POLAROID on seam â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <figure class="polaroid" aria-hidden="true">
-      <img src="/images/headshot-pointing.jpg" alt="">
+      <img src="/images/headshot-pointing.jpg?v=2" alt="">
       <figcaption class="pcap">"yeah, you."</figcaption>
     </figure>
 
@@ -2900,7 +2900,7 @@ export default function Page() {
       <a class="tile tile-01" style="--i:0" href="/courses/cold-calling/" aria-label="Cold Calling 2.0 + AI — course">
         <span class="tile__numeral" aria-hidden="true">01</span>
         <div class="tile__photo">
-          <img src="/images/course-cold-calling.jpg" alt="Cold Calling 2.0 + AI course" loading="lazy">
+          <img src="/images/course-cold-calling.jpg?v=2" alt="Cold Calling 2.0 + AI course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
@@ -2922,7 +2922,7 @@ export default function Page() {
       <a class="tile tile-02" style="--i:1" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
         <span class="tile__numeral" aria-hidden="true">02</span>
         <div class="tile__photo">
-          <img src="/images/course-brand-builder.jpg" alt="AI Brand Builder course" loading="lazy">
+          <img src="/images/course-brand-builder.jpg?v=2" alt="AI Brand Builder course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
@@ -2944,7 +2944,7 @@ export default function Page() {
       <a class="tile tile-03" style="--i:2" href="/courses/marketing-engine/" aria-label="AI Marketing Engine — course">
         <span class="tile__numeral" aria-hidden="true">03</span>
         <div class="tile__photo">
-          <img src="/images/course-marketing-engine.jpg" alt="AI Marketing Engine course" loading="lazy">
+          <img src="/images/course-marketing-engine.jpg?v=2" alt="AI Marketing Engine course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker" style="grid-column:1/-1;">
@@ -2988,7 +2988,7 @@ export default function Page() {
       <a class="tile tile-05" style="--i:4" href="/challenge/" aria-label="30-Day AI Empire Challenge">
         <span class="tile__numeral" aria-hidden="true">05</span>
         <div class="tile__photo">
-          <img src="/images/streaming-rig.jpg" alt="30-Day AI Empire Challenge" loading="lazy">
+          <img src="/images/streaming-rig.jpg?v=2" alt="30-Day AI Empire Challenge" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
@@ -3010,7 +3010,7 @@ export default function Page() {
       <a class="tile tile-06" style="--i:5" href="/cold-call-30/" aria-label="30-Day Cold Calling Challenge">
         <span class="tile__numeral" aria-hidden="true">06</span>
         <div class="tile__photo">
-          <img src="/images/broll-bangkok.jpg" alt="30-Day Cold Calling Challenge" loading="lazy">
+          <img src="/images/broll-bangkok.jpg?v=2" alt="30-Day Cold Calling Challenge" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker" style="grid-column:1/-1;">
@@ -3082,7 +3082,7 @@ export default function Page() {
 
     <aside class="ps-anchor">
       <div class="ps-anchor-frame">
-        <img src="/images/headshot-mural.jpg" alt="Ben in front of a street-art mural in Bangkok" loading="lazy">
+        <img src="/images/headshot-mural.jpg?v=2" alt="Ben in front of a street-art mural in Bangkok" loading="lazy">
       </div>
       <div class="ps-anchor-cap">
         Bangkok &middot; Street Lab
@@ -3126,42 +3126,42 @@ export default function Page() {
 
     <figure class="ps-tile t1">
       <div class="ps-frame">
-        <img src="/images/proof-shopify-2-8m.jpg" alt="Shopify dashboard showing $2.8M in 90 days across 31,745 orders" loading="lazy">
+        <img src="/images/proof-shopify-2-8m.jpg?v=2" alt="Shopify dashboard showing $2.8M in 90 days across 31,745 orders" loading="lazy">
       </div>
       <figcaption class="ps-cap">$2.8M &middot; 31,745 Orders &middot; 90 Days</figcaption>
     </figure>
 
     <figure class="ps-tile t2">
       <div class="ps-frame">
-        <img src="/images/proof-grant-cardone.jpg" alt="Ben standing with Grant Cardone" loading="lazy">
+        <img src="/images/proof-grant-cardone.jpg?v=2" alt="Ben standing with Grant Cardone" loading="lazy">
       </div>
       <figcaption class="ps-cap">With Grant Cardone &middot; 2024</figcaption>
     </figure>
 
     <figure class="ps-tile t3">
       <div class="ps-frame">
-        <img src="/images/proof-meta-ads.jpg" alt="Meta Ads Manager showing four active campaigns" loading="lazy">
+        <img src="/images/proof-meta-ads.jpg?v=2" alt="Meta Ads Manager showing four active campaigns" loading="lazy">
       </div>
       <figcaption class="ps-cap">Meta Ads &middot; 4 Active Campaigns</figcaption>
     </figure>
 
     <figure class="ps-tile t4">
       <div class="ps-frame">
-        <img src="/images/hero-petronas.jpg" alt="Petronas Towers, Kuala Lumpur" loading="lazy">
+        <img src="/images/hero-petronas.jpg?v=2" alt="Petronas Towers, Kuala Lumpur" loading="lazy">
       </div>
       <figcaption class="ps-cap">Build From Anywhere &middot; KL</figcaption>
     </figure>
 
     <figure class="ps-tile t5">
       <div class="ps-frame">
-        <img src="/images/headshot-mural.jpg" alt="Bangkok street mural session" loading="lazy">
+        <img src="/images/headshot-mural.jpg?v=2" alt="Bangkok street mural session" loading="lazy">
       </div>
       <figcaption class="ps-cap">Bangkok &middot; Street Lab</figcaption>
     </figure>
 
     <figure class="ps-tile t6">
       <div class="ps-frame">
-        <img src="/images/course-dev-rig.jpg" alt="Live cold-call rig — Tuesdays and Thursdays" loading="lazy">
+        <img src="/images/course-dev-rig.jpg?v=2" alt="Live cold-call rig — Tuesdays and Thursdays" loading="lazy">
       </div>
       <figcaption class="ps-cap">Tuesdays / Thursdays &middot; Live</figcaption>
     </figure>

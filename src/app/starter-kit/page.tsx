@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Free Tier — Watch Me Cold-Call Live · Benji's AI Empire",
   description: "The free tier: every Tuesday cold call live, every Thursday build day live, the full 52-week archive. No email opt-in. The Starter Kit, prompts, scripts, and challenges live in $10 Insider.",
   alternates: { canonical: "https://benjisaiempire.com/starter-kit/" },
-  openGraph: { title: "Free Tier — Watch Me Cold-Call Live", description: "Tuesday cold call live. Thursday build day live. Full archive. Free.", url: "https://benjisaiempire.com/starter-kit/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg" }], type: "website" }
+  openGraph: { title: "Free Tier — Watch Me Cold-Call Live", description: "Tuesday cold call live. Thursday build day live. Full archive. Free.", url: "https://benjisaiempire.com/starter-kit/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -273,7 +273,7 @@ export default function Page() {
         <a class="free-hero__cta" href="https://www.youtube.com/@benjiboyce" target="_blank" rel="noopener">Open the YouTube channel</a>
       </div>
       <figure class="free-hero__media">
-        <img src="/images/streaming-rig.jpg" alt="The streaming rig where every Tuesday cold call and Thursday build day goes live." loading="eager" />
+        <img src="/images/streaming-rig.jpg?v=2" alt="The streaming rig where every Tuesday cold call and Thursday build day goes live." loading="eager" />
         <figcaption class="free-hero__caption">
           <span>Live Rig — Build Floor</span><span>On Air Tue · Thu</span>
         </figcaption>

@@ -110,7 +110,7 @@ export default function Page() {
         </div>
       </div>
       <div class="welcome-hero__right">
-        <img class="welcome-hero__photo" src="/images/course-dev-rig.jpg" alt="Empire OS — operator desk, dual monitors, agency dashboard" />
+        <img class="welcome-hero__photo" src="/images/course-dev-rig.jpg?v=2" alt="Empire OS — operator desk, dual monitors, agency dashboard" />
         <div class="welcome-hero__caption"><strong>FILE 04</strong> Empire OS · 16 modules · SOP pack · VA hiring kit · Client onboarding</div>
       </div>
     </div>

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "30-Day AI Empire Challenge — Included with $10 Insider · Benji's AI Empire",
   description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Daily prompt, daily nudge, accountability check-ins. Included with $10 Insider.",
   alternates: { canonical: "https://benjisaiempire.com/challenge/" },
-  openGraph: { title: "30-Day AI Empire Challenge — Included with $10 Insider", description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Included with $10 Insider.", url: "https://benjisaiempire.com/challenge/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg" }], type: "website" }
+  openGraph: { title: "30-Day AI Empire Challenge — Included with $10 Insider", description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Included with $10 Insider.", url: "https://benjisaiempire.com/challenge/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -249,7 +249,7 @@ export default function Page() {
         <a class="ch-hero__cta" href="/insider/">Get this + everything for $10/mo</a>
       </div>
       <figure class="ch-hero__media">
-        <img src="/images/course-marketing-engine.jpg" alt="The Marketing Engine — where the 30-Day Empire Challenge runs from." loading="eager" />
+        <img src="/images/course-marketing-engine.jpg?v=2" alt="The Marketing Engine — where the 30-Day Empire Challenge runs from." loading="eager" />
         <figcaption class="ch-hero__cap">
           <span>Empire Challenge · Cohort 04</span><span>30 Days</span>
         </figcaption>

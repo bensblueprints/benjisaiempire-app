@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Cold Calling 2.0 + AI — Included with $10 Insider · Benji's AI Empire",
   description: "The exact cold-calling system I run live every Tuesday. AI-augmented prospecting, the Master Script, real objection handling, and the follow-up cadence that closes. Included with $10 Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/cold-calling/" },
-  openGraph: { title: "Cold Calling 2.0 + AI — Course 01 / 04", description: "The exact cold-calling system I run live every Tuesday. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/cold-calling/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg" }], type: "article" }
+  openGraph: { title: "Cold Calling 2.0 + AI — Course 01 / 04", description: "The exact cold-calling system I run live every Tuesday. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/cold-calling/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -41,7 +41,7 @@ export default function Page() {
   .course-hero__cta:hover::after{ transform:translateX(4px); }
   .course-hero__sublink{ display:block; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--cream-soft); }
   .course-hero__sublink:hover{ color:var(--gold-bright); }
-  .course-hero__right{ position:relative; background:url('/images/hero-empire.jpg') center/cover no-repeat; min-height:480px; }
+  .course-hero__right{ position:relative; background:url('/images/hero-empire.jpg?v=2') center/cover no-repeat; min-height:480px; }
   .course-hero__right::before{ content:""; position:absolute; inset:0; background:linear-gradient(110deg, rgba(11,11,12,.55) 0%, rgba(11,11,12,.05) 50%, rgba(11,11,12,0) 100%); }
   .course-hero__right-tag{ position:absolute; top:32px; right:32px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--cream); background:rgba(11,11,12,.7); padding:8px 12px; border:1px solid var(--gold); backdrop-filter:blur(6px); }
   .course-hero__right-tag .dot{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--rust); margin-right:8px; vertical-align:middle; animation:livePulse 1.6s ease-in-out infinite; }

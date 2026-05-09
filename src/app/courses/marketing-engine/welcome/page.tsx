@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "You're in. Here's the 24-hour playbook for AI Marketing Engine.",
   alternates: { canonical: "https://benjisaiempire.com/courses/marketing-engine/welcome" },
   robots: { index: false, follow: true },
-  openGraph: { title: "Welcome — AI Marketing Engine", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg" }], type: "website" }
+  openGraph: { title: "Welcome — AI Marketing Engine", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -110,7 +110,7 @@ export default function Page() {
         </div>
       </div>
       <div class="welcome-hero__right">
-        <img class="welcome-hero__photo" src="/images/course-marketing-engine.jpg" alt="Marketing engine — funnels, sequences, GHL automations" />
+        <img class="welcome-hero__photo" src="/images/course-marketing-engine.jpg?v=2" alt="Marketing engine — funnels, sequences, GHL automations" />
         <div class="welcome-hero__caption"><strong>FILE 03</strong> AI Marketing Engine · 14 modules · Funnel pack · GHL workflow imports</div>
       </div>
     </div>

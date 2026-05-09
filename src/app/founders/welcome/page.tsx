@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Your $49/mo wholesale GoHighLevel seat is confirmed. Credentials within 24 hours. Welcome to wholesale-rate minutes for life.",
   alternates: { canonical: "https://benjisaiempire.com/founders/welcome.html" },
   robots: { index: false, follow: true },
-  openGraph: { title: "You're locked in — Wholesale GHL", description: "Seat confirmed. Credentials within 24h. $49/mo locked for life.", url: "https://benjisaiempire.com/founders/welcome.html", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg" }], type: "website" }
+  openGraph: { title: "You're locked in — Wholesale GHL", description: "Seat confirmed. Credentials within 24h. $49/mo locked for life.", url: "https://benjisaiempire.com/founders/welcome.html", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -233,7 +233,7 @@ export default function Page() {
   }
   .w-xsell__bg {
     position: absolute; inset: 0;
-    background-image: url('/images/headshot-mural.jpg');
+    background-image: url('/images/headshot-mural.jpg?v=2');
     background-size: cover; background-position: center 30%;
     opacity: .14; filter: grayscale(.4) contrast(1.1);
   }

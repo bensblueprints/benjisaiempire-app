@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "You're in. Here's the 24-hour playbook for AI Brand Builder.",
   alternates: { canonical: "https://benjisaiempire.com/courses/brand-builder/welcome" },
   robots: { index: false, follow: true },
-  openGraph: { title: "Welcome — AI Brand Builder", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-brand-builder.jpg" }], type: "website" }
+  openGraph: { title: "Welcome — AI Brand Builder", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-brand-builder.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -115,7 +115,7 @@ export default function Page() {
         </div>
       </div>
       <div class="welcome-hero__right">
-        <img class="welcome-hero__photo" src="/images/headshot-mural.jpg" alt="Brand identity work in progress — wall of mural references" />
+        <img class="welcome-hero__photo" src="/images/headshot-mural.jpg?v=2" alt="Brand identity work in progress — wall of mural references" />
         <div class="welcome-hero__caption"><strong>FILE 02</strong> AI Brand Builder · 11 modules · Identity sprint · Cursor + Figma + Claude</div>
       </div>
     </div>

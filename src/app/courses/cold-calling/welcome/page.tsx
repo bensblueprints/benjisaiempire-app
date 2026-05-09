@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "You're in. Here's the 24-hour playbook for Cold Calling 2.0 + AI.",
   alternates: { canonical: "https://benjisaiempire.com/courses/cold-calling/welcome" },
   robots: { index: false, follow: true },
-  openGraph: { title: "Welcome — Cold Calling 2.0 + AI", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-cold-calling.jpg" }], type: "website" }
+  openGraph: { title: "Welcome — Cold Calling 2.0 + AI", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-cold-calling.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -302,7 +302,7 @@ export default function Page() {
         </div>
       </div>
       <div class="welcome-hero__right">
-        <img class="welcome-hero__photo" src="/images/streaming-rig.jpg" alt="Cold call streaming rig — phone, headset, dual monitors" />
+        <img class="welcome-hero__photo" src="/images/streaming-rig.jpg?v=2" alt="Cold call streaming rig — phone, headset, dual monitors" />
         <div class="welcome-hero__caption"><strong>FILE 01</strong> Cold Calling 2.0 + AI · 9 modules · Master Script PDF · Live Tuesdays</div>
       </div>
     </div>

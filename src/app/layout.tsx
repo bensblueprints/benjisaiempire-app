@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Benji's AI Empire",
-    images: [{ url: "/images/hero-empire.jpg" }],
+    images: [{ url: "/images/hero-empire.jpg?v=2" }],
   },
   twitter: { card: "summary_large_image" },
 };

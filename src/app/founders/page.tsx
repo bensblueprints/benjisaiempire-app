@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Wholesale GHL — $49/mo · First 100 Operators · Benji's AI Empire",
   description: "GoHighLevel at $0.015 a minute, $49 a month, locked for life. First 100 seats only — then back to $99 forever. Pure software at wholesale. No courses.",
   alternates: { canonical: "https://benjisaiempire.com/founders/" },
-  openGraph: { title: "Wholesale GHL — $49/mo · First 100 Operators", description: "GHL at $0.015/min. $49/mo locked for life. First 100 only — then $99 forever.", url: "https://benjisaiempire.com/founders/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg" }], type: "website" }
+  openGraph: { title: "Wholesale GHL — $49/mo · First 100 Operators", description: "GHL at $0.015/min. $49/mo locked for life. First 100 only — then $99 forever.", url: "https://benjisaiempire.com/founders/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -162,7 +162,7 @@ export default function Page() {
   }
   .f-hero__photo {
     position: absolute; inset: 0;
-    background-image: url('/images/hero-mclaren.jpg');
+    background-image: url('/images/hero-mclaren.jpg?v=2');
     background-size: cover; background-position: center 42%;
     transform: scale(1.04);
   }

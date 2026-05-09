@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "$10 Insider — Every Course, Every Prompt, Every Script | Benji's AI Empire",
   description: "Tier 02. Ten dollars a month gets you every course I teach, every prompt I run, every script I send, the GoHighLevel reseller account, and the private Insider community. The whole bucket.",
   alternates: { canonical: "https://benjisaiempire.com/insider/" },
-  openGraph: { title: "$10 Insider — Every Course, Every Prompt, Every Script", description: "The Everything Bucket. $10/mo. Four courses, every prompt, every script, GHL reseller, private community.", url: "https://benjisaiempire.com/insider/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg" }], type: "website" }
+  openGraph: { title: "$10 Insider — Every Course, Every Prompt, Every Script", description: "The Everything Bucket. $10/mo. Four courses, every prompt, every script, GHL reseller, private community.", url: "https://benjisaiempire.com/insider/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -549,7 +549,7 @@ export default function Page() {
         </div>
 
         <figure class="ins-hero__photo" aria-hidden="false">
-          <img src="/images/course-marketing-engine.jpg" alt="Streaming rig where Benji ships build days every Thursday" loading="eager" decoding="async" />
+          <img src="/images/course-marketing-engine.jpg?v=2" alt="Streaming rig where Benji ships build days every Thursday" loading="eager" decoding="async" />
           <figcaption class="ins-hero__caption">
             <span class="ins-hero__caption-l">The same rig where every prompt, every script, every course gets recorded.</span>
             <span class="ins-hero__caption-r">Plate 02</span>
@@ -583,7 +583,7 @@ export default function Page() {
         <!-- 01 Cold Calling 2.0 -->
         <article class="ins-tile ins-tile--photo ins-tile--wide" role="listitem" aria-labelledby="tile-01-t">
           <div class="ins-tile__photo-wrap">
-            <img src="/images/course-cold-calling.jpg" alt="Cold Calling 2.0 + AI course thumbnail" loading="lazy" decoding="async" />
+            <img src="/images/course-cold-calling.jpg?v=2" alt="Cold Calling 2.0 + AI course thumbnail" loading="lazy" decoding="async" />
             <div class="ins-tile__photo-overlay">
               <span class="ins-tile__num">01</span>
               <span class="ins-tile__kicker">Course · 6 Modules</span>
@@ -596,7 +596,7 @@ export default function Page() {
         <!-- 02 AI Brand Builder -->
         <article class="ins-tile ins-tile--photo" role="listitem" aria-labelledby="tile-02-t">
           <div class="ins-tile__photo-wrap">
-            <img src="/images/course-brand-builder.jpg" alt="AI Brand Builder course thumbnail" loading="lazy" decoding="async" />
+            <img src="/images/course-brand-builder.jpg?v=2" alt="AI Brand Builder course thumbnail" loading="lazy" decoding="async" />
             <div class="ins-tile__photo-overlay">
               <span class="ins-tile__num">02</span>
               <span class="ins-tile__kicker">Course · 5 Modules</span>
@@ -608,7 +608,7 @@ export default function Page() {
         <!-- 03 Marketing Engine -->
         <article class="ins-tile ins-tile--photo" role="listitem" aria-labelledby="tile-03-t">
           <div class="ins-tile__photo-wrap">
-            <img src="/images/course-marketing-engine.jpg" alt="AI Marketing Engine course thumbnail" loading="lazy" decoding="async" />
+            <img src="/images/course-marketing-engine.jpg?v=2" alt="AI Marketing Engine course thumbnail" loading="lazy" decoding="async" />
             <div class="ins-tile__photo-overlay">
               <span class="ins-tile__num">03</span>
               <span class="ins-tile__kicker">Course · 7 Modules</span>
