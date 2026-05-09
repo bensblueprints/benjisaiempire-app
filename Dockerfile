@@ -5,8 +5,8 @@ RUN apk add --no-cache openssl libc6-compat
 
 FROM base AS deps
 COPY package.json ./
-# install (no lockfile copied — Windows-generated lockfile mismatches alpine platform deps)
-RUN npm install --include=dev --no-audit --no-fund
+# install with --ignore-scripts so postinstall (prisma generate) doesn't run yet — prisma/ isn't copied here
+RUN npm install --include=dev --ignore-scripts --no-audit --no-fund
 
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
