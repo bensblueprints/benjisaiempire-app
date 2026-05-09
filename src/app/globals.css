@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Page-level rules. /public/styles/site.css owns the design tokens, body, shell-* + base reset. */
+
+/* TipTap rendered content styling for /learn/* routes */
+.lesson-prose {
+  color: var(--cream);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 72ch;
+}
+.lesson-prose h1, .lesson-prose h2, .lesson-prose h3 {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.01em;
+  color: var(--cream);
+  margin-top: 2em;
+  margin-bottom: .5em;
+}
+.lesson-prose h1 { font-size: 2.4em; }
+.lesson-prose h2 { font-size: 1.75em; }
+.lesson-prose h3 { font-size: 1.3em; color: var(--gold); }
+.lesson-prose p { margin: 1em 0; }
+.lesson-prose blockquote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.2em;
+  border-left: 2px solid var(--gold);
+  padding-left: 1em;
+  color: var(--cream-soft);
+  margin: 1.5em 0;
+}
+.lesson-prose code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--ink-2);
+  color: var(--gold);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: .9em;
+}
+.lesson-prose pre {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+}
+.lesson-prose pre code { background: transparent; padding: 0; }
+.lesson-prose a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+.lesson-prose ul, .lesson-prose ol { padding-left: 1.4em; margin: 1em 0; }
+.lesson-prose img { border-radius: 8px; border: 1px solid var(--line); margin: 1.5em 0; }
+.lesson-prose hr { border: none; border-top: 1px solid var(--line); margin: 2.5em 0; }

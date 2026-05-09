@@ -1,0 +1,55 @@
+services:
+  app:
+    build: .
+    container_name: benjisaiempire-app
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - coolify
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=coolify"
+      - "traefik.http.routers.benjisaiempire.rule=Host(`benjisaiempire.com`)"
+      - "traefik.http.routers.benjisaiempire.entrypoints=https"
+      - "traefik.http.routers.benjisaiempire.tls=true"
+      - "traefik.http.routers.benjisaiempire.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.benjisaiempire.service=benjisaiempire"
+      - "traefik.http.routers.benjisaiempire-www.rule=Host(`www.benjisaiempire.com`)"
+      - "traefik.http.routers.benjisaiempire-www.entrypoints=https"
+      - "traefik.http.routers.benjisaiempire-www.tls=true"
+      - "traefik.http.routers.benjisaiempire-www.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.benjisaiempire-www.middlewares=benjisaiempire-www-redirect"
+      - "traefik.http.middlewares.benjisaiempire-www-redirect.redirectregex.regex=^https?://www\\.benjisaiempire\\.com/(.*)"
+      - "traefik.http.middlewares.benjisaiempire-www-redirect.redirectregex.replacement=https://benjisaiempire.com/$${1}"
+      - "traefik.http.middlewares.benjisaiempire-www-redirect.redirectregex.permanent=true"
+      - "traefik.http.services.benjisaiempire.loadbalancer.server.port=3000"
+
+  db:
+    image: postgres:16-alpine
+    container_name: benjisaiempire-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: benjisaiempire
+      POSTGRES_USER: benji
+      POSTGRES_PASSWORD: b3njiL0cked!42
+    volumes:
+      - benjisaiempire-pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U benji -d benjisaiempire"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  benjisaiempire-pgdata:
+
+networks:
+  coolify:
+    external: true
+  internal:
