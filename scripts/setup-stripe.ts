@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Bootstrap script — creates the two Benji's AI Empire subscription products
  * in Stripe (Insider $10/mo, Wholesale GHL $49/mo) and a customer-portal
  * configuration. Idempotent: re-running does NOT create dupes.
@@ -45,7 +45,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-12-18.acacia",
+  apiVersion: "2025-02-24.acacia",
   typescript: true,
 });
 

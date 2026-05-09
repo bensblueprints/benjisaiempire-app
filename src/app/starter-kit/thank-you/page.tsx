@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
@@ -77,7 +77,6 @@ export default function Page() {
   .lite-hero__cross:hover { color: var(--gold-bright); }
   .lite-hero__cross::after { content: " →"; }
 ` }} />
-      {/* @ts-expect-error Async Server Component */}
       <Topbar />
       <main id="main" dangerouslySetInnerHTML={{ __html: `
   <section class="lite-hero">

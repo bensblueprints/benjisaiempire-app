@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
@@ -2637,7 +2637,6 @@ export default function Page() {
 
 
 ` }} />
-      {/* @ts-expect-error Async Server Component */}
       <Topbar />
       <Marquee />
       <main id="main" dangerouslySetInnerHTML={{ __html: `

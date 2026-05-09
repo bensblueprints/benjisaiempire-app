@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
@@ -227,7 +227,6 @@ export default function Page() {
   .member-note__cta::after{ content:"→"; font-family:'Manrope', sans-serif; letter-spacing:0; }
   .member-note__cta:hover{ background:var(--gold-bright); transform:translateX(3px); }
 ` }} />
-      {/* @ts-expect-error Async Server Component */}
       <Topbar />
       <main id="main" dangerouslySetInnerHTML={{ __html: `
 

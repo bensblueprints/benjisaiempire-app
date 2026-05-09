@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
@@ -494,7 +494,6 @@ export default function Page() {
   .ins-xsell__h em{ font-family:'Fraunces',serif; font-style:italic; font-weight:500; color:var(--gold-bright); text-transform:none; }
   .ins-xsell__sub{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; color:var(--bone); max-width:520px; }
 ` }} />
-      {/* @ts-expect-error Async Server Component */}
       <Topbar />
       <main id="main" dangerouslySetInnerHTML={{ __html: `
 

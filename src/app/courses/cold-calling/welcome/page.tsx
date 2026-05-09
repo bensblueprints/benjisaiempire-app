@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
@@ -271,7 +271,6 @@ export default function Page() {
   .cross__cta:hover{ background:var(--gold); color:var(--ink); }
   .cross__cta:hover::after{ color:var(--ink); }
 ` }} />
-      {/* @ts-expect-error Async Server Component */}
       <Topbar />
       <main id="main" dangerouslySetInnerHTML={{ __html: `
 
