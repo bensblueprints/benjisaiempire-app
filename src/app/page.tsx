@@ -2,6 +2,7 @@
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import PortfolioSection from "@/components/PortfolioSection";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -3177,6 +3178,7 @@ export default function Page() {
 </section>
 
 ` }} />
+      <PortfolioSection />
       <Footer />
       <Script id="page-init-0" strategy="afterInteractive">{`(function () {
       var section = document.currentScript && document.currentScript.closest('.courses-section');
