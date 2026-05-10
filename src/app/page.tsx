@@ -58,7 +58,8 @@ export default function Page() {
     position:relative;
     background:var(--ink);
     color:var(--cream);
-    min-height:100vh;
+    min-height:auto;
+    padding-block:clamp(64px, 8vw, 128px);
     overflow:hidden;
     font-family:'Manrope',sans-serif;
     isolation:isolate;
@@ -97,8 +98,11 @@ export default function Page() {
     position:relative;
     display:grid;
     grid-template-columns:42% 58%;
-    min-height:100vh;
+    min-height:auto;
     z-index:1;
+  }
+  @media (max-width:760px){
+    .hero-section .hero-grid{ grid-template-columns:1fr; gap:32px; }
   }
 
   /* â”€â”€ LEFT: INK PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
