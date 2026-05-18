@@ -3181,7 +3181,7 @@ export default function Page() {
       <PortfolioSection />
       <Footer />
       <Script id="page-init-0" strategy="afterInteractive">{`(function () {
-      var section = document.currentScript && document.currentScript.closest('.courses-section');
+      var section = document.querySelector('#the-bucket');
       if (!section || section.dataset.observed === '1') return;
       section.dataset.observed = '1';
       var tiles = section.querySelectorAll('.tile');
