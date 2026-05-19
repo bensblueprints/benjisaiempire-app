@@ -133,7 +133,7 @@ export default function LessonBodyEditor({
     editorProps: {
       attributes: {
         class: "lesson-prose",
-        style: "min-height: 480px; padding: 28px 32px; outline: none;",
+        style: "min-height: 480px; padding: 28px 32px; outline: none; max-width: 100%;",
       },
     },
     onUpdate({ editor }) {
