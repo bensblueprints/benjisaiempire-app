@@ -67,9 +67,9 @@ export default async function AdminDownloadsPage() {
           </div>
           <div>
             <span style={label}>Tier</span>
-            <select name="tier" style={{ ...inp, cursor: "pointer" }}>
+            <select name="tier" defaultValue="INSIDER" style={{ ...inp, cursor: "pointer" }}>
               <option value="FREE">FREE</option>
-              <option value="INSIDER" selected>INSIDER</option>
+              <option value="INSIDER">INSIDER</option>
               <option value="WHOLESALE">WHOLESALE</option>
             </select>
           </div>
@@ -165,10 +165,7 @@ export default async function AdminDownloadsPage() {
                 </div>
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <DeleteButton
-                    onConfirm={async () => {
-                      "use server";
-                      await deleteDownload(d.id);
-                    }}
+                    onConfirm={deleteDownload.bind(null, d.id)}
                     label="Remove"
                     message={`Remove "${d.title}" from the downloads library?`}
                   />

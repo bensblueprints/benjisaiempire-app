@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { setUserRole, setUserTier } from "../../_actions";
-import type { UserRole, Tier } from "@prisma/client";
+import { setUserRoleFromForm, setUserTierFromForm } from "../../_actions";
 
 export const dynamic = "force-dynamic";
 
@@ -183,13 +182,7 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
           Permissions
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-          <form
-            action={async (fd: FormData) => {
-              "use server";
-              const role = String(fd.get("role")) as UserRole;
-              await setUserRole(user.id, role);
-            }}
-          >
+          <form action={setUserRoleFromForm.bind(null, user.id)}>
             <label style={labelStyle}>Role</label>
             <div style={{ display: "flex", gap: 8 }}>
               <select
@@ -228,13 +221,7 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
             </div>
           </form>
 
-          <form
-            action={async (fd: FormData) => {
-              "use server";
-              const tier = String(fd.get("tier")) as Tier;
-              await setUserTier(user.id, tier);
-            }}
-          >
+          <form action={setUserTierFromForm.bind(null, user.id)}>
             <label style={labelStyle}>Tier</label>
             <div style={{ display: "flex", gap: 8 }}>
               <select

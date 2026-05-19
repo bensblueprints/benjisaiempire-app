@@ -128,10 +128,7 @@ export default async function CoursesIndex() {
                   Edit →
                 </Link>
                 <DeleteButton
-                  onConfirm={async () => {
-                    "use server";
-                    await deleteCourse(c.id);
-                  }}
+                  onConfirm={deleteCourse.bind(null, c.id)}
                   label="Delete"
                   message={`Delete "${c.title}" and all its modules/lessons?`}
                 />

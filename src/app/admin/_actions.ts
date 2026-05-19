@@ -307,3 +307,13 @@ export async function setUserTier(userId: string, tier: Tier) {
   revalidatePath(`/admin/students/${userId}`);
   revalidatePath("/admin/students");
 }
+
+export async function setUserRoleFromForm(userId: string, formData: FormData) {
+  const role = s(formData.get("role")) as UserRole;
+  await setUserRole(userId, role);
+}
+
+export async function setUserTierFromForm(userId: string, formData: FormData) {
+  const tier = s(formData.get("tier")) as Tier;
+  await setUserTier(userId, tier);
+}
