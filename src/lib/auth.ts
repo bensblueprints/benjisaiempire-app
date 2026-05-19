@@ -12,7 +12,7 @@ const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "")
 export const { handlers, signIn, signOut, auth } = NextAuth({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   adapter: PrismaAdapter(prisma) as any,
-  session: { strategy: "database" },
+  session: { strategy: "jwt" },
   pages: { signIn: "/login", verifyRequest: "/auth/verify-request" },
   providers: [
     Resend({
@@ -21,31 +21,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      if (session.user && user) {
-        session.user.id = user.id;
-        const dbUser = user as unknown as {
-          id: string;
-          email: string;
-          role: UserRole;
-          tier: Tier;
-        };
-        session.user.role = dbUser.role;
-        session.user.tier = dbUser.tier;
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        const dbUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          select: { role: true, tier: true },
+        });
+        token.role = dbUser?.role ?? "USER";
+        token.tier = dbUser?.tier ?? "FREE";
+        // promote admins
+        if (user.email && ADMIN_EMAILS.includes(user.email.toLowerCase()) && dbUser?.role !== "ADMIN") {
+          await prisma.user.update({ where: { id: user.id }, data: { role: "ADMIN" } }).catch(() => {});
+          token.role = "ADMIN";
+        }
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user && token) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as UserRole;
+        session.user.tier = token.tier as Tier;
       }
       return session;
-    },
-    async signIn({ user }) {
-      // promote admins on first sign-in if they're in the allowlist
-      if (user.email && ADMIN_EMAILS.includes(user.email.toLowerCase())) {
-        await prisma.user.update({
-          where: { email: user.email },
-          data: { role: "ADMIN" },
-        }).catch(() => {
-          /* user record might not exist yet; will be promoted on next visit */
-        });
-      }
-      return true;
     },
   },
 });
