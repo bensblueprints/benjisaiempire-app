@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Welcome — Free Tier · Benji's AI Empire",
-  description: "You're in the free tier. The videos live at /starter-kit/. Want everything else? $10 Insider.",
+  description: "You're in the free tier. The videos live at /starter-kit/. Want everything else? $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/starter-kit/welcome" },
   robots: { index: false, follow: true }
 };
@@ -79,9 +79,9 @@ export default function Page() {
       <h1 class="lite-hero__title"><em>Welcome.</em></h1>
       <p class="lite-hero__lede">
         You're in the free tier. The videos are at <strong style="color:var(--cream);">/starter-kit/</strong>.
-        Want everything else? <strong style="color:var(--gold);">$10 Insider →</strong>
+        Want everything else? <strong style="color:var(--gold);">$9 AI Empire Insider →</strong>
       </p>
-      <a class="lite-hero__cta" href="/insider/">Join Insider — $10/mo</a>
+      <a class="lite-hero__cta" href="/insider/">Join AI Empire Insider — $9/mo</a>
       <a class="lite-hero__cross" href="/starter-kit/">Or stay in free tier · watch the videos</a>
     </div>
   </section>

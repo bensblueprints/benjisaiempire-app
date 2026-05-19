@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "$10 Insider — Every Course, Every Prompt, Every Script | Benji's AI Empire",
-  description: "Tier 02. Ten dollars a month gets you every course I teach, every prompt I run, every script I send, the GoHighLevel reseller account, and the private Insider community. The whole bucket.",
+  title: "AI Empire Insider — $9/mo · Every Course, Free GoHighLevel, Every Prompt | Benji's AI Empire",
+  description: "Nine dollars a month gets you every AI course I teach, every prompt I run, every script I send, a free GoHighLevel sub-account, and the private AI Empire Insider community.",
   alternates: { canonical: "https://benjisaiempire.com/insider/" },
-  openGraph: { title: "$10 Insider — Every Course, Every Prompt, Every Script", description: "The Everything Bucket. $10/mo. Four courses, every prompt, every script, GHL reseller, private community.", url: "https://benjisaiempire.com/insider/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
+  openGraph: { title: "AI Empire Insider — $9/mo · Everything You Need to Build an AI Business", description: "Free GoHighLevel sub-account + 4 courses + every prompt + every script. $9/mo. Cancel anytime.", url: "https://benjisaiempire.com/insider/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -502,27 +502,27 @@ export default function Page() {
     <div class="ins-wrap">
 
       <div class="ins-hero__rail">
-        <span class="ins-hero__chapter"><strong>Tier 02</strong> / Everything · The Insider Bucket</span>
-        <span class="ins-hero__price-tag">$10 / mo · cancel anytime</span>
+        <span class="ins-hero__chapter"><strong>AI Empire Insider</strong> / Everything · The Full Playbook</span>
+        <span class="ins-hero__price-tag">$9 / mo · cancel anytime</span>
       </div>
 
       <div class="ins-hero__grid">
 
         <div class="ins-hero__copy">
-          <div class="ins-eyebrow" style="margin-bottom:22px;">Tier 02 — Everything</div>
+          <div class="ins-eyebrow" style="margin-bottom:22px;">AI Empire Insider — Everything</div>
           <h1 class="ins-hero__headline ins-display" id="hero-headline">
-            Ten dollars a&nbsp;month.<br><em>The whole bucket.</em>
+            Nine dollars a&nbsp;month.<br><em>The whole empire.</em>
           </h1>
           <p class="ins-hero__lede ins-lede">
-            Every course I teach, every prompt I run, every script I send, the GoHighLevel
-            reseller account, and the private Insider community — bundled into one tier
+            Every course I teach, every prompt I run, every script I send, a free GoHighLevel
+            sub-account, and the private AI Empire Insider community — bundled into one tier
             that costs less than a coffee twice a week.
           </p>
 
           <div class="ins-hero__meta-row" aria-label="Tier facts">
             <div class="ins-hero__meta-cell">
               <span class="ins-hero__meta-k">Price</span>
-              <span class="ins-hero__meta-v">$10<em>/mo</em></span>
+              <span class="ins-hero__meta-v">$9<em>/mo</em></span>
             </div>
             <div class="ins-hero__meta-cell">
               <span class="ins-hero__meta-k">Courses</span>
@@ -540,7 +540,7 @@ export default function Page() {
 
           <div class="ins-hero__ctas">
             <a class="ins-btn ins-btn--gold" href="#claim-form">
-              Join Insider — $10/mo <span class="arrow">→</span>
+              Join AI Empire Insider — $9/mo <span class="arrow">→</span>
             </a>
             <a class="ins-btn ins-btn--ghost" href="/#pricing">
               See pricing <span class="arrow">→</span>
@@ -692,12 +692,12 @@ export default function Page() {
     </div>
   </section>
 
-  <!-- ═════ WHY $10 ═════ -->
+  <!-- ═════ WHY $9 ═════ -->
   <section class="ins-pull" aria-labelledby="pull-q">
     <div class="ins-pull__inner">
       <div class="ins-pull__mark" aria-hidden="true">"</div>
       <p class="ins-pull__quote" id="pull-q">
-        I want every operator who's serious to have this. Ten dollars is the price of a coffee
+        I want every operator who's serious to have this. Nine dollars is the price of a coffee
         twice a week. <em>I'm not building a $2K mastermind</em> — I'm building a community
         that actually ships.
       </p>
@@ -733,15 +733,16 @@ export default function Page() {
         </div>
 
         <div class="ins-math__col ins-math__col--insider">
-          <div class="ins-math__col-tag">Insider — Year 01</div>
-          <div class="ins-math__col-name">The Bucket</div>
+          <div class="ins-math__col-tag">AI Empire Insider — Year 01</div>
+          <div class="ins-math__col-name">The Empire</div>
           <ul class="ins-math__list">
-            <li><span>Four full courses</span><span>Included</span></li>
+            <li><span>Free GoHighLevel sub-account</span><span>Included</span></li>
+            <li><span>Four full AI courses</span><span>Included</span></li>
             <li><span>Every prompt · script · SOP</span><span>Included</span></li>
-            <li><span>Private community + Friday Q&amp;A</span><span>Included</span></li>
-            <li><span>GHL reseller sub-account</span><span>$0.04 / min</span></li>
+            <li><span>Private AI Empire Insider community</span><span>Included</span></li>
+            <li><span>GHL AI calling minutes</span><span>$0.04 / min</span></li>
           </ul>
-          <div class="ins-math__total"><span>Year One</span><span>$120</span></div>
+          <div class="ins-math__total"><span>Year One</span><span>$108</span></div>
         </div>
       </div>
     </div>
@@ -755,30 +756,30 @@ export default function Page() {
         <div class="ins-claim__l">
           <span class="ins-eyebrow">Claim</span>
           <h2 class="ins-claim__title ins-display" id="claim-title">
-            Take the&nbsp;<em>whole bucket.</em>
+            Take the&nbsp;<em>whole empire.</em>
           </h2>
           <p class="ins-claim__lede ins-lede">
-            One form. Ten dollars. Access provisioned the second the charge clears.
+            One form. Nine dollars. Access provisioned the second the charge clears.
             Cancel from your dashboard anytime — no email-the-support-team gauntlet.
           </p>
           <ul class="ins-claim__list">
-            <li>Instant access to all four courses</li>
-            <li>Community invite within 60 seconds</li>
-            <li>GHL sub-account spun up same day</li>
+            <li>Free GoHighLevel sub-account — set up same day</li>
+            <li>Instant access to all four AI courses</li>
+            <li>AI Empire Insider community invite within 60 seconds</li>
             <li>Cancel inside the dashboard, one click</li>
           </ul>
         </div>
 
         <div class="ins-claim__r">
-          <div class="ghl-checkout-slot" data-ghl-product="insider-10" role="region" aria-label="Insider checkout">
-            <h3 class="ghl-checkout-slot__title">$10<em>/mo</em></h3>
-            <p class="ghl-checkout-slot__sub">The GoHighLevel checkout drops in here. Stripe handles the card, GHL handles the access, you handle the work.</p>
-            <a class="ins-btn ins-btn--gold ghl-checkout-slot__cta" href="https://benjisaiempire.com/checkout/insider-10">
-              Start Insider — $10/mo <span class="arrow">→</span>
+          <div class="ghl-checkout-slot" data-ghl-product="insider-9" role="region" aria-label="AI Empire Insider checkout">
+            <h3 class="ghl-checkout-slot__title">$9<em>/mo</em></h3>
+            <p class="ghl-checkout-slot__sub">Stripe handles the card — access provisioned instantly. Free GoHighLevel sub-account set up same day.</p>
+            <a class="ins-btn ins-btn--gold ghl-checkout-slot__cta" href="/api/stripe/checkout" data-tier="INSIDER">
+              Join AI Empire Insider — $9/mo <span class="arrow">→</span>
             </a>
           </div>
           <noscript>
-            <p class="ins-claim__noscript">JavaScript off? <a href="https://benjisaiempire.com/checkout/insider-10" style="color:var(--gold-bright); text-decoration:underline;">Click here to claim Insider directly.</a></p>
+            <p class="ins-claim__noscript">JavaScript off? <a href="/login" style="color:var(--gold-bright); text-decoration:underline;">Sign in to join AI Empire Insider.</a></p>
           </noscript>
           <p class="ins-claim__caption">
             Form wires to <strong>GoHighLevel</strong> checkout · <strong>Stripe</strong> handles payment · access provisioned <strong>instantly</strong>
@@ -809,7 +810,7 @@ export default function Page() {
           <span class="ins-faq__num">01</span>
           <div>
             <h3 class="ins-faq__q">What if I only want <em>one</em> course?</h3>
-            <p class="ins-faq__a">There's no single-course tier. The math doesn't work — even one course at standalone agency-school pricing runs $300-$2,000. <strong>The whole bucket is $10.</strong> Take it for a month, watch the one you came for, cancel if the rest isn't useful. You're still up two grand.</p>
+            <p class="ins-faq__a">There's no single-course tier. The math doesn't work — even one course at standalone agency-school pricing runs $300-$2,000. <strong>The whole empire is $9.</strong> Take it for a month, watch the one you came for, cancel if the rest isn't useful. You're still up two grand.</p>
           </div>
         </article>
 

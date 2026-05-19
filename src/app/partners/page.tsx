@@ -618,11 +618,11 @@ export default function Page() {
       <span class="member-note__eyebrow">For Insiders</span>
       <h2 class="member-note__title">The codes aren't on the public links.</h2>
       <p class="member-note__copy">
-        Insiders ($10/mo) get my <em>member-only promo codes</em> for several of these — discounts
+        Insiders ($9/mo) get my <em>member-only promo codes</em> for several of these — discounts
         I've negotiated that aren't published on the public affiliate links above. Posted in the
         community vault, updated whenever a new deal opens.
       </p>
-      <a class="member-note__cta" href="/insider/">Open Insider — $10/mo</a>
+      <a class="member-note__cta" href="/insider/">Open Insider — $9/mo</a>
     </div>
   </section>
 

@@ -97,7 +97,7 @@ export default function Page() {
           <span class="welcome-hero__check">Access Live</span>
         </div>
         <div>
-          <p class="welcome-hero__eyebrow">Engine Track <span>·</span> Insider $10</p>
+          <p class="welcome-hero__eyebrow">Engine Track <span>·</span> AI Empire Insider $9</p>
           <h1 class="welcome-hero__title">You're in: AI Marketing <span class="accent">Engine.</span></h1>
           <p class="welcome-hero__lede">
             Course access provisioned. The funnel template, email sequences, ad copy generator,

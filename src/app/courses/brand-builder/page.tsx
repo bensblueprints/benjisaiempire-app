@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "AI Brand Builder — Included with $10 Insider · Benji's AI Empire",
-  description: "Blank page to a brand that converts. Positioning, voice, identity, content. AI as a co-pilot — not a crutch. Included with $10 Insider.",
+  title: "AI Brand Builder — Included with $9 AI Empire Insider · Benji's AI Empire",
+  description: "Blank page to a brand that converts. Positioning, voice, identity, content. AI as a co-pilot — not a crutch. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/brand-builder/" },
-  openGraph: { title: "AI Brand Builder — Course 02 / 04", description: "Blank page to a brand that converts. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/brand-builder/", images: [{ url: "https://benjisaiempire.com/images/headshot-leaves.jpg?v=2" }], type: "article" }
+  openGraph: { title: "AI Brand Builder — Course 02 / 04", description: "Blank page to a brand that converts. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/courses/brand-builder/", images: [{ url: "https://benjisaiempire.com/images/headshot-leaves.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -189,7 +189,7 @@ export default function Page() {
         </div>
       </div>
       <div class="course-hero__right">
-        <div class="course-hero__eyebrow">Included with $10 Insider · Course 02 / 04</div>
+        <div class="course-hero__eyebrow">Included with $9 AI Empire Insider · Course 02 / 04</div>
         <h1>AI Brand <span class="accent">Builder</span></h1>
         <p class="course-hero__lede">
           Blank page to a brand that converts. Positioning, voice, identity,
@@ -198,7 +198,7 @@ export default function Page() {
         <div class="course-hero__meta">
           <strong>7 modules</strong> &nbsp;·&nbsp; ≈5 hours &nbsp;·&nbsp; self-paced &nbsp;·&nbsp; prompt library included
         </div>
-        <a class="course-hero__cta" href="/insider/">Get this + everything else for $10/mo</a>
+        <a class="course-hero__cta" href="/insider/">Get this + everything else for $9/mo</a>
         <a class="course-hero__sublink" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
       </div>
     </div>
@@ -247,8 +247,8 @@ export default function Page() {
   </section>
 
   <section class="cta-strip">
-    <div class="cta-strip__eyebrow">Included with $10 Insider</div>
-    <h2 class="cta-strip__head">Get this + <em>everything in the bucket</em> for $10/mo.</h2>
+    <div class="cta-strip__eyebrow">Included with $9 AI Empire Insider</div>
+    <h2 class="cta-strip__head">Get this + <em>everything in the empire</em> for $9/mo.</h2>
     <a class="cta-strip__btn" href="/insider/">Join Insider</a>
     <a class="cta-strip__alt" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
   </section>

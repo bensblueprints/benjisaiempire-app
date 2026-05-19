@@ -97,7 +97,7 @@ export default function Page() {
           <span class="welcome-hero__check">Access Live</span>
         </div>
         <div>
-          <p class="welcome-hero__eyebrow">System Track <span>·</span> Insider $10</p>
+          <p class="welcome-hero__eyebrow">System Track <span>·</span> AI Empire Insider $9</p>
           <h1 class="welcome-hero__title">You're in: <span class="accent">Empire OS.</span></h1>
           <p class="welcome-hero__lede">
             Course access provisioned. The agency SOP pack, the daily rhythm template, the first-VA

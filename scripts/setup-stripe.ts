@@ -64,8 +64,8 @@ const PRODUCTS: ProductSpec[] = [
     tier: "INSIDER",
     name: "Insider — Everything Bucket",
     description:
-      "Empire Insider — $10/month. Foundation courses, Tuesday Cold Call Live replays, the Master Script PDF, and the public side of Build Day Live.",
-    unitAmount: 1000,
+      "Empire Insider — $9/month. All 4 courses, every prompt & script, free GoHighLevel sub-account, Tuesday Cold Call Live replays, and private Insider community.",
+    unitAmount: 900,
     envVar: "STRIPE_PRICE_INSIDER",
   },
   {

@@ -107,11 +107,11 @@ export default async function PortalPage({
         <aside className="portal-banner portal-banner--upgrade">
           <span className="portal-banner__eyebrow">Locked Door</span>
           <p className="portal-banner__text">
-            Lessons live behind the Insider tier. <strong>$10/mo</strong> opens
-            every course, prompt, and script.
+            Lessons live behind AI Empire Insider. <strong>$9/mo</strong> opens
+            every course, prompt, script, and your free GoHighLevel sub-account.
           </p>
           <Link href="/insider" className="portal-banner__cta">
-            Upgrade to Insider →
+            Join AI Empire Insider →
           </Link>
         </aside>
       )}
@@ -141,11 +141,11 @@ export default async function PortalPage({
           </h2>
           <p className="portal-callout__body">
             Every Tuesday cold call is free, forever. But the courses, prompts,
-            scripts, and the GHL reseller account live inside Insider —{" "}
-            <strong>$10/mo</strong>, cancel anytime, no contract.
+            scripts, and your free GoHighLevel sub-account live inside AI Empire Insider —{" "}
+            <strong>$9/mo</strong>, cancel anytime, no contract.
           </p>
           <Link href="/insider" className="portal-callout__cta">
-            Upgrade to Insider →
+            Join AI Empire Insider →
           </Link>
         </aside>
       )}

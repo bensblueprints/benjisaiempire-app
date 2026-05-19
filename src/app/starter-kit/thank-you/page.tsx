@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Thanks — Free Tier · Benji's AI Empire",
-  description: "Thanks for coming through. The free videos live at /starter-kit/. Hit the YouTube channel for the full archive. The $10 Insider bucket is one click away.",
+  description: "Thanks for coming through. The free videos live at /starter-kit/. Hit the YouTube channel for the full archive. The $9 AI Empire Insider bucket is one click away.",
   alternates: { canonical: "https://benjisaiempire.com/starter-kit/thank-you" },
   robots: { index: false, follow: true }
 };
@@ -85,11 +85,11 @@ export default function Page() {
       <h1 class="lite-hero__title"><em>Thanks</em> for coming through.</h1>
       <p class="lite-hero__lede">
         The free videos live at <strong style="color:var(--cream);">/starter-kit/</strong>.
-        Hit the YouTube channel for the full archive. The <strong style="color:var(--gold);">$10 Insider</strong>
+        Hit the YouTube channel for the full archive. The <strong style="color:var(--gold);">$9 AI Empire Insider</strong>
         bucket — every course, every prompt, every script — is one click away.
       </p>
       <div class="lite-hero__ctas">
-        <a class="btn-gold" href="/insider/">Join Insider — $10/mo</a>
+        <a class="btn-gold" href="/insider/">Join AI Empire Insider — $9/mo</a>
         <a class="btn-ghost" href="https://www.youtube.com/@benjiboyce" target="_blank" rel="noopener">Open the YouTube channel</a>
       </div>
       <a class="lite-hero__cross" href="/starter-kit/">Back to the free videos hub</a>

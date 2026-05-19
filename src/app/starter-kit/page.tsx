@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Free Tier — Watch Me Cold-Call Live · Benji's AI Empire",
-  description: "The free tier: every Tuesday cold call live, every Thursday build day live, the full 52-week archive. No email opt-in. The Starter Kit, prompts, scripts, and challenges live in $10 Insider.",
+  description: "The free tier: every Tuesday cold call live, every Thursday build day live, the full 52-week archive. No email opt-in. The Starter Kit, prompts, scripts, and challenges live in $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/starter-kit/" },
   openGraph: { title: "Free Tier — Watch Me Cold-Call Live", description: "Tuesday cold call live. Thursday build day live. Full archive. Free.", url: "https://benjisaiempire.com/starter-kit/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg?v=2" }], type: "website" }
 };
@@ -268,7 +268,7 @@ export default function Page() {
         <p class="free-hero__lede">
           Tuesday Cold Call Live. Thursday Build Day Live. The full archive. No email opt-in,
           no PDFs, no scripts — just the videos. Everything else (the Starter Kit PDF, the
-          prompts, the scripts) is $10 Insider.
+          prompts, the scripts) is $9 AI Empire Insider.
         </p>
         <a class="free-hero__cta" href="https://www.youtube.com/@benjiboyce" target="_blank" rel="noopener">Open the YouTube channel</a>
       </div>
@@ -336,8 +336,8 @@ export default function Page() {
       <div class="notfree__rail">What's not free</div>
       <p class="notfree__quote">
         “The Starter Kit PDF, every prompt, every script, the 30-day challenges — they all
-        moved to the <em>$10 Insider</em> tier. Why? Because I want serious operators, and
-        ten dollars is the smallest filter that keeps tire-kickers out without making it
+        moved to the <em>$9 AI Empire Insider</em> tier. Why? Because I want serious operators, and
+        nine dollars is the smallest filter that keeps tire-kickers out without making it
         inaccessible.”
       </p>
       <p class="notfree__sig">— Benji · Operator's Note</p>
@@ -353,7 +353,7 @@ export default function Page() {
         Four courses, every prompt, every script, the Starter Kit PDF, both 30-day
         challenges, the community, GHL @ $0.04/min — one bucket, one price.
       </p>
-      <a class="upgrade__primary" href="/insider/">Join Insider — $10/mo</a>
+      <a class="upgrade__primary" href="/insider/">Join AI Empire Insider — $9/mo</a>
       <a class="upgrade__cross" href="/founders/">Or grab wholesale GHL for $49/mo</a>
     </div>
   </section>

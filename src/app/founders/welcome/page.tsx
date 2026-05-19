@@ -389,7 +389,7 @@ export default function Page() {
             <h3>Operator community</h3>
             <p>
               Wholesale seats include read access to the public build-day archive. Want full
-              community + every course, prompt, and script? Add Insider for $10/mo (see below).
+              community + every course, prompt, and script? Add AI Empire Insider for $9/mo (see below).
             </p>
             <a class="w-support__link" href="/community">
               Open the community →
@@ -414,7 +414,7 @@ export default function Page() {
             Challenge, and the private community. Add it for ten bucks and you're at $59/mo total.
           </p>
           <a class="w-btn w-btn--primary" href="/insider/">
-            Add Insider for $10/mo <span class="arrow" aria-hidden="true">→</span>
+            Add AI Empire Insider for $9/mo <span class="arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>

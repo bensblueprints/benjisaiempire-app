@@ -102,7 +102,7 @@ export default function Page() {
           <span class="welcome-hero__check">Access Live</span>
         </div>
         <div>
-          <p class="welcome-hero__eyebrow">Foundation Track <span>·</span> Insider $10</p>
+          <p class="welcome-hero__eyebrow">Foundation Track <span>·</span> AI Empire Insider $9</p>
           <h1 class="welcome-hero__title">You're in: AI Brand <span class="accent">Builder.</span></h1>
           <p class="welcome-hero__lede">
             Course access provisioned. Logo prompts, voice docs, the positioning teardown,

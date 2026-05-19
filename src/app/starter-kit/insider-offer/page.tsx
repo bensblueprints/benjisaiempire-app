@@ -3,8 +3,8 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "You watched me dial. Now run the system. — $10 Insider · Benji's AI Empire",
-  description: "Free-tier viewer offer: lock in $10/mo Insider. Four courses, every prompt, every script, the Starter Kit, both 30-day challenges, the community, GHL @ $0.04/min.",
+  title: "You watched me dial. Now run the system. — $9 AI Empire Insider · Benji's AI Empire",
+  description: "Free-tier viewer offer: lock in $9/mo Insider. Four courses, every prompt, every script, the Starter Kit, both 30-day challenges, the community, GHL @ $0.04/min.",
   alternates: { canonical: "https://benjisaiempire.com/starter-kit/insider-offer" },
   robots: { index: false, follow: true }
 };
@@ -214,10 +214,10 @@ export default function Page() {
         <p class="tw-hero__lede">
           You've been watching the videos. Cool. The videos are the trailer. The system —
           the Starter Kit PDF, every prompt I've ever shipped, the master cold-call script,
-          the 30-day challenges, the GHL reseller seat — all lives one tier up. Ten dollars.
+          the 30-day challenges, the GHL reseller seat — all lives one tier up. Nine dollars.
           Unlock the whole bucket.
         </p>
-        <p class="tw-hero__price">$10<small>/ month · cancel any time</small></p>
+        <p class="tw-hero__price">$9<small>/ month · cancel any time</small></p>
       </div>
       <figure class="tw-hero__media">
         <img src="/images/headshot-pointing.jpg?v=2" alt="Benji pointing — your turn." loading="eager" />
@@ -230,7 +230,7 @@ export default function Page() {
     <div class="page-wrap">
       <div class="bucket__head">
         <h2 class="bucket__title">What's <em>actually</em> in the bucket.</h2>
-        <span class="bucket__meta">5 things · all $10/mo</span>
+        <span class="bucket__meta">5 things · all $9/mo</span>
       </div>
       <ul class="bucket__list">
         <li class="bucket__item">
@@ -266,12 +266,12 @@ export default function Page() {
   <section class="checkout" id="lock">
     <div class="page-wrap">
       <div class="checkout__eyebrow">Lock the rate · 60 seconds</div>
-      <h2 class="checkout__title">$10/mo. One click.</h2>
+      <h2 class="checkout__title">$9/mo. One click.</h2>
       <div class="ghl-slot" data-ghl-form="insider-checkout" aria-label="GoHighLevel checkout embed">
         <strong>GHL Checkout Form</strong>
         <span>Embed slot · wires to live form</span>
       </div>
-      <a class="checkout__cta" href="#">Lock $10/mo</a>
+      <a class="checkout__cta" href="#">Lock $9/mo</a>
       <p class="checkout__fineprint">Stripe · Cancel any time · Instant access</p>
     </div>
   </section>

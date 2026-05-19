@@ -53,13 +53,7 @@ export default function Footer() {
               <li>
                 <Link className="shell-footer__link" href="/insider">
                   Insider{" "}
-                  <span className="shell-footer__link-meta">$10/mo</span>
-                </Link>
-              </li>
-              <li>
-                <Link className="shell-footer__link" href="/founders">
-                  Wholesale GHL{" "}
-                  <span className="shell-footer__link-meta">$49/mo</span>
+                  <span className="shell-footer__link-meta">$9/mo</span>
                 </Link>
               </li>
               <li>
@@ -77,7 +71,7 @@ export default function Footer() {
               <li>
                 <a
                   className="shell-footer__link"
-                  href="https://youtube.com"
+                  href="https://www.youtube.com/channel/UCT6RXVsmGY7U_LxcUFoVC0g"
                   target="_blank"
                   rel="noopener"
                 >
@@ -88,7 +82,7 @@ export default function Footer() {
               <li>
                 <a
                   className="shell-footer__link"
-                  href="https://youtube.com"
+                  href="https://www.youtube.com/channel/UCT6RXVsmGY7U_LxcUFoVC0g"
                   target="_blank"
                   rel="noopener"
                 >

@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "30-Day Cold Calling Challenge — Included with $10 Insider · Benji's AI Empire",
-  description: "100 calls. 30 days. Goal: 10 new clients. The master script + the cadence + watching me dial live on Tuesdays. Included with $10 Insider.",
+  title: "30-Day Cold Calling Challenge — Included with $9 AI Empire Insider · Benji's AI Empire",
+  description: "100 calls. 30 days. Goal: 10 new clients. The master script + the cadence + watching me dial live on Tuesdays. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/cold-call-30/" },
-  openGraph: { title: "30-Day Cold Calling Challenge — Included with $10 Insider", description: "100 calls. 30 days. Goal: 10 new clients. The master script + the live cadence.", url: "https://benjisaiempire.com/cold-call-30/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg?v=2" }], type: "website" }
+  openGraph: { title: "30-Day Cold Calling Challenge — Included with $9 AI Empire Insider", description: "100 calls. 30 days. Goal: 10 new clients. The master script + the live cadence.", url: "https://benjisaiempire.com/cold-call-30/", images: [{ url: "https://benjisaiempire.com/images/streaming-rig.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -254,12 +254,12 @@ export default function Page() {
   <section class="cc-hero">
     <div class="page-wrap cc-hero__inner">
       <div>
-        <span class="cc-hero__badge">Included with $10 Insider</span>
+        <span class="cc-hero__badge">Included with $9 AI Empire Insider</span>
         <h1 class="cc-hero__title">100 Calls. 30 Days. <em>Goal:</em> 10 new clients.</h1>
         <p class="cc-hero__lede">
           The math: 100 calls in a month is ~3 dials a day. 10 closes on 100 calls is a 10% conversion — boring, achievable, repeatable. Use my Master Script, watch me run it live every Tuesday, and put 10 new logos on the wall in 30 days.
         </p>
-        <a class="cc-hero__cta" href="/insider/">Get this + everything for $10/mo</a>
+        <a class="cc-hero__cta" href="/insider/">Get this + everything for $9/mo</a>
       </div>
       <figure class="cc-hero__media">
         <img src="/images/streaming-rig.jpg?v=2" alt="The streaming rig — every Tuesday cold call live runs from here." loading="eager" />
@@ -362,8 +362,8 @@ export default function Page() {
   <section class="cta-strip">
     <div class="page-wrap">
       <div class="cta-strip__eyebrow">When you're ready</div>
-      <h2 class="cta-strip__title">Join Insider — <em>$10/mo</em></h2>
-      <a class="cta-strip__primary" href="/insider/">Lock $10/mo</a>
+      <h2 class="cta-strip__title">Join Insider — <em>$9/mo</em></h2>
+      <a class="cta-strip__primary" href="/insider/">Lock $9/mo</a>
       <a class="cta-strip__cross" href="/founders/">Or wholesale GHL — $49/mo</a>
     </div>
   </section>

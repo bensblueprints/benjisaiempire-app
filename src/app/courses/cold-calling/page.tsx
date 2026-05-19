@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Cold Calling 2.0 + AI — Included with $10 Insider · Benji's AI Empire",
-  description: "The exact cold-calling system I run live every Tuesday. AI-augmented prospecting, the Master Script, real objection handling, and the follow-up cadence that closes. Included with $10 Insider.",
+  title: "Cold Calling 2.0 + AI — Included with $9 AI Empire Insider · Benji's AI Empire",
+  description: "The exact cold-calling system I run live every Tuesday. AI-augmented prospecting, the Master Script, real objection handling, and the follow-up cadence that closes. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/cold-calling/" },
-  openGraph: { title: "Cold Calling 2.0 + AI — Course 01 / 04", description: "The exact cold-calling system I run live every Tuesday. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/cold-calling/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "article" }
+  openGraph: { title: "Cold Calling 2.0 + AI — Course 01 / 04", description: "The exact cold-calling system I run live every Tuesday. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/courses/cold-calling/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -112,7 +112,7 @@ export default function Page() {
         </div>
         <div>
           <div class="course-hero__eyebrow">
-            Included with $10 Insider <span class="sep">·</span> Course 01 / 04
+            Included with $9 AI Empire Insider <span class="sep">·</span> Course 01 / 04
           </div>
           <h1>Cold Calling <em>2.0</em><br>+ AI</h1>
           <p class="course-hero__lede">
@@ -123,7 +123,7 @@ export default function Page() {
           <div class="course-hero__meta">
             <strong>8 modules</strong> &nbsp;·&nbsp; ≈6.5 hours &nbsp;·&nbsp; self-paced &nbsp;·&nbsp; live Q&amp;A weekly
           </div>
-          <a class="course-hero__cta" href="/insider/">Get this + everything else for $10/mo</a>
+          <a class="course-hero__cta" href="/insider/">Get this + everything else for $9/mo</a>
           <a class="course-hero__sublink" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
         </div>
       </div>
@@ -140,7 +140,7 @@ export default function Page() {
       <span class="dial-ticker__item"><strong>8s</strong> to hook</span>
       <span class="dial-ticker__item"><strong>1</strong> Master Script</span>
       <span class="dial-ticker__item"><strong>0</strong> burnout</span>
-      <span class="dial-ticker__item"><strong>$10/mo</strong> includes everything</span>
+      <span class="dial-ticker__item"><strong>$9/mo</strong> includes everything</span>
     </div>
   </div>
 
@@ -187,8 +187,8 @@ export default function Page() {
   </section>
 
   <section class="cta-strip">
-    <div class="cta-strip__eyebrow">Included with $10 Insider</div>
-    <h2 class="cta-strip__head">Get this + <em>everything in the bucket</em> for $10/mo.</h2>
+    <div class="cta-strip__eyebrow">Included with $9 AI Empire Insider</div>
+    <h2 class="cta-strip__head">Get this + <em>everything in the empire</em> for $9/mo.</h2>
     <a class="cta-strip__btn" href="/insider/">Join Insider</a>
     <a class="cta-strip__alt" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
   </section>

@@ -605,7 +605,7 @@ export default function Page() {
               <div class="f-math__row" role="row">
                 <div class="f-math__label" role="cell">
                   Insider tier — retail GHL minutes
-                  <small>5,000 min &nbsp;×&nbsp; $0.040 &nbsp;+&nbsp; $10/mo</small>
+                  <small>5,000 min × $0.040 + $9/mo</small>
                 </div>
                 <div class="f-math__num f-math__num--strike" role="cell">$210/mo</div>
               </div>
@@ -654,7 +654,7 @@ export default function Page() {
 
           <div class="f-card">
             <div class="f-card__head">What's NOT included</div>
-            <h3>This is not the $10 tier.</h3>
+            <h3>This is not the $9 AI Empire Insider tier.</h3>
             <ul class="f-list f-list--strike">
               <li>No courses — Empire OS, Cold Calling, Marketing Engine</li>
               <li>No prompt library, no scripts, no swipe files</li>
@@ -663,8 +663,8 @@ export default function Page() {
               <li>No 1:1 coaching, no DMs, no done-for-you setup</li>
             </ul>
             <p class="f-math__caption" style="margin-top: 22px;">
-              Want all of that? It's <strong>$10/mo</strong> on the Insider tier — and you can
-              stack both. Wholesale + Insider = $59/mo total.
+              Want all of that? It's <strong>$9/mo</strong> on the AI Empire Insider tier — and you can
+              stack both. Wholesale + AI Empire Insider = $58/mo total.
             </p>
           </div>
         </div>
@@ -759,7 +759,7 @@ export default function Page() {
             <div>
               <h3 class="f-faq__q">Can I upgrade to Insider too?</h3>
               <p class="f-faq__a">
-                Stack them. <strong>$49 wholesale + $10 Insider = $59/mo total</strong> — wholesale
+                Stack them. <strong>$49 wholesale + $9 AI Empire Insider = $58/mo total</strong> — wholesale
                 minutes <em>and</em> every course, prompt, script, challenge, and the community. That's
                 the play most operators run.
               </p>
@@ -786,7 +786,7 @@ export default function Page() {
               <p class="f-faq__a">
                 Then this tier probably isn't your move. <strong>The math only works if you're
                 dialing.</strong> Under ~1,200 min/mo, the $39 monthly delta vs Insider eats the
-                per-minute savings. Take the $10 Insider tier instead — you get the platform plus
+                per-minute savings. Take the $9 AI Empire Insider tier instead — you get the platform plus
                 everything else.
               </p>
             </div>

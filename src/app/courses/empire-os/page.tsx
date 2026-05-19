@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Empire OS — Included with $10 Insider · Benji's AI Empire",
-  description: "How I run the agency. Systems, hires, finance, fulfillment. The boring stuff that compounds. The operating manual behind the YouTube. Included with $10 Insider.",
+  title: "Empire OS — Included with $9 AI Empire Insider · Benji's AI Empire",
+  description: "How I run the agency. Systems, hires, finance, fulfillment. The boring stuff that compounds. The operating manual behind the YouTube. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/empire-os/" },
-  openGraph: { title: "Empire OS — Course 04 / 04", description: "The operating manual behind the YouTube. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/empire-os/", images: [{ url: "https://benjisaiempire.com/images/hero-petronas-2.jpg?v=2" }], type: "article" }
+  openGraph: { title: "Empire OS — Course 04 / 04", description: "The operating manual behind the YouTube. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/courses/empire-os/", images: [{ url: "https://benjisaiempire.com/images/hero-petronas-2.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -197,7 +197,7 @@ export default function Page() {
       <span class="chip">Operator-grade · Asia-friendly</span>
     </div>
     <div class="course-hero__inner">
-      <div class="course-hero__eyebrow">Included with $10 Insider <span class="sep">·</span> Course 04 / 04</div>
+      <div class="course-hero__eyebrow">Included with $9 AI Empire Insider <span class="sep">·</span> Course 04 / 04</div>
       <h1>Empire <em>OS</em></h1>
 
       <div class="course-hero__split">
@@ -207,7 +207,7 @@ export default function Page() {
             <em>The boring stuff that compounds.</em>
             The operating manual behind the YouTube.
           </p>
-          <a class="course-hero__cta" href="/insider/">Get this + everything else for $10/mo</a>
+          <a class="course-hero__cta" href="/insider/">Get this + everything else for $9/mo</a>
           <a class="course-hero__sublink" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
         </div>
 
@@ -272,8 +272,8 @@ export default function Page() {
   </section>
 
   <section class="cta-strip">
-    <div class="cta-strip__eyebrow">Included with $10 Insider</div>
-    <h2 class="cta-strip__head">Get this + <em>everything in the bucket</em> for $10/mo.</h2>
+    <div class="cta-strip__eyebrow">Included with $9 AI Empire Insider</div>
+    <h2 class="cta-strip__head">Get this + <em>everything in the empire</em> for $9/mo.</h2>
     <a class="cta-strip__btn" href="/insider/">Join Insider</a>
     <a class="cta-strip__alt" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
   </section>

@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "30-Day AI Empire Challenge — Included with $10 Insider · Benji's AI Empire",
-  description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Daily prompt, daily nudge, accountability check-ins. Included with $10 Insider.",
+  title: "30-Day AI Empire Challenge — Included with $9 AI Empire Insider · Benji's AI Empire",
+  description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Daily prompt, daily nudge, accountability check-ins. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/challenge/" },
-  openGraph: { title: "30-Day AI Empire Challenge — Included with $10 Insider", description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Included with $10 Insider.", url: "https://benjisaiempire.com/challenge/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
+  openGraph: { title: "30-Day AI Empire Challenge — Included with $9 AI Empire Insider", description: "30 days. 30 emails. One AI-powered offer shipped end-to-end. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/challenge/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -239,14 +239,14 @@ export default function Page() {
   <section class="ch-hero">
     <div class="page-wrap ch-hero__inner">
       <div>
-        <span class="ch-hero__badge">Included with $10 Insider</span>
+        <span class="ch-hero__badge">Included with $9 AI Empire Insider</span>
         <h1 class="ch-hero__title">30 Days. 30 Emails. <em>One</em> AI-powered offer.</h1>
         <p class="ch-hero__lede">
           Daily prompt, daily nudge, accountability check-ins. Build a real AI-powered offer
           end-to-end in a month — not in theory, in shipped output. Positioning, build,
           launch, iterate. By Day 30 you have a thing you can sell.
         </p>
-        <a class="ch-hero__cta" href="/insider/">Get this + everything for $10/mo</a>
+        <a class="ch-hero__cta" href="/insider/">Get this + everything for $9/mo</a>
       </div>
       <figure class="ch-hero__media">
         <img src="/images/course-marketing-engine.jpg?v=2" alt="The Marketing Engine — where the 30-Day Empire Challenge runs from." loading="eager" />
@@ -385,8 +385,8 @@ export default function Page() {
   <section class="cta-strip">
     <div class="page-wrap">
       <div class="cta-strip__eyebrow">When you're ready</div>
-      <h2 class="cta-strip__title">Join Insider — <em>$10/mo</em></h2>
-      <a class="cta-strip__primary" href="/insider/">Lock $10/mo</a>
+      <h2 class="cta-strip__title">Join Insider — <em>$9/mo</em></h2>
+      <a class="cta-strip__primary" href="/insider/">Lock $9/mo</a>
       <a class="cta-strip__cross" href="/founders/">Or wholesale GHL — $49/mo</a>
     </div>
   </section>

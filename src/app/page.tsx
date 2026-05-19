@@ -6,10 +6,10 @@ import PortfolioSection from "@/components/PortfolioSection";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Benji's AI Empire — Sales Calls Free · Everything Else $10 · Wholesale GHL $49",
-  description: "Watch me cold-call live every Tuesday — free. Every course, prompt, script, and the GHL reseller account is $10/mo. Wholesale GHL @ $0.015/min for the first 100 operators.",
+  title: "Benji's AI Empire — Free Sales Call Videos · Everything Else $9/mo · AI Business Playbook",
+  description: "I cold-call live every Tuesday on YouTube — free. For $9/mo get every AI course I teach, every prompt, every script, and a free GoHighLevel sub-account. Everything you need to build an AI business.",
   alternates: { canonical: "https://benjisaiempire.com/" },
-  openGraph: { title: "Benji's AI Empire", description: "Sales call videos free. $10 for everything else. $49 wholesale GHL — first 100.", url: "https://benjisaiempire.com/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "website" }
+  openGraph: { title: "Benji's AI Empire — $9/mo Gets You Everything", description: "Free cold call videos every Tuesday. $9/mo for all 4 AI courses, every prompt, every script, and a free GoHighLevel account.", url: "https://benjisaiempire.com/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=2" }], type: "website" }
 };
 
 export default function Page() {
@@ -683,8 +683,9 @@ export default function Page() {
   }
   @media (min-width: 900px){
     .pricing-grid{
-      grid-template-columns: 1fr 1fr 1.18fr;
+      grid-template-columns: 1fr 1.24fr;
       gap: clamp(18px, 2vw, 28px);
+      max-width: 880px;
     }
   }
 
@@ -2037,6 +2038,7 @@ export default function Page() {
   .proof-section .ps-frame img{
     width:100%; height:100%;
     object-fit:cover;
+    object-position:center top;
     display:block;
     filter:contrast(1.05) saturate(.94);
     transition:transform 900ms cubic-bezier(.22,1,.36,1), filter 600ms ease;
@@ -2640,6 +2642,84 @@ export default function Page() {
     }
   }
 
+  /* ═══ VSL SECTION ═══════════════════════════════════════════ */
+  .vsl-section{
+    background:var(--ink-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:clamp(56px,8vw,112px) clamp(20px,5vw,56px);
+  }
+  .vsl-inner{
+    max-width:860px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:32px;
+    text-align:center;
+  }
+  .vsl-eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--gold);
+    display:flex; align-items:center; gap:14px;
+  }
+  .vsl-eyebrow::before,.vsl-eyebrow::after{
+    content:""; width:32px; height:1px; background:var(--gold);
+  }
+  .vsl-headline{
+    font-family:'Anton',sans-serif; font-weight:400;
+    font-size:clamp(26px,4.5vw,52px);
+    text-transform:uppercase; line-height:1.05;
+    color:var(--cream); letter-spacing:.01em;
+  }
+  .vsl-headline em{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    text-transform:none; color:var(--gold-bright); letter-spacing:-.01em;
+  }
+  .vsl-topics{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+    max-width:680px;
+  }
+  .vsl-topic{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--cream-soft);
+    border:1px solid var(--line); padding:6px 12px; border-radius:2px;
+  }
+  .vsl-player-wrap{
+    width:100%; max-width:800px;
+    border-radius:4px; overflow:hidden;
+    border:1px solid rgba(212,175,55,.35);
+    box-shadow:0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(212,175,55,.08);
+  }
+  .vsl-player{
+    position:relative; padding-bottom:56.25%; height:0;
+    background:var(--ink);
+  }
+  .vsl-player iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+  }
+  .vsl-sub{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:300;
+    font-size:clamp(16px,2vw,20px); color:var(--bone); line-height:1.5;
+    max-width:560px;
+  }
+  .vsl-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold); color:var(--ink);
+    font-family:'Manrope',sans-serif; font-weight:800;
+    font-size:14px; letter-spacing:.1em; text-transform:uppercase;
+    padding:16px 32px; border-radius:3px;
+    transition:background .2s var(--ease), transform .2s var(--ease);
+  }
+  .vsl-cta:hover{ background:var(--gold-bright); transform:translateY(-2px); }
+  .vsl-cta-arrow{ font-size:18px; }
+  @media(max-width:600px){
+    .vsl-topics{ gap:8px; }
+    .vsl-topic{ font-size:10px; letter-spacing:.14em; }
+  }
+
 
 ` }} />
       <Topbar />
@@ -2678,17 +2758,17 @@ export default function Page() {
         <p class="hero-lede">
           I'm Benji Boyce. I run a real agency, sell real software, and ship
           real client websites with Claude Code on YouTube every week.
-          <strong>Watch me work — for free.</strong> Or grab the $10 bucket
-          and get every course, every prompt, the whole library.
+          <strong>Watch me work — for free.</strong> Or grab the $9 AI Empire Insider
+          and get every course, every prompt, free GoHighLevel, the whole playbook.
         </p>
 
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#pricing">
-            <span>See the 3 tiers</span>
+          <a class="btn btn-primary" href="/insider/">
+            <span>Join AI Empire Insider — $9/mo</span>
             <span class="arrow" aria-hidden="true">→</span>
           </a>
           <a class="btn btn-ghost" href="/starter-kit/">
-            <span>Get free video access</span>
+            <span>Watch free first</span>
             <span class="arrow" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -2704,8 +2784,8 @@ export default function Page() {
           <span class="v">40<em>+</em></span>
         </div>
         <div class="stat">
-          <span class="k">Bucket</span>
-          <span class="v">$10<em>/mo</em></span>
+          <span class="k">AI Empire Insider</span>
+          <span class="v">$9<em>/mo</em></span>
         </div>
       </div>
     </div>
@@ -2741,6 +2821,52 @@ export default function Page() {
 </section>
 
 
+<!-- ═══ VSL SECTION — swap YouTube ID when you have your sales letter video ═══ -->
+<section class="vsl-section" aria-label="Watch before you decide">
+  <div class="vsl-inner">
+
+    <div class="vsl-eyebrow">Watch Before You Decide</div>
+
+    <h2 class="vsl-headline">
+      I spend 16 hours a day<br>building AI businesses.<br>
+      <em>This is exactly what I do</em> — $9/mo gets you all of it.
+    </h2>
+
+    <div class="vsl-topics">
+      <span class="vsl-topic">AI E-Commerce</span>
+      <span class="vsl-topic">Client Marketing with AI</span>
+      <span class="vsl-topic">Getting Clients with AI</span>
+      <span class="vsl-topic">Writing Scripts with AI</span>
+      <span class="vsl-topic">AI Videos for Clients</span>
+      <span class="vsl-topic">Building Funnels with AI</span>
+      <span class="vsl-topic">Cold Calling + AI</span>
+    </div>
+
+    <div class="vsl-player-wrap">
+      <div class="vsl-player">
+        <!-- Replace VIDEO_ID below with your VSL video ID from YouTube -->
+        <iframe
+          src="https://www.youtube.com/embed/NBUdUZKN7Ts?rel=0&modestbranding=1&color=white"
+          title="Benji Boyce — AI Empire: Watch Before You Join"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <p class="vsl-sub">
+      If this doesn&rsquo;t resonate in the first 5 minutes, close the tab.
+      If it does, nine dollars will feel like a rounding error.
+    </p>
+
+    <a class="vsl-cta" href="#pricing">
+      <span>Get AI Empire Insider — $9/mo</span>
+      <span class="vsl-cta-arrow" aria-hidden="true">&nbsp;&rarr;</span>
+    </a>
+
+  </div>
+</section>
+
 <section class="pricing-section" id="pricing">
   <header class="pricing-masthead">
     <div class="pricing-eyebrow">
@@ -2748,10 +2874,10 @@ export default function Page() {
       <span class="pricing-eyebrow-meta">VOL. 02 · ISSUE 03 · OPERATOR EDITION</span>
     </div>
     <h2 class="pricing-headline">
-      Three Tiers. <span class="ph-amp">No</span> Secrets.
+      Two Tiers. <span class="ph-amp">No</span> Secrets.
     </h2>
     <p class="pricing-lede">
-      Free is just the videos. Ten gets you the playbook. Forty-nine is wholesale software for the first hundred operators who want it.
+      Free is the videos. Nine dollars a month gets you the full AI Empire playbook — every course, every prompt, every script, plus a free GoHighLevel account.
     </p>
   </header>
 
@@ -2784,45 +2910,46 @@ export default function Page() {
       </div>
     </article>
 
-    <!-- ============== TIER 02: INSIDER ============== -->
+    <!-- ============== TIER 02: AI EMPIRE INSIDER ============== -->
     <article class="tier tier--insider" aria-labelledby="tier-insider-name">
+      <div class="tier-ribbon">MOST POPULAR</div>
       <div class="tier-eyebrow"><span>TIER 02 / EVERYTHING</span></div>
-      <h3 class="tier-name" id="tier-insider-name">INSIDER</h3>
+      <h3 class="tier-name" id="tier-insider-name">AI EMPIRE INSIDER</h3>
 
       <div class="tier-price-row">
-        <span class="tier-price"><span class="currency">$</span>10</span>
+        <span class="tier-price"><span class="currency">$</span>9</span>
         <span class="tier-price-cadence">/ month</span>
       </div>
       <span class="tier-perminute">
         <span class="dot" aria-hidden="true"></span>
-        GHL · $0.04 / minute
+        GHL AI calling · $0.04 / min
       </span>
 
-      <p class="tier-tagline">Every course. Every prompt. Every script. The whole bucket.</p>
+      <p class="tier-tagline">Every course. Every prompt. Every script. Free GoHighLevel. The whole empire.</p>
 
       <div class="tier-divider"><span>What's included</span></div>
       <ul class="tier-includes">
-        <li>All <strong>4 courses</strong> (Cold Calling 2.0, AI Brand Builder, AI Marketing Engine, Empire OS)</li>
-        <li>Every prompt I run — Claude, Cursor, GPT</li>
-        <li>Every script, template, SOP, checklist</li>
+        <li><strong>Free GoHighLevel sub-account</strong> — yours to keep, set up within 24 hrs</li>
+        <li>All <strong>4 courses</strong> — Cold Calling 2.0 + AI, AI Brand Builder, AI Marketing Engine, Empire OS</li>
+        <li>Every AI prompt I run — Claude, Cursor, GPT</li>
+        <li>Every script, template, SOP &amp; checklist</li>
         <li>The Starter Kit (PDF + cold-call scripts)</li>
-        <li>30-Day Empire Challenge (email sequence)</li>
-        <li>30-Day Cold Calling Challenge (email sequence)</li>
-        <li>GoHighLevel reseller sub-account</li>
-        <li>Private Insider community</li>
-        <li>Cancel anytime</li>
+        <li>30-Day AI Empire Challenge (daily email sequence)</li>
+        <li>30-Day Cold Calling Challenge</li>
+        <li>Private AI Empire Insider community</li>
+        <li>Cancel anytime · 7-day refund</li>
       </ul>
 
       <div class="tier-foot">
         <a class="tier-cta tier-cta--gold" href="/insider/">
-          <span>Join Insider — $10/mo</span>
+          <span>Join AI Empire Insider — $9/mo</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </article>
 
-    <!-- ============== TIER 03: WHOLESALE GHL — FEATURED ============== -->
-    <article class="tier tier--featured" aria-labelledby="tier-wholesale-name">
+    <!-- ============== TIER 03: WHOLESALE GHL — hidden until relaunched ============== -->
+    <article class="tier tier--featured" style="display:none" aria-labelledby="tier-wholesale-name">
       <div class="tier-ribbon">FIRST 100 SEATS · WAS $99</div>
 
       <div class="tier-eyebrow"><span>TIER 03 / WHOLESALE</span></div>
@@ -2879,22 +3006,22 @@ export default function Page() {
 
     <header class="courses-header">
       <div>
-        <p class="courses-eyebrow">Included with $10 Insider</p>
+        <p class="courses-eyebrow">Included with AI Empire Insider — $9/mo</p>
         <h2 class="courses-display">
           Everything<br>
-          <span class="outline">in the</span> <span class="accent">Bucket</span>
+          <span class="outline">in the</span> <span class="accent">Empire</span>
         </h2>
       </div>
       <div>
         <p class="courses-lede">
-          Four courses. Two 30-day challenges. Every prompt and script I run.
-          <em>All for ten dollars a month</em> &mdash; or free up to the videos.
+          Four courses. Two 30-day challenges. Every prompt and script I run. Free GoHighLevel sub-account.
+          <em>All for nine dollars a month</em> &mdash; or free up to the videos.
         </p>
         <div class="courses-meta-row">
           <span><strong>04</strong>Courses</span>
           <span><strong>02</strong>Challenges</span>
           <span><strong>â‰ˆ18.5h</strong>Of footage</span>
-          <span><strong>$10</strong>/mo</span>
+          <span><strong>$9</strong>/mo</span>
         </div>
       </div>
     </header>
@@ -3036,9 +3163,9 @@ export default function Page() {
     </div>
 
     <div class="courses-footstrip">
-      <span class="courses-footstrip__price">$10/mo</span>
+      <span class="courses-footstrip__price">$9/mo</span>
       <span class="courses-footstrip__rule"></span>
-      <a href="/insider/">Become an Insider &rarr;</a>
+      <a href="/insider/">Join AI Empire Insider &rarr;</a>
     </div>
 
   </div>
@@ -3159,16 +3286,16 @@ export default function Page() {
 
     <figure class="ps-tile t5">
       <div class="ps-frame">
-        <img src="/images/headshot-mural.jpg?v=2" alt="Bangkok street mural session" loading="lazy">
+        <img src="/images/lifestyle-mclaren.jpg?v=2" alt="McLaren — the receipts" loading="lazy">
       </div>
-      <figcaption class="ps-cap">Bangkok &middot; Street Lab</figcaption>
+      <figcaption class="ps-cap">McLaren &middot; The Receipts</figcaption>
     </figure>
 
     <figure class="ps-tile t6">
       <div class="ps-frame">
-        <img src="/images/course-dev-rig.jpg?v=2" alt="Live cold-call rig — Tuesdays and Thursdays" loading="lazy">
+        <img src="/images/hero-throne.jpg?v=2" alt="Benji Boyce — built on AI" loading="lazy">
       </div>
-      <figcaption class="ps-cap">Tuesdays / Thursdays &middot; Live</figcaption>
+      <figcaption class="ps-cap">Built On AI &middot; 2026</figcaption>
     </figure>
 
   </div>

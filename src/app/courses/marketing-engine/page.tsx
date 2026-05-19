@@ -3,10 +3,10 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "AI Marketing Engine — Included with $10 Insider · Benji's AI Empire",
-  description: "One Tuesday Live → 14 pieces of content. The Pillar-to-Derivative Cascade, the full prompt + automation stack, the engine I run while I sleep. Included with $10 Insider.",
+  title: "AI Marketing Engine — Included with $9 AI Empire Insider · Benji's AI Empire",
+  description: "One Tuesday Live → 14 pieces of content. The Pillar-to-Derivative Cascade, the full prompt + automation stack, the engine I run while I sleep. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/marketing-engine/" },
-  openGraph: { title: "AI Marketing Engine — Course 03 / 04", description: "One Tuesday Live → 14 pieces of content. Included with $10 Insider.", url: "https://benjisaiempire.com/courses/marketing-engine/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "article" }
+  openGraph: { title: "AI Marketing Engine — Course 03 / 04", description: "One Tuesday Live → 14 pieces of content. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/courses/marketing-engine/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "article" }
 };
 
 export default function Page() {
@@ -197,7 +197,7 @@ export default function Page() {
         <span>Pillar → Derivative · 1 in / 14 out</span>
       </div>
 
-      <div class="course-hero__eyebrow">Included with $10 Insider <span>·</span> Course 03 / 04</div>
+      <div class="course-hero__eyebrow">Included with $9 AI Empire Insider <span>·</span> Course 03 / 04</div>
       <h1>AI Marketing<br><em>Engine</em><span class="arrow"> →</span> 14×</h1>
 
       <div class="course-hero__split">
@@ -210,7 +210,7 @@ export default function Page() {
           <div class="course-hero__meta">
             <strong>9 modules</strong> &nbsp;·&nbsp; ≈8 hours &nbsp;·&nbsp; Make + Claude + GHL stack &nbsp;·&nbsp; templates included
           </div>
-          <a class="course-hero__cta" href="/insider/">Get this + everything else for $10/mo</a>
+          <a class="course-hero__cta" href="/insider/">Get this + everything else for $9/mo</a>
           <a class="course-hero__sublink" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
         </div>
 
@@ -272,8 +272,8 @@ export default function Page() {
   </section>
 
   <section class="cta-strip">
-    <div class="cta-strip__eyebrow">Included with $10 Insider</div>
-    <h2 class="cta-strip__head">Get this + <em>everything in the bucket</em> for $10/mo.</h2>
+    <div class="cta-strip__eyebrow">Included with $9 AI Empire Insider</div>
+    <h2 class="cta-strip__head">Get this + <em>everything in the empire</em> for $9/mo.</h2>
     <a class="cta-strip__btn" href="/insider/">Join Insider</a>
     <a class="cta-strip__alt" href="/founders/">Or grab wholesale GHL for $49/mo (no courses) →</a>
   </section>

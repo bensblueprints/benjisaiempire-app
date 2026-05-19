@@ -4,11 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://benjisaiempire.com"),
   title: {
-    default: "Benji's AI Empire — Sales Calls Free · Everything Else $10 · Wholesale GHL $49",
+    default: "Benji's AI Empire — Free Sales Call Videos · AI Empire Insider $9/mo · Build AI Businesses",
     template: "%s · Benji's AI Empire",
   },
   description:
-    "Watch me cold-call live every Tuesday — free. Every course, prompt, script, and the GHL reseller account is $10/mo. Wholesale GHL @ $0.015/min for the first 100 operators.",
+    "I cold-call live every Tuesday on YouTube — free. For $9/mo get every AI course, every prompt, every script, and a free GoHighLevel sub-account. Build an AI empire.",
   themeColor: "#0b0b0c",
   icons: { icon: "/favicon.png" },
   openGraph: {
