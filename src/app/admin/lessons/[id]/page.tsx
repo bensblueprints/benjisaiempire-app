@@ -82,18 +82,9 @@ export default async function LessonEditPage({ params }: { params: Promise<{ id:
         initialFields={initialFields}
         initialBody={lesson.body ?? { type: "doc", content: [{ type: "paragraph" }] }}
         initialResources={initialResources}
-        saveAction={async (fields, body) => {
-          "use server";
-          await updateLesson(lesson.id, fields, body);
-        }}
-        saveResourcesAction={async (resources) => {
-          "use server";
-          await saveResources(lesson.id, resources);
-        }}
-        deleteAction={async () => {
-          "use server";
-          await deleteLesson(lesson.id);
-        }}
+        saveAction={updateLesson.bind(null, lesson.id)}
+        saveResourcesAction={saveResources.bind(null, lesson.id)}
+        deleteAction={deleteLesson.bind(null, lesson.id)}
       />
     </div>
   );

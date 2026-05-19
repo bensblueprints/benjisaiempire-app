@@ -27,6 +27,18 @@ const sectionTitle: React.CSSProperties = {
   marginBottom: 18,
 };
 
+const inp: React.CSSProperties = {
+  padding: "8px 12px",
+  background: "var(--ink)",
+  border: "1px solid var(--line)",
+  borderRadius: 3,
+  color: "var(--cream)",
+  fontFamily: "Manrope, sans-serif",
+  fontSize: 13,
+};
+
+const FILE_TYPES = ["PDF", "ZIP", "MP3", "MP4", "DOCX", "XLSX", "PNG", "JPG", "Other"];
+
 export default async function EditCoursePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const course = await prisma.course.findUnique({
@@ -73,10 +85,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
           {course.title}
         </h1>
         <DeleteButton
-          onConfirm={async () => {
-            "use server";
-            await deleteCourse(course.id);
-          }}
+          onConfirm={deleteCourse.bind(null, course.id)}
           label="Delete course"
           message={`Delete "${course.title}" and all its modules/lessons? This cannot be undone.`}
         />
@@ -95,10 +104,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
             sortOrder: course.sortOrder,
             published: course.published,
           }}
-          action={async (fd) => {
-            "use server";
-            await updateCourse(course.id, fd);
-          }}
+          action={updateCourse.bind(null, course.id)}
         />
       </section>
 
@@ -108,38 +114,26 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
         <div style={{ display: "grid", gap: 18, marginBottom: 32 }}>
           {course.modules.map((m) => (
             <div key={m.id} style={{ background: "var(--ink-2)", border: "1px solid var(--line)", borderRadius: 6, padding: 24 }}>
+
+              {/* Module header: form + delete */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 24, marginBottom: 18 }}>
                 <div style={{ flex: 1 }}>
                   <ModuleForm
                     module={{ id: m.id, title: m.title, summary: m.summary, sortOrder: m.sortOrder }}
-                    action={async (fd) => {
-                      "use server";
-                      await updateModule(m.id, fd);
-                    }}
+                    action={updateModule.bind(null, m.id)}
                     submitLabel="Save module"
                   />
                 </div>
                 <DeleteButton
-                  onConfirm={async () => {
-                    "use server";
-                    await deleteModule(m.id);
-                  }}
+                  onConfirm={deleteModule.bind(null, m.id)}
                   label="Delete module"
                   message={`Delete module "${m.title}" and all its lessons?`}
                 />
               </div>
 
+              {/* Lessons */}
               <div style={{ borderTop: "1px solid var(--line)", paddingTop: 18 }}>
-                <div
-                  style={{
-                    fontFamily: "JetBrains Mono, monospace",
-                    fontSize: 10,
-                    textTransform: "uppercase",
-                    letterSpacing: ".14em",
-                    color: "var(--cream-soft)",
-                    marginBottom: 12,
-                  }}
-                >
+                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".14em", color: "var(--cream-soft)", marginBottom: 12 }}>
                   Lessons ({m.lessons.length})
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
@@ -160,12 +154,8 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                       <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "var(--gold)" }}>
                         {String(l.sortOrder).padStart(2, "0")}
                       </div>
-                      <div style={{ fontFamily: "Manrope, sans-serif", color: "var(--cream)" }}>
-                        {l.title}
-                      </div>
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--cream-soft)" }}>
-                        /{l.slug}
-                      </div>
+                      <div style={{ fontFamily: "Manrope, sans-serif", color: "var(--cream)" }}>{l.title}</div>
+                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--cream-soft)" }}>/{l.slug}</div>
                       <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--cream-soft)", textAlign: "right" }}>
                         {l.durationMinutes ?? "—"}m
                       </div>
@@ -173,19 +163,13 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                         #{l.sortOrder}
                       </div>
                       <div>
-                        <span
-                          style={{
-                            fontFamily: "JetBrains Mono, monospace",
-                            fontSize: 9,
-                            textTransform: "uppercase",
-                            letterSpacing: ".1em",
-                            padding: "3px 7px",
-                            borderRadius: 2,
-                            background: l.published ? "rgba(212,175,55,.15)" : "var(--ink-3)",
-                            color: l.published ? "var(--gold)" : "var(--cream-soft)",
-                            border: l.published ? "1px solid var(--gold)" : "1px solid var(--line)",
-                          }}
-                        >
+                        <span style={{
+                          fontFamily: "JetBrains Mono, monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: ".1em",
+                          padding: "3px 7px", borderRadius: 2,
+                          background: l.published ? "rgba(212,175,55,.15)" : "var(--ink-3)",
+                          color: l.published ? "var(--gold)" : "var(--cream-soft)",
+                          border: l.published ? "1px solid var(--gold)" : "1px solid var(--line)",
+                        }}>
                           {l.published ? "Published" : "Draft"}
                         </span>
                       </div>
@@ -197,10 +181,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                           Edit
                         </Link>
                         <DeleteButton
-                          onConfirm={async () => {
-                            "use server";
-                            await deleteLesson(l.id);
-                          }}
+                          onConfirm={deleteLesson.bind(null, l.id)}
                           label="X"
                           message={`Delete lesson "${l.title}"?`}
                         />
@@ -210,60 +191,22 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                 </div>
 
                 <form
-                  action={async (fd: FormData) => {
-                    "use server";
-                    await createLesson(m.id, fd);
-                  }}
-                  style={{
-                    marginTop: 14,
-                    display: "flex",
-                    gap: 10,
-                    alignItems: "center",
-                  }}
+                  action={createLesson.bind(null, m.id)}
+                  style={{ marginTop: 14, display: "flex", gap: 10, alignItems: "center" }}
                 >
                   <input
                     name="title"
                     placeholder="New lesson title..."
-                    style={{
-                      flex: 1,
-                      padding: "10px 14px",
-                      background: "var(--ink)",
-                      border: "1px solid var(--line)",
-                      borderRadius: 3,
-                      color: "var(--cream)",
-                      fontFamily: "Manrope, sans-serif",
-                      fontSize: 14,
-                    }}
+                    style={{ flex: 1, padding: "10px 14px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "Manrope, sans-serif", fontSize: 14 }}
                     required
                   />
                   <input
                     name="sortOrder"
                     type="number"
                     defaultValue={m.lessons.length}
-                    style={{
-                      width: 70,
-                      padding: "10px 12px",
-                      background: "var(--ink)",
-                      border: "1px solid var(--line)",
-                      borderRadius: 3,
-                      color: "var(--cream)",
-                      fontFamily: "JetBrains Mono, monospace",
-                    }}
+                    style={{ width: 70, padding: "10px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace" }}
                   />
-                  <button
-                    type="submit"
-                    style={{
-                      fontFamily: "JetBrains Mono, monospace",
-                      fontSize: 11,
-                      textTransform: "uppercase",
-                      letterSpacing: ".1em",
-                      padding: "10px 16px",
-                      border: "1px solid var(--gold)",
-                      color: "var(--gold)",
-                      borderRadius: 3,
-                      background: "transparent",
-                    }}
-                  >
+                  <button type="submit" style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, textTransform: "uppercase", letterSpacing: ".1em", padding: "10px 16px", border: "1px solid var(--gold)", color: "var(--gold)", borderRadius: 3, background: "transparent" }}>
                     + Add lesson
                   </button>
                 </form>
@@ -278,16 +221,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                   {m.downloads.map((dl) => (
                     <div
                       key={dl.id}
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "32px 1fr 1.5fr 70px 36px",
-                        gap: 12,
-                        alignItems: "center",
-                        padding: "8px 12px",
-                        background: "var(--ink)",
-                        border: "1px solid var(--line)",
-                        borderRadius: 3,
-                      }}
+                      style={{ display: "grid", gridTemplateColumns: "32px 1fr 1.5fr 70px 36px", gap: 12, alignItems: "center", padding: "8px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3 }}
                     >
                       <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--gold)" }}>#{dl.sortOrder}</div>
                       <div style={{ fontFamily: "Manrope, sans-serif", fontSize: 13, color: "var(--cream)" }}>{dl.title}</div>
@@ -300,10 +234,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                         )}
                       </div>
                       <DeleteButton
-                        onConfirm={async () => {
-                          "use server";
-                          await deleteModuleDownload(dl.id);
-                        }}
+                        onConfirm={deleteModuleDownload.bind(null, dl.id)}
                         label="X"
                         message={`Remove download "${dl.title}"?`}
                       />
@@ -311,46 +242,32 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                   ))}
                 </div>
                 <form
-                  action={async (fd: FormData) => {
-                    "use server";
-                    await createModuleDownload(m.id, fd);
-                  }}
+                  action={createModuleDownload.bind(null, m.id)}
                   style={{ display: "grid", gridTemplateColumns: "2fr 2fr 80px 60px 80px", gap: 8, alignItems: "center" }}
                 >
-                  <input name="title" placeholder="File title..." required style={{ padding: "8px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "Manrope, sans-serif", fontSize: 13 }} />
-                  <input name="url" type="url" placeholder="https://..." required style={{ padding: "8px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
-                  <select name="fileType" style={{ padding: "8px 10px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
+                  <input name="title" placeholder="File title..." required style={inp} />
+                  <input name="url" type="url" placeholder="https://..." required style={{ ...inp, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
+                  <select name="fileType" style={{ ...inp, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
                     <option value="">Type</option>
-                    {["PDF","ZIP","MP3","MP4","DOCX","XLSX","PNG","JPG","Other"].map((t) => <option key={t} value={t}>{t}</option>)}
+                    {FILE_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                   </select>
-                  <input name="sortOrder" type="number" defaultValue={m.downloads.length} style={{ padding: "8px 10px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
+                  <input name="sortOrder" type="number" defaultValue={m.downloads.length} style={{ ...inp, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
                   <button type="submit" style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".08em", padding: "9px 12px", border: "1px solid var(--gold)", color: "var(--gold)", borderRadius: 3, background: "transparent", cursor: "pointer" }}>
                     + Add
                   </button>
                 </form>
               </div>
+
             </div>
           ))}
         </div>
 
         <div style={{ background: "var(--ink-2)", border: "1px dashed var(--line)", borderRadius: 6, padding: 24 }}>
-          <div
-            style={{
-              fontFamily: "JetBrains Mono, monospace",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: ".14em",
-              color: "var(--gold)",
-              marginBottom: 14,
-            }}
-          >
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".14em", color: "var(--gold)", marginBottom: 14 }}>
             + Add module
           </div>
           <ModuleForm
-            action={async (fd) => {
-              "use server";
-              await createModule(course.id, fd);
-            }}
+            action={createModule.bind(null, course.id)}
             submitLabel="Create module"
           />
         </div>
