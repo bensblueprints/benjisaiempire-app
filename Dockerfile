@@ -13,6 +13,10 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV DATABASE_URL=postgresql://build:build@localhost/build
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV RESEND_API_KEY=build-placeholder
+ENV STRIPE_SECRET_KEY=sk_test_build_placeholder
+ENV STRIPE_PUBLISHABLE_KEY=pk_test_build_placeholder
+ENV EMAIL_FROM=build@example.com
 RUN npx prisma generate
 RUN npm run build
 
