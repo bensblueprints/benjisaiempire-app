@@ -12,6 +12,8 @@ import {
   deleteModule,
   createLesson,
   deleteLesson,
+  createModuleDownload,
+  deleteModuleDownload,
 } from "../../_actions";
 
 export const dynamic = "force-dynamic";
@@ -32,7 +34,10 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
     include: {
       modules: {
         orderBy: { sortOrder: "asc" },
-        include: { lessons: { orderBy: { sortOrder: "asc" } } },
+        include: {
+          lessons: { orderBy: { sortOrder: "asc" } },
+          downloads: { orderBy: { sortOrder: "asc" } },
+        },
       },
     },
   });
@@ -260,6 +265,67 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
                     }}
                   >
                     + Add lesson
+                  </button>
+                </form>
+              </div>
+
+              {/* Module Downloads */}
+              <div style={{ borderTop: "1px solid var(--line)", paddingTop: 18, marginTop: 4 }}>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".14em", color: "var(--cream-soft)", marginBottom: 12 }}>
+                  Downloads ({m.downloads.length})
+                </div>
+                <div style={{ display: "grid", gap: 6, marginBottom: 10 }}>
+                  {m.downloads.map((dl) => (
+                    <div
+                      key={dl.id}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "32px 1fr 1.5fr 70px 36px",
+                        gap: 12,
+                        alignItems: "center",
+                        padding: "8px 12px",
+                        background: "var(--ink)",
+                        border: "1px solid var(--line)",
+                        borderRadius: 3,
+                      }}
+                    >
+                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--gold)" }}>#{dl.sortOrder}</div>
+                      <div style={{ fontFamily: "Manrope, sans-serif", fontSize: 13, color: "var(--cream)" }}>{dl.title}</div>
+                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--cream-soft)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{dl.url}</div>
+                      <div>
+                        {dl.fileType && (
+                          <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, letterSpacing: ".1em", padding: "2px 6px", background: "var(--ink-3)", color: "var(--cream-soft)", borderRadius: 2 }}>
+                            {dl.fileType}
+                          </span>
+                        )}
+                      </div>
+                      <DeleteButton
+                        onConfirm={async () => {
+                          "use server";
+                          await deleteModuleDownload(dl.id);
+                        }}
+                        label="X"
+                        message={`Remove download "${dl.title}"?`}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <form
+                  action={async (fd: FormData) => {
+                    "use server";
+                    await createModuleDownload(m.id, fd);
+                  }}
+                  style={{ display: "grid", gridTemplateColumns: "2fr 2fr 80px 60px 80px", gap: 8, alignItems: "center" }}
+                >
+                  <input name="title" placeholder="File title..." required style={{ padding: "8px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "Manrope, sans-serif", fontSize: 13 }} />
+                  <input name="url" type="url" placeholder="https://..." required style={{ padding: "8px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
+                  <select name="fileType" style={{ padding: "8px 10px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
+                    <option value="">Type</option>
+                    {["PDF","ZIP","MP3","MP4","DOCX","XLSX","PNG","JPG","Other"].map((t) => <option key={t} value={t}>{t}</option>)}
+                  </select>
+                  <input name="sortOrder" type="number" defaultValue={m.downloads.length} style={{ padding: "8px 10px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
+                  <button type="submit" style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".08em", padding: "9px 12px", border: "1px solid var(--gold)", color: "var(--gold)", borderRadius: 3, background: "transparent", cursor: "pointer" }}>
+                    + Add
                   </button>
                 </form>
               </div>

@@ -49,6 +49,14 @@ export default async function PortalPage({
       })
     : [];
 
+  const downloads = await prisma.download.findMany({
+    where: {
+      published: true,
+      tier: isAdmin ? undefined : tier === "WHOLESALE" ? { in: ["FREE", "INSIDER", "WHOLESALE"] } : tier === "INSIDER" ? { in: ["FREE", "INSIDER"] } : "FREE",
+    },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+  });
+
   type CourseRow = (typeof courses)[number];
 
   const courseRows = courses.map((c: CourseRow) => {
@@ -203,6 +211,47 @@ export default async function PortalPage({
               ))}
             </ul>
           )}
+        </section>
+      )}
+
+      {/* Downloads */}
+      {downloads.length > 0 && (
+        <section className="portal-downloads">
+          <header className="portal-section-head">
+            <span className="portal-section-eyebrow">Resource Library</span>
+            <h2 className="portal-section-title">Downloads</h2>
+            <span className="portal-section-meta">
+              {downloads.length} {downloads.length === 1 ? "file" : "files"}
+            </span>
+          </header>
+          <ul className="portal-dl-list">
+            {downloads.map((d) => (
+              <li key={d.id} className="portal-dl-item">
+                <div className="portal-dl-item__meta">
+                  {d.fileType && (
+                    <span className="portal-dl-item__type">{d.fileType}</span>
+                  )}
+                  <span className={`portal-dl-item__tier portal-dl-item__tier--${d.tier.toLowerCase()}`}>
+                    {d.tier}
+                  </span>
+                </div>
+                <div className="portal-dl-item__body">
+                  <div className="portal-dl-item__title">{d.title}</div>
+                  {d.description && (
+                    <div className="portal-dl-item__desc">{d.description}</div>
+                  )}
+                </div>
+                <a
+                  href={d.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="portal-dl-item__cta"
+                >
+                  Download →
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
@@ -414,6 +463,58 @@ export default async function PortalPage({
           padding-bottom:.25rem; align-self:flex-start;
         }
         .portal-course__cta:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+        /* DOWNLOADS */
+        .portal-dl-list {
+          list-style:none; padding:0; margin:0;
+          display:grid; gap:8px;
+        }
+        .portal-dl-item {
+          display:grid;
+          grid-template-columns: 120px 1fr auto;
+          gap: 16px; align-items:center;
+          padding: 14px 20px;
+          background: var(--ink-2); border: 1px solid var(--line);
+          transition: border-color .2s;
+        }
+        .portal-dl-item:hover { border-color: var(--gold); }
+        .portal-dl-item__meta {
+          display:flex; flex-direction:column; gap:5px;
+        }
+        .portal-dl-item__type {
+          font-family:'JetBrains Mono',monospace;
+          font-size:.65rem; letter-spacing:.12em; text-transform:uppercase;
+          padding: 2px 7px; background: var(--ink-3);
+          color: var(--cream-soft); align-self:flex-start;
+        }
+        .portal-dl-item__tier {
+          font-family:'JetBrains Mono',monospace;
+          font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+          padding: 2px 7px; align-self:flex-start;
+        }
+        .portal-dl-item__tier--free { background:transparent; color:var(--cream-soft); border:1px solid var(--line); }
+        .portal-dl-item__tier--insider { background:rgba(212,175,55,.12); color:var(--gold); border:1px solid var(--gold); }
+        .portal-dl-item__tier--wholesale { background:var(--gold); color:var(--ink); }
+        .portal-dl-item__body { display:flex; flex-direction:column; gap:4px; }
+        .portal-dl-item__title {
+          font-family:'Manrope',sans-serif;
+          font-size:.98rem; font-weight:600; color:var(--cream);
+        }
+        .portal-dl-item__desc {
+          font-family:'Manrope',sans-serif;
+          font-size:.82rem; color:var(--cream-soft); line-height:1.4;
+        }
+        .portal-dl-item__cta {
+          font-family:'JetBrains Mono',monospace;
+          font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+          color: var(--gold); border-bottom:1px solid var(--gold);
+          padding-bottom:.2rem; white-space:nowrap;
+        }
+        .portal-dl-item__cta:hover { color:var(--gold-bright); border-color:var(--gold-bright); }
+        @media (max-width: 640px) {
+          .portal-dl-item { grid-template-columns: 1fr; }
+          .portal-dl-item__meta { flex-direction:row; }
+        }
       `}</style>
     </div>
   );

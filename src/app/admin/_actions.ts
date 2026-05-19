@@ -234,6 +234,64 @@ export async function saveResources(
   revalidatePath(`/admin/lessons/${lessonId}`);
 }
 
+/* ───────── MODULE DOWNLOADS ───────── */
+
+export async function createModuleDownload(moduleId: string, formData: FormData) {
+  await requireAdmin();
+  const title = s(formData.get("title")).trim();
+  const url = s(formData.get("url")).trim();
+  if (!title || !url) throw new Error("Title and URL required");
+  const mod = await prisma.moduleDownload.create({
+    data: {
+      moduleId,
+      title,
+      url,
+      fileType: s(formData.get("fileType")) || null,
+      sortOrder: n(formData.get("sortOrder")),
+    },
+    include: { module: true },
+  });
+  revalidatePath(`/admin/courses/${mod.module.courseId}`);
+}
+
+export async function deleteModuleDownload(id: string) {
+  await requireAdmin();
+  const dl = await prisma.moduleDownload.findUnique({ where: { id }, include: { module: true } });
+  await prisma.moduleDownload.delete({ where: { id } });
+  if (dl) revalidatePath(`/admin/courses/${dl.module.courseId}`);
+}
+
+/* ───────── GLOBAL DOWNLOADS ───────── */
+
+export async function createDownload(formData: FormData) {
+  await requireAdmin();
+  const title = s(formData.get("title")).trim();
+  const url = s(formData.get("url")).trim();
+  if (!title || !url) throw new Error("Title and URL required");
+  const rawTier = s(formData.get("tier"));
+  const tier = rawTier === "FREE" ? "FREE" : rawTier === "WHOLESALE" ? "WHOLESALE" : "INSIDER";
+  await prisma.download.create({
+    data: {
+      title,
+      url,
+      description: s(formData.get("description")) || null,
+      fileType: s(formData.get("fileType")) || null,
+      sortOrder: n(formData.get("sortOrder")),
+      published: b(formData.get("published")),
+      tier: tier as "FREE" | "INSIDER" | "WHOLESALE",
+    },
+  });
+  revalidatePath("/admin/downloads");
+  revalidatePath("/portal");
+}
+
+export async function deleteDownload(id: string) {
+  await requireAdmin();
+  await prisma.download.delete({ where: { id } });
+  revalidatePath("/admin/downloads");
+  revalidatePath("/portal");
+}
+
 /* ───────── USERS ───────── */
 
 export async function setUserRole(userId: string, role: UserRole) {

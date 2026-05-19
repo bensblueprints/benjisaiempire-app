@@ -44,6 +44,7 @@ export default async function LessonPage(
     include: {
       module: {
         include: {
+          downloads: { orderBy: { sortOrder: "asc" } },
           course: {
             include: {
               modules: {
@@ -222,6 +223,62 @@ export default async function LessonPage(
                         color: "var(--gold)",
                       }}
                     >
+                      Download ↓
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Module Downloads */}
+        {lesson.module.downloads.length > 0 && (
+          <section
+            aria-label="Module downloads"
+            style={{
+              marginTop: 16,
+              borderTop: "1px solid var(--line)",
+              paddingTop: 24,
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 10.5,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "var(--gold)",
+                margin: "0 0 16px 0",
+              }}
+            >
+              Module Downloads
+            </h2>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 0 }}>
+              {lesson.module.downloads.map((dl) => (
+                <li key={dl.id} style={{ borderBottom: "1px solid var(--line)" }}>
+                  <a
+                    href={dl.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr auto auto",
+                      alignItems: "center",
+                      gap: 16,
+                      padding: "14px 4px",
+                      fontFamily: "'Manrope', sans-serif",
+                      fontSize: 16,
+                      color: "var(--cream)",
+                    }}
+                  >
+                    <span>{dl.title}</span>
+                    {dl.fileType && (
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9.5, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--cream-soft)", padding: "2px 6px", background: "var(--ink-3)" }}>
+                        {dl.fileType}
+                      </span>
+                    )}
+                    <span aria-hidden="true" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10.5, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold)" }}>
                       Download ↓
                     </span>
                   </a>
