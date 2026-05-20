@@ -13,6 +13,13 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Until @netlify/plugin-nextjs ships public/ on this site, proxy /images to Coolify (still has full static tree).
+[[redirects]]
+  from = "/images/*"
+  to = "https://server.advancedmarketing.co/images/:splat"
+  status = 200
+  force = true
+
 # Open Next deploys public/ assets under /public/*; marketing HTML uses /images/*
 [[redirects]]
   from = "/images/*"
