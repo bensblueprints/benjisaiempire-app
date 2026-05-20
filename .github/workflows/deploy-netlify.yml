@@ -21,5 +21,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm install -g netlify-cli@latest
+      - name: Clear UI publish override (plugin owns output dir)
+        run: |
+          curl -fsS -X PATCH "https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}" \
+            -H "Authorization: Bearer ${NETLIFY_AUTH_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d '{"build_settings":{"cmd":"npm run build","publish_dir":""}}'
       - name: Build & deploy to Netlify
         run: netlify deploy --build --prod --site=$NETLIFY_SITE_ID --message "GHA $GITHUB_SHA"
