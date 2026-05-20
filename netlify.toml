@@ -1,0 +1,13 @@
+# Benji's AI Empire — Next.js app (benjisaiempire.com apex)
+# Runtime: @netlify/plugin-nextjs (Open Next adapter). Do not set output: "standalone" on Netlify builds.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # Prisma: postinstall + build script run `prisma generate`. Use Supabase transaction pooler for DATABASE_URL.
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

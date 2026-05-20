@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
+/** Coolify/Docker uses standalone; Netlify sets NETLIFY=true and uses @netlify/plugin-nextjs. */
+const isNetlify = process.env.NETLIFY === "true";
+
 const config: NextConfig = {
-  output: "standalone",
+  ...(isNetlify ? {} : { output: "standalone" }),
   reactStrictMode: true,
   images: {
     remotePatterns: [

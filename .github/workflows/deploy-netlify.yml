@@ -1,0 +1,25 @@
+name: Deploy app to Netlify
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      # Public build-time vars (override in workflow or set only in Netlify UI)
+      NEXT_PUBLIC_SITE_URL: https://benjisaiempire.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm install -g netlify-cli@latest
+      - name: Build & deploy to Netlify
+        run: netlify deploy --build --prod --site=$NETLIFY_SITE_ID --message "GHA $GITHUB_SHA"

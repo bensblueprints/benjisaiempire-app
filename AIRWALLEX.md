@@ -23,31 +23,71 @@ AIRWALLEX_API_KEY=your_api_key
 
 | Variable | Where in Airwallex web app |
 |----------|---------------------------|
-| `AIRWALLEX_CLIENT_ID` | **Settings → Developer → API keys** (Client ID on the key row) |
+| `AIRWALLEX_CLIENT_ID` | **Account → Developer → API keys** (sandbox/live web app; Client ID on the key row) |
 | `AIRWALLEX_API_KEY` | Same page — create/copy API key (never commit) |
 | `AIRWALLEX_LEGAL_ENTITY_ID` | **Settings → Legal entities** — open your entity → ID starts with `le_` |
 | `AIRWALLEX_PAYMENT_ACCOUNT_ID` | **Settings → Account details → Account information** — linked payment account ID starts with `acct_` |
 
 Required when you have more than one legal entity or payment account; the checkout API rejects requests without them.
 
-## 3. Create $9 / $49 recurring prices
+## 3. Create $9 / $49 recurring prices (dashboard)
 
-1. **Billing → Products** → **Create product**
-   - **AI Empire Insider** — description optional
-   - **Wholesale GHL** — description optional
-2. On each product, **Add price**:
-   - **Recurring**, **USD**, **Monthly**
-   - Insider: **$9.00** / month
-   - Wholesale: **$49.00** / month
-3. Open each price → copy **Price ID** (`pri_...`) into:
-   - `AIRWALLEX_PRICE_INSIDER`
-   - `AIRWALLEX_PRICE_WHOLESALE`
+**Billing vs Payments (do not mix these up)**
 
-List prices via API: `GET /api/v1/prices` (with bearer token) if you prefer CLI over the UI.
+| Area | Left menu (typical) | What it is for |
+|------|---------------------|----------------|
+| **Billing** | **Billing** → **Products**, **Customers**, **Subscriptions** | Catalog (products/prices), recurring subs, invoices |
+| **Payments** | **Payments** → **Get started**, payment methods | Card/APMs acceptance — apply separately; not where you create subscription plans |
+
+Official overview: [Get started with billing](https://www.airwallex.com/docs/billing/get-started-with-billing) · [Payments access](https://help.airwallex.com/hc/en-gb/articles/900006304303)
+
+**Open the correct web app**
+
+| Environment | Login URL | API host (for `.env` `AIRWALLEX_SANDBOX`) |
+|-------------|-----------|-------------------------------------------|
+| Sandbox (test) | https://demo.airwallex.com/app/ | `true` → `https://api-demo.airwallex.com` |
+| Live | https://www.airwallex.com/app/ | `false` → `https://api.airwallex.com` |
+
+Products/prices created in sandbox **do not** appear in live (and vice versa). Create both if you test then go live.
+
+**Step-by-step (no code) — two products, monthly recurring**
+
+1. Log in (sandbox or live URL above).
+2. In the **left sidebar**, open **Billing** (not **Payments**). If you only see **Payments**, Billing may not be enabled yet — see [Activate Billing](https://help.airwallex.com/hc/en-gb/articles/14622748737039) and contact Airwallex support if there is no Billing section.
+3. Click **Products** (docs call this the “products app”).
+4. Click **New product** (top right).
+5. **Product 1:** Name `AI Empire Insider` → **Create product**.  
+   **What you should see:** A table row for the product; clicking it opens a **drawer** on the right with product details.
+6. In that drawer, click **New price**.
+7. Set: **Recurring** · **USD** · **Monthly** · pricing model **Flat** (or fixed amount) · **$9.00** · billing type **In advance** (default) → **Create price**.
+8. Click the new price in the drawer’s price table → copy **Price ID** (`pri_...`) → `AIRWALLEX_PRICE_INSIDER` in `.env` / Coolify.
+9. Back to **Products** list → **New product** again.
+10. **Product 2:** Name `Wholesale GHL` → **Create product** → **New price** → **$49.00** / month (same settings as step 7) → copy `pri_...` → `AIRWALLEX_PRICE_WHOLESALE`.
+
+Help article (same flow): [Customers, products, and prices](https://help.airwallex.com/hc/en-gb/articles/14622840540943) · API reference: [Products](https://www.airwallex.com/docs/billing/billing-components/products) · [Prices](https://www.airwallex.com/docs/billing/billing-components/prices)
+
+**Optional:** **Billing** → **Billing settings** to set default currency (USD), payment account, and dunning — [Configure billing settings](https://www.airwallex.com/docs/billing/configure-your-billing-settings).
+
+**If Products / New product is missing**
+
+- You are under **Payments** instead of **Billing**.
+- Account still in **KYC/KYB review** or Payments not approved — complete **Payments** → **Get started** if you need online collection ([KYC prep](https://help.airwallex.com/hc/en-gb/sections/8352632554767-Preparing-KYC-Documentation)).
+- Wrong environment (sandbox login vs live keys).
+- Wrong business in the org/account switcher (top of app) — products are per account.
+- Sandbox sub-account stuck “In review”: entity name must be **New Business Sandbox** or **Sandbox Business** ([sandbox overview](https://www.airwallex.com/docs/developer-tools/sandbox-environment/sandbox-environment-overview)).
+
+**API fallback (if UI hidden)** — credentials in `.env`; no values in git.
+
+1. `POST /api/v1/authentication/login` — headers `x-client-id`, `x-api-key` (sandbox: `https://api-demo.airwallex.com/...`).
+2. `POST /api/v1/products/create` — body `name`, `request_id` (unique).
+3. `POST /api/v1/prices/create` — body `product_id`, `currency` `USD`, `pricing_model` `FLAT`, `flat_amount` `9` or `49`, `recurring` `{ "period": 1, "period_unit": "MONTH" }`, `request_id`.
+4. `GET /api/v1/prices` — list and copy `pri_...` IDs.
+
+Docs: [Create product](https://www.airwallex.com/docs/api/billing/products/create) · [Create price](https://www.airwallex.com/docs/api/billing/prices/create) · [List prices](https://www.airwallex.com/docs/api/billing/prices/list)
 
 ## 4. Webhook
 
-1. **Settings → Developer → Webhooks → New webhook**
+1. **Account → Developer → Webhooks → New webhook** (or `/app/developer` in the web app)
 2. **Notification URL:** `https://benjisaiempire.com/api/airwallex/webhook`
 3. **API version:** `2025-06-16` or later (Billing events)
 4. Subscribe to (minimum):
