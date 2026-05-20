@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Welcome to Insider. Everything I run is now in your account. Three steps to get moving today.",
   alternates: { canonical: "https://benjisaiempire.com/insider/welcome" },
   robots: { index: false, follow: true },
-  openGraph: { title: "You're In — Welcome to Insider", description: "Welcome to Insider. Everything I run is now in your account.", url: "https://benjisaiempire.com/insider/welcome", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "website" }
+  openGraph: { title: "You're In — Welcome to Insider", description: "Welcome to Insider. Everything I run is now in your account.", url: "https://benjisaiempire.com/insider/welcome", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=3" }], type: "website" }
 };
 
 export default function Page() {

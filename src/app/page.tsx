@@ -3032,7 +3032,7 @@ export default function Page() {
       <a class="tile tile-01" style="--i:0" href="/courses/cold-calling/" aria-label="Cold Calling 2.0 + AI — course">
         <span class="tile__numeral" aria-hidden="true">01</span>
         <div class="tile__photo">
-          <img src="/images/course-cold-calling.jpg?v=2" alt="Cold Calling 2.0 + AI course" loading="lazy">
+          <img src="/images/course-cold-calling.jpg?v=3" alt="Cold Calling 2.0 + AI course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
@@ -3054,7 +3054,7 @@ export default function Page() {
       <a class="tile tile-02" style="--i:1" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
         <span class="tile__numeral" aria-hidden="true">02</span>
         <div class="tile__photo">
-          <img src="/images/course-brand-builder.jpg?v=2" alt="AI Brand Builder course" loading="lazy">
+          <img src="/images/course-brand-builder.jpg?v=3" alt="AI Brand Builder course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
@@ -3076,7 +3076,7 @@ export default function Page() {
       <a class="tile tile-03" style="--i:2" href="/courses/marketing-engine/" aria-label="AI Marketing Engine — course">
         <span class="tile__numeral" aria-hidden="true">03</span>
         <div class="tile__photo">
-          <img src="/images/course-marketing-engine.jpg?v=2" alt="AI Marketing Engine course" loading="lazy">
+          <img src="/images/course-marketing-engine.jpg?v=3" alt="AI Marketing Engine course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker" style="grid-column:1/-1;">

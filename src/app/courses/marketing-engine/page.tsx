@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "AI Marketing Engine — Included with $9 AI Empire Insider · Benji's AI Empire",
   description: "One Tuesday Live → 14 pieces of content. The Pillar-to-Derivative Cascade, the full prompt + automation stack, the engine I run while I sleep. Included with $9 AI Empire Insider.",
   alternates: { canonical: "https://benjisaiempire.com/courses/marketing-engine/" },
-  openGraph: { title: "AI Marketing Engine — Course 03 / 04", description: "One Tuesday Live → 14 pieces of content. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/courses/marketing-engine/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=2" }], type: "article" }
+  openGraph: { title: "AI Marketing Engine — Course 03 / 04", description: "One Tuesday Live → 14 pieces of content. Included with $9 AI Empire Insider.", url: "https://benjisaiempire.com/courses/marketing-engine/", images: [{ url: "https://benjisaiempire.com/images/course-marketing-engine.jpg?v=3" }], type: "article" }
 };
 
 export default function Page() {

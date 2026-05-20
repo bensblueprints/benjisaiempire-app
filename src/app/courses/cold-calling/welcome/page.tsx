@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "You're in. Here's the 24-hour playbook for Cold Calling 2.0 + AI.",
   alternates: { canonical: "https://benjisaiempire.com/courses/cold-calling/welcome" },
   robots: { index: false, follow: true },
-  openGraph: { title: "Welcome — Cold Calling 2.0 + AI", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-cold-calling.jpg?v=2" }], type: "website" }
+  openGraph: { title: "Welcome — Cold Calling 2.0 + AI", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-cold-calling.jpg?v=3" }], type: "website" }
 };
 
 export default function Page() {
