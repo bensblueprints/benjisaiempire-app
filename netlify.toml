@@ -3,10 +3,11 @@
 
 [build]
   command = "npm run build"
-  publish = ".next"
+  # publish dir is set by @netlify/plugin-nextjs — do not set publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20"
+  NETLIFY = "true"
   # Prisma: postinstall + build script run `prisma generate`. Use Supabase transaction pooler for DATABASE_URL.
 
 [[plugins]]
