@@ -3054,7 +3054,7 @@ export default function Page() {
       <a class="tile tile-02" style="--i:1" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
         <span class="tile__numeral" aria-hidden="true">02</span>
         <div class="tile__photo">
-          <img src="/images/course-brand-builder.jpg?v=3" alt="AI Brand Builder course" loading="lazy">
+          <img src="/images/course-brand-builder.jpg?v=4" alt="AI Brand Builder course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">

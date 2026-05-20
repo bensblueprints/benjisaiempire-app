@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "You're in. Here's the 24-hour playbook for AI Brand Builder.",
   alternates: { canonical: "https://benjisaiempire.com/courses/brand-builder/welcome" },
   robots: { index: false, follow: true },
-  openGraph: { title: "Welcome — AI Brand Builder", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-brand-builder.jpg?v=3" }], type: "website" }
+  openGraph: { title: "Welcome — AI Brand Builder", description: "Course access provisioned. Here's what to do next.", images: [{ url: "https://benjisaiempire.com/images/course-brand-builder.jpg?v=4" }], type: "website" }
 };
 
 export default function Page() {
