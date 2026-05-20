@@ -19,10 +19,3 @@
   to = "https://server.advancedmarketing.co/images/:splat"
   status = 200
   force = true
-
-# Open Next deploys public/ assets under /public/*; marketing HTML uses /images/*
-[[redirects]]
-  from = "/images/*"
-  to = "/public/images/:splat"
-  status = 200
-  force = true
