@@ -172,77 +172,96 @@ async function createGuestCheckoutResponse(
     return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
   }
 
-  const user = await findOrCreateUserByEmail(normalized);
-  if (!user) {
-    return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
+  try {
+    const user = await findOrCreateUserByEmail(normalized);
+    if (!user) {
+      return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
+    }
+    return createCheckoutResponse(user.id, tier);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Database error during checkout";
+    console.error("[airwallex/checkout] guest user error:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
+}
 
-  return createCheckoutResponse(user.id, tier);
+function checkoutErrorResponse(err: unknown, context: string): Response {
+  const message = err instanceof Error ? err.message : "Checkout failed";
+  console.error(`[airwallex/checkout] ${context}:`, message);
+  return NextResponse.json({ error: message }, { status: 500 });
 }
 
 /** GET: signed-in → Airwallex; guest with ?email= → checkout; else → guest landing page */
 export async function GET(req: Request): Promise<Response> {
-  const url = new URL(req.url);
-  const tier = url.searchParams.get("tier") as Tier | null;
-  if (tier !== "INSIDER" && tier !== "WHOLESALE") {
-    return NextResponse.json(
-      { error: "Invalid tier — use ?tier=INSIDER or ?tier=WHOLESALE" },
-      { status: 400 },
-    );
-  }
-
-  const session = await auth();
-  if (session?.user?.id) {
-    const result = await createCheckoutResponse(session.user.id, tier);
-    if (!result.ok) return result;
-    const data = (await result.json()) as { url?: string };
-    if (!data.url) {
-      return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+  try {
+    const url = new URL(req.url);
+    const tier = url.searchParams.get("tier") as Tier | null;
+    if (tier !== "INSIDER" && tier !== "WHOLESALE") {
+      return NextResponse.json(
+        { error: "Invalid tier — use ?tier=INSIDER or ?tier=WHOLESALE" },
+        { status: 400 },
+      );
     }
-    return NextResponse.redirect(data.url);
-  }
 
-  const email = url.searchParams.get("email");
-  if (email) {
-    const result = await createGuestCheckoutResponse(email, tier);
-    if (!result.ok) return result;
-    const data = (await result.json()) as { url?: string };
-    if (!data.url) {
-      return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+    const session = await auth();
+    if (session?.user?.id) {
+      const result = await createCheckoutResponse(session.user.id, tier);
+      if (!result.ok) return result;
+      const data = (await result.json()) as { url?: string };
+      if (!data.url) {
+        return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+      }
+      return NextResponse.redirect(data.url);
     }
-    return NextResponse.redirect(data.url);
-  }
 
-  return guestCheckoutRedirect(req, tier);
+    const email = url.searchParams.get("email");
+    if (email) {
+      const result = await createGuestCheckoutResponse(email, tier);
+      if (!result.ok) return result;
+      const data = (await result.json()) as { url?: string };
+      if (!data.url) {
+        return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+      }
+      return NextResponse.redirect(data.url);
+    }
+
+    return guestCheckoutRedirect(req, tier);
+  } catch (err) {
+    return checkoutErrorResponse(err, "GET");
+  }
 }
 
 export async function POST(req: Request): Promise<Response> {
-  let body: { tier?: string; email?: string } = {};
   try {
-    body = (await req.json()) as { tier?: string; email?: string };
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
-  }
+    let body: { tier?: string; email?: string } = {};
+    try {
+      body = (await req.json()) as { tier?: string; email?: string };
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    }
 
-  const tier = body.tier as Tier | undefined;
-  if (tier !== "INSIDER" && tier !== "WHOLESALE") {
+    const tier = body.tier as Tier | undefined;
+    if (tier !== "INSIDER" && tier !== "WHOLESALE") {
+      return NextResponse.json(
+        { error: "Invalid tier — must be INSIDER or WHOLESALE" },
+        { status: 400 },
+      );
+    }
+
+    const session = await auth();
+    if (session?.user?.id) {
+      return createCheckoutResponse(session.user.id, tier);
+    }
+
+    if (body.email) {
+      return createGuestCheckoutResponse(body.email, tier);
+    }
+
     return NextResponse.json(
-      { error: "Invalid tier — must be INSIDER or WHOLESALE" },
+      { error: "Email required for guest checkout", redirectTo: guestCheckoutPath(tier) },
       { status: 400 },
     );
+  } catch (err) {
+    return checkoutErrorResponse(err, "POST");
   }
-
-  const session = await auth();
-  if (session?.user?.id) {
-    return createCheckoutResponse(session.user.id, tier);
-  }
-
-  if (body.email) {
-    return createGuestCheckoutResponse(body.email, tier);
-  }
-
-  return NextResponse.json(
-    { error: "Email required for guest checkout", redirectTo: guestCheckoutPath(tier) },
-    { status: 400 },
-  );
 }
