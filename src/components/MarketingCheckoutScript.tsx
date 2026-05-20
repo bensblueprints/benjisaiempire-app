@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { checkoutApiPath } from "@/lib/payments";
+import { checkoutApiPath, guestCheckoutPath } from "@/lib/payments";
 
 type Tier = "INSIDER" | "WHOLESALE";
 
@@ -12,16 +12,18 @@ function tierFromAnchor(anchor: HTMLAnchorElement): Tier | null {
   if (dataTier === "INSIDER" || dataTier === "WHOLESALE") return dataTier;
 
   const href = anchor.getAttribute("href") ?? "";
-  if (href.includes("insider")) return "INSIDER";
-  if (href.includes("wholesale")) return "WHOLESALE";
+  if (href.includes("insider") || href.includes("/checkout/insider")) return "INSIDER";
+  if (href.includes("wholesale") || href.includes("founders") || href.includes("/checkout/founders")) {
+    return "WHOLESALE";
+  }
   return null;
 }
 
-async function startCheckout(tier: Tier): Promise<void> {
+async function startCheckout(tier: Tier, email?: string): Promise<void> {
   const res = await fetch(CHECKOUT_API, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ tier }),
+    body: JSON.stringify({ tier, ...(email ? { email } : {}) }),
   });
   const data = (await res.json().catch(() => ({}))) as {
     url?: string;
@@ -29,9 +31,8 @@ async function startCheckout(tier: Tier): Promise<void> {
     redirectTo?: string;
   };
 
-  if (res.status === 401) {
-    const checkoutReturn = `${CHECKOUT_API}?tier=${tier}`;
-    window.location.href = `/login?callbackUrl=${encodeURIComponent(checkoutReturn)}`;
+  if (res.status === 401 || res.status === 400) {
+    window.location.href = data.redirectTo ?? guestCheckoutPath(tier);
     return;
   }
   if (!res.ok || !data.url) {
@@ -50,6 +51,13 @@ export default function MarketingCheckoutScript() {
       if (!anchor) return;
 
       const href = anchor.getAttribute("href") ?? "";
+      const isGuestLanding =
+        href === "/checkout/insider" ||
+        href.startsWith("/checkout/insider?") ||
+        href === "/checkout/founders" ||
+        href.startsWith("/checkout/founders?");
+      if (isGuestLanding) return;
+
       const isApi =
         href === CHECKOUT_API ||
         href.startsWith(`${CHECKOUT_API}?`) ||

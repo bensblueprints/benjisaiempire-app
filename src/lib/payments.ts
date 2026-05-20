@@ -23,3 +23,8 @@ export function checkoutApiPath(): string {
 export function portalApiPath(): string {
   return useAirwallex() ? "/api/airwallex/portal" : "/api/stripe/portal";
 }
+
+/** Guest checkout landing (email → hosted payment). */
+export function guestCheckoutPath(tier: "INSIDER" | "WHOLESALE"): string {
+  return tier === "WHOLESALE" ? "/checkout/founders" : "/checkout/insider";
+}

@@ -4,6 +4,8 @@ import {
   AIRWALLEX_CONFIG,
   verifyAirwallexWebhookSignature,
 } from "@/lib/airwallex";
+import { normalizeCheckoutEmail } from "@/lib/checkout-user";
+import { sendMagicLink } from "@/lib/send-magic-link";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -108,40 +110,70 @@ async function applySubscription(
   );
 }
 
-async function handleBillingCheckoutCompleted(data: AirwallexBillingCheckout): Promise<void> {
+async function resolveUserForCheckout(data: AirwallexBillingCheckout) {
   const userId = data.metadata?.userId;
+  if (userId) {
+    const byId = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, email: true },
+    });
+    if (byId) return byId;
+  }
+
+  if (data.billing_customer_id) {
+    const byCustomer = await prisma.user.findFirst({
+      where: { airwallexBillingCustomerId: data.billing_customer_id },
+      select: { id: true, email: true },
+    });
+    if (byCustomer) return byCustomer;
+  }
+
+  const metaEmail = data.metadata?.email;
+  const normalized = metaEmail ? normalizeCheckoutEmail(metaEmail) : null;
+  if (normalized) {
+    return prisma.user.findUnique({
+      where: { email: normalized },
+      select: { id: true, email: true },
+    });
+  }
+
+  return null;
+}
+
+async function handleBillingCheckoutCompleted(data: AirwallexBillingCheckout): Promise<void> {
   const tier = tierFromMetadata(data.metadata);
-  if (!userId) {
-    console.warn("[airwallex/webhook] billing_checkout.completed without userId", data.id);
+  const user = await resolveUserForCheckout(data);
+  if (!user) {
+    console.warn("[airwallex/webhook] billing_checkout.completed — user not found", data.id);
     return;
   }
 
-  if (data.subscription_id) {
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        tier: tier !== "FREE" ? tier : undefined,
-        paymentProvider: "airwallex",
-        airwallexBillingCustomerId: data.billing_customer_id ?? undefined,
-        airwallexSubscriptionId: data.subscription_id,
-        subscriptionStatus: "ACTIVE",
-      },
-    });
-    console.log(
-      `[airwallex/webhook] checkout completed user=${userId} tier=${tier} sub=${data.subscription_id}`,
-    );
-    return;
-  }
+  const updateData = {
+    tier: tier !== "FREE" ? tier : undefined,
+    paymentProvider: "airwallex" as const,
+    airwallexBillingCustomerId: data.billing_customer_id ?? undefined,
+    airwallexSubscriptionId: data.subscription_id ?? undefined,
+    subscriptionStatus: "ACTIVE" as const,
+  };
 
   await prisma.user.update({
-    where: { id: userId },
-    data: {
-      tier: tier !== "FREE" ? tier : undefined,
-      paymentProvider: "airwallex",
-      airwallexBillingCustomerId: data.billing_customer_id ?? undefined,
-      subscriptionStatus: "ACTIVE",
-    },
+    where: { id: user.id },
+    data: updateData,
   });
+
+  console.log(
+    `[airwallex/webhook] checkout completed user=${user.id} tier=${tier} sub=${data.subscription_id ?? "n/a"}`,
+  );
+
+  try {
+    await sendMagicLink(user.email, "/portal");
+    console.log(`[airwallex/webhook] magic link sent to ${user.email}`);
+  } catch (err) {
+    console.error(
+      "[airwallex/webhook] failed to send magic link:",
+      err instanceof Error ? err.message : err,
+    );
+  }
 }
 
 export async function POST(req: Request): Promise<Response> {

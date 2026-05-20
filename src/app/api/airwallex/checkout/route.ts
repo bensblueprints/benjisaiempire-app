@@ -7,6 +7,8 @@ import {
   newRequestId,
 } from "@/lib/airwallex";
 import { env } from "@/lib/env";
+import { findOrCreateUserByEmail, normalizeCheckoutEmail } from "@/lib/checkout-user";
+import { guestCheckoutPath } from "@/lib/payments";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,6 +30,15 @@ function priceFor(tier: Tier): string | null {
 function cancelUrlFor(tier: Tier): string {
   const slug = tier === "WHOLESALE" ? "founders" : "insider";
   return `${env.SITE_URL}/${slug}/?canceled=1`;
+}
+
+function successUrlFor(tier: Tier): string {
+  if (tier === "WHOLESALE") return `${env.SITE_URL}/founders/welcome?paid=1`;
+  return `${env.SITE_URL}/insider/welcome?paid=1`;
+}
+
+function guestCheckoutRedirect(req: Request, tier: Tier): Response {
+  return NextResponse.redirect(new URL(guestCheckoutPath(tier), req.url));
 }
 
 async function ensureBillingCustomer(
@@ -116,12 +127,17 @@ async function createCheckoutResponse(
           legal_entity_id: AIRWALLEX_CONFIG.legalEntityId,
           linked_payment_account_id: AIRWALLEX_CONFIG.paymentAccountId,
           billing_customer_id: billingCustomerId,
-          success_url: `${env.SITE_URL}/portal?upgraded=1`,
+          success_url: successUrlFor(tier),
           back_url: cancelUrlFor(tier),
           line_items: [{ price_id: priceId, quantity: 1 }],
-          metadata: { userId: user.id, tier, app: "benjisaiempire" },
+          metadata: {
+            userId: user.id,
+            tier,
+            email: user.email,
+            app: "benjisaiempire",
+          },
           subscription_data: {
-            metadata: { userId: user.id, tier, app: "benjisaiempire" },
+            metadata: { userId: user.id, tier, email: user.email, app: "benjisaiempire" },
           },
           customer_data: {
             email: user.email,
@@ -147,9 +163,27 @@ async function createCheckoutResponse(
   }
 }
 
-/** GET supports marketing-page links: /api/airwallex/checkout?tier=INSIDER */
+async function createGuestCheckoutResponse(
+  email: string,
+  tier: Tier,
+): Promise<Response> {
+  const normalized = normalizeCheckoutEmail(email);
+  if (!normalized) {
+    return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
+  }
+
+  const user = await findOrCreateUserByEmail(normalized);
+  if (!user) {
+    return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
+  }
+
+  return createCheckoutResponse(user.id, tier);
+}
+
+/** GET: signed-in → Airwallex; guest with ?email= → checkout; else → guest landing page */
 export async function GET(req: Request): Promise<Response> {
-  const tier = new URL(req.url).searchParams.get("tier") as Tier | null;
+  const url = new URL(req.url);
+  const tier = url.searchParams.get("tier") as Tier | null;
   if (tier !== "INSIDER" && tier !== "WHOLESALE") {
     return NextResponse.json(
       { error: "Invalid tier — use ?tier=INSIDER or ?tier=WHOLESALE" },
@@ -158,35 +192,34 @@ export async function GET(req: Request): Promise<Response> {
   }
 
   const session = await auth();
-  if (!session?.user?.id) {
-    const returnTo = encodeURIComponent(`/api/airwallex/checkout?tier=${tier}`);
-    return NextResponse.redirect(
-      new URL(`/login?callbackUrl=${returnTo}`, req.url),
-    );
+  if (session?.user?.id) {
+    const result = await createCheckoutResponse(session.user.id, tier);
+    if (!result.ok) return result;
+    const data = (await result.json()) as { url?: string };
+    if (!data.url) {
+      return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+    }
+    return NextResponse.redirect(data.url);
   }
 
-  const result = await createCheckoutResponse(session.user.id, tier);
-  if (!result.ok) return result;
-
-  const data = (await result.json()) as { url?: string };
-  if (!data.url) {
-    return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+  const email = url.searchParams.get("email");
+  if (email) {
+    const result = await createGuestCheckoutResponse(email, tier);
+    if (!result.ok) return result;
+    const data = (await result.json()) as { url?: string };
+    if (!data.url) {
+      return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+    }
+    return NextResponse.redirect(data.url);
   }
-  return NextResponse.redirect(data.url);
+
+  return guestCheckoutRedirect(req, tier);
 }
 
 export async function POST(req: Request): Promise<Response> {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json(
-      { error: "Not signed in", redirectTo: "/login" },
-      { status: 401 },
-    );
-  }
-
-  let body: { tier?: string } = {};
+  let body: { tier?: string; email?: string } = {};
   try {
-    body = (await req.json()) as { tier?: string };
+    body = (await req.json()) as { tier?: string; email?: string };
   } catch {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
@@ -199,5 +232,17 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  return createCheckoutResponse(session.user.id, tier);
+  const session = await auth();
+  if (session?.user?.id) {
+    return createCheckoutResponse(session.user.id, tier);
+  }
+
+  if (body.email) {
+    return createGuestCheckoutResponse(body.email, tier);
+  }
+
+  return NextResponse.json(
+    { error: "Email required for guest checkout", redirectTo: guestCheckoutPath(tier) },
+    { status: 400 },
+  );
 }

@@ -3,7 +3,7 @@ import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MarketingCheckoutScript from "@/components/MarketingCheckoutScript";
-import { checkoutApiPath, useAirwallex } from "@/lib/payments";
+import { guestCheckoutPath, useAirwallex } from "@/lib/payments";
 
 export const metadata: Metadata = {
   title: "Wholesale GHL — $49/mo · First 100 Operators · Benji's AI Empire",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const checkoutHref = `${checkoutApiPath()}?tier=WHOLESALE`;
+  const checkoutHref = guestCheckoutPath("WHOLESALE");
   const payLabel = useAirwallex() ? "Airwallex" : "Stripe";
 
   return (

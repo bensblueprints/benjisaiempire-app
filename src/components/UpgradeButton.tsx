@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { checkoutApiPath } from "@/lib/payments";
+import { checkoutApiPath, guestCheckoutPath } from "@/lib/payments";
 
 type Tier = "INSIDER" | "WHOLESALE";
 
@@ -39,9 +39,10 @@ export default function UpgradeButton({
         redirectTo?: string;
       };
 
-      if (res.status === 401) {
-        const returnTo = encodeURIComponent(`${CHECKOUT_API}?tier=${tier}`);
-        window.location.href = `/login?callbackUrl=${returnTo}`;
+      if (res.status === 401 || res.status === 400) {
+        const redirectTo =
+          (data as { redirectTo?: string }).redirectTo ?? guestCheckoutPath(tier);
+        window.location.href = redirectTo;
         return;
       }
       if (!res.ok || !data.url) {
