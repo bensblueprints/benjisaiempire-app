@@ -1,2 +1,3 @@
 name: copy-public-assets
-inputs: {}
+main: index.js
+inputs: []
