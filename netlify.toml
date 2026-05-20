@@ -8,6 +8,8 @@
 [build.environment]
   NODE_VERSION = "20"
   NETLIFY = "true"
+  # Netlify sets CI=true by default; that breaks Next file-tracing on this app.
+  CI = "false"
   # Prisma: postinstall + build script run `prisma generate`. Use Supabase transaction pooler for DATABASE_URL.
 
 [[plugins]]
