@@ -16,36 +16,14 @@ function priceFor(tier: Tier): string | null {
 }
 
 function cancelUrlFor(tier: Tier): string {
-  // Marketing pages live at /insider and /founders; we send the user back
-  // to the page that produced the checkout click with a `?canceled=1` flag.
   const slug = tier === "WHOLESALE" ? "founders" : "insider";
   return `${env.SITE_URL}/${slug}/?canceled=1`;
 }
 
-export async function POST(req: Request): Promise<Response> {
-  const session = await auth();
-  if (!session?.user?.email) {
-    return NextResponse.json(
-      { error: "Not signed in", redirectTo: "/login" },
-      { status: 401 },
-    );
-  }
-
-  let body: { tier?: string } = {};
-  try {
-    body = (await req.json()) as { tier?: string };
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
-  }
-
-  const tier = body.tier as Tier | undefined;
-  if (tier !== "INSIDER" && tier !== "WHOLESALE") {
-    return NextResponse.json(
-      { error: "Invalid tier — must be INSIDER or WHOLESALE" },
-      { status: 400 },
-    );
-  }
-
+async function createCheckoutResponse(
+  userId: string,
+  tier: Tier,
+): Promise<Response> {
   const priceId = priceFor(tier);
   if (!priceId) {
     return NextResponse.json(
@@ -58,9 +36,8 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  // Look up the user (auth() session has id but we want fresh stripeCustomerId)
   const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
+    where: { id: userId },
     select: { id: true, email: true, name: true, stripeCustomerId: true },
   });
   if (!user) {
@@ -108,4 +85,59 @@ export async function POST(req: Request): Promise<Response> {
     console.error("[stripe/checkout] error:", message);
     return NextResponse.json({ error: message }, { status: 500 });
   }
+}
+
+/** GET supports marketing-page links: /api/stripe/checkout?tier=INSIDER */
+export async function GET(req: Request): Promise<Response> {
+  const tier = new URL(req.url).searchParams.get("tier") as Tier | null;
+  if (tier !== "INSIDER" && tier !== "WHOLESALE") {
+    return NextResponse.json(
+      { error: "Invalid tier — use ?tier=INSIDER or ?tier=WHOLESALE" },
+      { status: 400 },
+    );
+  }
+
+  const session = await auth();
+  if (!session?.user?.id) {
+    const returnTo = encodeURIComponent(`/api/stripe/checkout?tier=${tier}`);
+    return NextResponse.redirect(
+      new URL(`/login?callbackUrl=${returnTo}`, req.url),
+    );
+  }
+
+  const result = await createCheckoutResponse(session.user.id, tier);
+  if (!result.ok) return result;
+
+  const data = (await result.json()) as { url?: string };
+  if (!data.url) {
+    return NextResponse.json({ error: "No checkout URL" }, { status: 500 });
+  }
+  return NextResponse.redirect(data.url);
+}
+
+export async function POST(req: Request): Promise<Response> {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json(
+      { error: "Not signed in", redirectTo: "/login" },
+      { status: 401 },
+    );
+  }
+
+  let body: { tier?: string } = {};
+  try {
+    body = (await req.json()) as { tier?: string };
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const tier = body.tier as Tier | undefined;
+  if (tier !== "INSIDER" && tier !== "WHOLESALE") {
+    return NextResponse.json(
+      { error: "Invalid tier — must be INSIDER or WHOLESALE" },
+      { status: 400 },
+    );
+  }
+
+  return createCheckoutResponse(session.user.id, tier);
 }

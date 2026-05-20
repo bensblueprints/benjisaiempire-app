@@ -1,6 +1,8 @@
 ﻿import type { Metadata } from "next";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
+import MarketingCheckoutScript from "@/components/MarketingCheckoutScript";
+import { checkoutApiPath, useAirwallex } from "@/lib/payments";
 
 export const metadata: Metadata = {
   title: "AI Empire Insider — $9/mo · Every Course, Free GoHighLevel, Every Prompt | Benji's AI Empire",
@@ -10,6 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const checkoutHref = `${checkoutApiPath()}?tier=INSIDER`;
+  const payLabel = useAirwallex() ? "Airwallex" : "Stripe";
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
@@ -773,8 +778,8 @@ export default function Page() {
         <div class="ins-claim__r">
           <div class="ghl-checkout-slot" data-ghl-product="insider-9" role="region" aria-label="AI Empire Insider checkout">
             <h3 class="ghl-checkout-slot__title">$9<em>/mo</em></h3>
-            <p class="ghl-checkout-slot__sub">Stripe handles the card — access provisioned instantly. Free GoHighLevel sub-account set up same day.</p>
-            <a class="ins-btn ins-btn--gold ghl-checkout-slot__cta" href="/api/stripe/checkout" data-tier="INSIDER">
+            <p class="ghl-checkout-slot__sub">${payLabel} handles the card — access provisioned instantly. Free GoHighLevel sub-account set up same day.</p>
+            <a class="ins-btn ins-btn--gold ghl-checkout-slot__cta" href="${checkoutHref}" data-tier="INSIDER">
               Join AI Empire Insider — $9/mo <span class="arrow">→</span>
             </a>
           </div>
@@ -782,7 +787,7 @@ export default function Page() {
             <p class="ins-claim__noscript">JavaScript off? <a href="/login" style="color:var(--gold-bright); text-decoration:underline;">Sign in to join AI Empire Insider.</a></p>
           </noscript>
           <p class="ins-claim__caption">
-            Form wires to <strong>GoHighLevel</strong> checkout · <strong>Stripe</strong> handles payment · access provisioned <strong>instantly</strong>
+            Form wires to <strong>GoHighLevel</strong> checkout · <strong>${payLabel}</strong> handles payment · access provisioned <strong>instantly</strong>
           </p>
         </div>
 
@@ -867,6 +872,7 @@ export default function Page() {
   </section>
 
 ` }} />
+      <MarketingCheckoutScript />
       <Footer />
     </>
   );

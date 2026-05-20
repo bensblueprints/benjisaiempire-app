@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum UserRole {
@@ -33,8 +34,11 @@ model User {
   image                String?
   role                 UserRole   @default(USER)
   tier                 Tier       @default(FREE)
+  paymentProvider      String?    // "stripe" | "airwallex"
   stripeCustomerId     String?    @unique
   stripeSubscriptionId String?    @unique
+  airwallexBillingCustomerId String? @unique
+  airwallexSubscriptionId    String? @unique
   subscriptionStatus   SubStatus?
   emailVerified        DateTime?
   createdAt            DateTime   @default(now())

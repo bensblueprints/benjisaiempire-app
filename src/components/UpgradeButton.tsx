@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { checkoutApiPath } from "@/lib/payments";
 
 type Tier = "INSIDER" | "WHOLESALE";
+
+const CHECKOUT_API = checkoutApiPath();
 
 interface UpgradeButtonProps {
   tier: Tier;
@@ -25,7 +28,7 @@ export default function UpgradeButton({
     setError(null);
     setLoading(true);
     try {
-      const res = await fetch("/api/stripe/checkout", {
+      const res = await fetch(CHECKOUT_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tier }),
@@ -36,10 +39,9 @@ export default function UpgradeButton({
         redirectTo?: string;
       };
 
-      if (res.status === 401 && data.redirectTo) {
-        // Send them to login with a return-to so they come back to upgrade.
-        const next = `/login?next=${encodeURIComponent("/portal")}`;
-        window.location.href = next;
+      if (res.status === 401) {
+        const returnTo = encodeURIComponent(`${CHECKOUT_API}?tier=${tier}`);
+        window.location.href = `/login?callbackUrl=${returnTo}`;
         return;
       }
       if (!res.ok || !data.url) {

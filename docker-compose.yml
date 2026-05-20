@@ -1,3 +1,5 @@
+# Production uses Supabase Postgres — set DATABASE_URL + DIRECT_URL in .env (see .env.example).
+# Local Postgres is optional: docker compose --profile local-db up
 services:
   app:
     build: .
@@ -7,6 +9,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+        required: false
     networks:
       - coolify
       - internal
@@ -28,14 +31,16 @@ services:
       - "traefik.http.middlewares.benjisaiempire-www-redirect.redirectregex.permanent=true"
       - "traefik.http.services.benjisaiempire.loadbalancer.server.port=3000"
 
+  # Optional local dev DB — not used when DATABASE_URL points at Supabase
   db:
+    profiles: ["local-db"]
     image: postgres:16-alpine
     container_name: benjisaiempire-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: benjisaiempire
       POSTGRES_USER: benji
-      POSTGRES_PASSWORD: b3njiL0cked!42
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-local-only}
     volumes:
       - benjisaiempire-pgdata:/var/lib/postgresql/data
     networks:

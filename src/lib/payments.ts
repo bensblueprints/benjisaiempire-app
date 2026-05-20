@@ -1,0 +1,25 @@
+/**
+ * Payment provider routing — Stripe (legacy) vs Airwallex.
+ * Set USE_AIRWALLEX=true (and NEXT_PUBLIC_USE_AIRWALLEX=true for client checkout UI).
+ */
+
+export function useAirwallex(): boolean {
+  return (
+    process.env.USE_AIRWALLEX === "true" ||
+    process.env.NEXT_PUBLIC_USE_AIRWALLEX === "true"
+  );
+}
+
+export type PaymentProvider = "stripe" | "airwallex";
+
+export function activePaymentProvider(): PaymentProvider {
+  return useAirwallex() ? "airwallex" : "stripe";
+}
+
+export function checkoutApiPath(): string {
+  return useAirwallex() ? "/api/airwallex/checkout" : "/api/stripe/checkout";
+}
+
+export function portalApiPath(): string {
+  return useAirwallex() ? "/api/airwallex/portal" : "/api/stripe/portal";
+}

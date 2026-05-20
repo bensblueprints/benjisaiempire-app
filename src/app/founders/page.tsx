@@ -2,6 +2,8 @@
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import MarketingCheckoutScript from "@/components/MarketingCheckoutScript";
+import { checkoutApiPath, useAirwallex } from "@/lib/payments";
 
 export const metadata: Metadata = {
   title: "Wholesale GHL — $49/mo · First 100 Operators · Benji's AI Empire",
@@ -11,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const checkoutHref = `${checkoutApiPath()}?tier=WHOLESALE`;
+  const payLabel = useAirwallex() ? "Airwallex" : "Stripe";
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
@@ -714,20 +719,20 @@ export default function Page() {
           <div class="ghl-checkout-slot" data-ghl-product="wholesale-49" role="region" aria-label="GoHighLevel checkout">
             <div class="ghl-checkout-slot__price">$49<em>/mo</em></div>
             <div class="ghl-checkout-slot__sub">Wholesale GHL · $0.015/min · Locked for life</div>
-            <a class="f-btn f-btn--primary" href="https://benjisaiempire.com/checkout/wholesale-49">
+            <a class="f-btn f-btn--primary" href="${checkoutHref}" data-tier="WHOLESALE">
               Lock my $49 seat <span class="arrow" aria-hidden="true">→</span>
             </a>
           </div>
           <noscript>
             <p style="margin-top:18px;">
-              <a class="f-btn f-btn--ghost" href="https://benjisaiempire.com/checkout/wholesale-49">
+              <a class="f-btn f-btn--ghost" href="${checkoutHref}">
                 Enable JS or click here to claim a seat <span class="arrow" aria-hidden="true">→</span>
               </a>
             </p>
           </noscript>
 
           <p class="f-claim__note">
-            Form wires to GoHighLevel checkout. Stripe processes payment.<br>
+            Form wires to GoHighLevel checkout. ${payLabel} processes payment.<br>
             You'll get account credentials within 24h.
           </p>
         </div>
@@ -809,6 +814,7 @@ export default function Page() {
     </section>
 
   ` }} />
+      <MarketingCheckoutScript />
       <Footer />
     </>
   );

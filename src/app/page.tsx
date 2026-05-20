@@ -54,7 +54,7 @@ export default function Page() {
 
 /* ===== 01-hero ===== */
 
-  /* â”€â”€ HERO SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── HERO SECTION ────────────────────────────────────────────────────────────────────────────────────── */
   .hero-section{
     position:relative;
     background:var(--ink);
@@ -106,7 +106,7 @@ export default function Page() {
     .hero-section .hero-grid{ grid-template-columns:1fr; gap:32px; }
   }
 
-  /* â”€â”€ LEFT: INK PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── LEFT: INK PANEL ──────────────────────────────────────────────────────────────────────────────── */
   .hero-section .hero-left{
     position:relative;
     padding:clamp(28px,4vw,56px) clamp(28px,4vw,68px) clamp(28px,3vw,48px);
@@ -331,7 +331,7 @@ export default function Page() {
     color:var(--gold);
   }
 
-  /* â”€â”€ RIGHT: PHOTO PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── RIGHT: PHOTO PANEL ────────────────────────────────────────────────────────────────────────── */
   .hero-section .hero-right{
     position:relative;
     overflow:hidden;
@@ -437,7 +437,7 @@ export default function Page() {
   }
   .hero-section .photo-credit b{ color:var(--cream); font-weight:600; }
 
-  /* â”€â”€ POLAROID on seam â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── POLAROID on seam ────────────────────────────────────────────────────────────────────────────── */
   .hero-section .polaroid{
     position:absolute;
     left:42%;
@@ -485,7 +485,7 @@ export default function Page() {
     border:1px solid var(--line);
   }
 
-  /* â”€â”€ KEYFRAMES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── KEYFRAMES ──────────────────────────────────────────────────────────────────────────────────────────── */
   @keyframes heroFadeIn{
     from{opacity:0; transform:translateY(8px);}
     to  {opacity:1; transform:translateY(0);}
@@ -511,7 +511,7 @@ export default function Page() {
     to  { opacity:1; transform:translate(-58%,-50%) rotate(-6deg)  scale(1); }
   }
 
-  /* â”€â”€ REDUCED MOTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── REDUCED MOTION ────────────────────────────────────────────────────────────────────────────────── */
   @media (prefers-reduced-motion:reduce){
     .hero-section *,
     .hero-section *::before,
@@ -523,7 +523,7 @@ export default function Page() {
     .hero-section .hero-headline .line > span{ transform:none; opacity:1; }
   }
 
-  /* â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── RESPONSIVE ────────────────────────────────────────────────────────────────────────────────────────── */
   @media (max-width:1100px){
     .hero-section .hero-grid{ grid-template-columns:48% 52%; }
     .hero-section::after{ left:48%; }
@@ -1154,7 +1154,7 @@ export default function Page() {
     margin: 0 auto;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ HEADER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── HEADER ────────────────────────────────────────────── */
   .courses-header {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -1246,7 +1246,7 @@ export default function Page() {
     margin-right: 8px;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ GRID â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── GRID ────────────────────────────────────────────── */
   .courses-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -1273,7 +1273,7 @@ export default function Page() {
     .tile-05 { transform: translateY(-32px); }
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TILE BASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── TILE BASE ────────────────────────────────────────────── */
   .tile {
     position: relative;
     text-decoration: none;
@@ -1300,7 +1300,7 @@ export default function Page() {
     .tile-05 { transform: translateY(calc(-32px + 28px)); }
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ NUMERAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── NUMERAL ────────────────────────────────────────────── */
   .tile__numeral {
     position: absolute;
     font-family: 'Anton', sans-serif;
@@ -1332,7 +1332,7 @@ export default function Page() {
   .tile-05 .tile__numeral { top: -42px; right: -18px; left: auto; }
   .tile-06 .tile__numeral { top: -88px; left: 2%; font-size: clamp(180px, 26vw, 380px); }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PHOTO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── PHOTO ────────────────────────────────────────────── */
   .tile__photo {
     position: relative;
     overflow: hidden;
@@ -1368,7 +1368,7 @@ export default function Page() {
   .tile-05 .tile__photo { aspect-ratio: 16 / 9; }    /* wide */
   .tile-06 .tile__photo { aspect-ratio: 21 / 9; }    /* atmospheric finale */
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ KICKER ROW (above title) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── KICKER ROW (above title) ────────────────────────────────────────────── */
   .tile__kicker {
     display: flex;
     align-items: center;
@@ -1397,7 +1397,7 @@ export default function Page() {
     color: var(--rust);
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TITLE + COPY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── TITLE + COPY ────────────────────────────────────────────── */
   .tile__title {
     font-family: 'Anton', sans-serif;
     font-weight: 400;
@@ -1478,7 +1478,7 @@ export default function Page() {
   }
   .tile:hover .tile__cta::after { transform: translate(4px, -1px); }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ SPREAD-STYLE TILES (03, 06) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── SPREAD-STYLE TILES (03, 06) ────────────────────────────────────────────── */
   /* On wide tiles, copy sits in a 5-col grid below the photo, magazine-style */
   @media (min-width: 1000px) {
     .tile-03 .tile__copy,
@@ -1549,7 +1549,7 @@ export default function Page() {
     .tile:not(.tile-03):not(.tile-06):hover { filter: brightness(1.02); }
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FOOTER STRIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ────────────────────────────────────────────── FOOTER STRIP ────────────────────────────────────────────── */
   .courses-footstrip {
     margin-top: clamp(96px, 10vw, 160px);
     padding-top: 32px;
@@ -1607,7 +1607,7 @@ export default function Page() {
 
 /* ===== 04-proof ===== */
 
-  /* â”€â”€ PROOF SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── PROOF SECTION ──────────────────────────────────────────────────────────────────────────────────── */
   .proof-section{
     position:relative;
     background:var(--ink);
@@ -1631,7 +1631,7 @@ export default function Page() {
 
   .proof-section > *{ position:relative; z-index:1; }
 
-  /* â”€â”€ MASTHEAD BAND â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── MASTHEAD BAND ──────────────────────────────────────────────────────────────────────────────────── */
   .proof-section .ps-masthead{
     display:grid;
     grid-template-columns: 1fr auto;
@@ -1682,7 +1682,7 @@ export default function Page() {
   }
   .proof-section .ps-folio span{ color:var(--gold); }
 
-  /* â”€â”€ PULL QUOTE SPREAD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── PULL QUOTE SPREAD ──────────────────────────────────────────────────────────────────────────── */
   .proof-section .ps-quote{
     max-width:min(1180px, 100%);
     margin:0 auto clamp(64px,8vw,120px);
@@ -1770,7 +1770,7 @@ export default function Page() {
     to  { opacity:1; letter-spacing:-.005em; }
   }
 
-  /* â”€â”€ BIO + ANCHOR PORTRAIT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── BIO + ANCHOR PORTRAIT ──────────────────────────────────────────────────────────────────── */
   .proof-section .ps-bio{
     display:grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
@@ -1896,7 +1896,7 @@ export default function Page() {
     margin-top:4px;
   }
 
-  /* â”€â”€ STATS REGISTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── STATS REGISTER ────────────────────────────────────────────────────────────────────────────────── */
   .proof-section .ps-stats{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1972,7 +1972,7 @@ export default function Page() {
   @keyframes ps-up-31745 { from{--pscount:0;} to{--pscount:31745;} }
   @keyframes ps-up-110 { from{--pscount:0;} to{--pscount:110;} }
 
-  /* â”€â”€ RECEIPTS GALLERY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── RECEIPTS GALLERY ────────────────────────────────────────────────────────────────────────────── */
   .proof-section .ps-receipts-head{
     max-width:1320px;
     margin:0 auto 36px;
@@ -2106,7 +2106,7 @@ export default function Page() {
     z-index:2;
   }
 
-  /* â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── RESPONSIVE ────────────────────────────────────────────────────────────────────────────────────────── */
   @media (max-width: 1024px){
     .proof-section .ps-bio{
       grid-template-columns: 1fr;
@@ -2149,7 +2149,7 @@ export default function Page() {
     .proof-section .ps-tile.t1 .ps-frame{ aspect-ratio: 16/10; }
   }
 
-  /* â”€â”€ REDUCED MOTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ──── REDUCED MOTION ────────────────────────────────────────────────────────────────────────────────── */
   @media (prefers-reduced-motion: reduce){
     .proof-section .ps-quote-body,
     .proof-section .ps-frame{
@@ -2728,7 +2728,7 @@ export default function Page() {
 <section class="hero-section" aria-label="Benji Boyce — The Empire">
   <div class="hero-grid">
 
-    <!-- â”€â”€ LEFT: INK PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- ──── LEFT: INK PANEL ────────────────────────────────────────────────────────────────────── -->
     <div class="hero-left">
 
       <div class="hero-rail">
@@ -2790,7 +2790,7 @@ export default function Page() {
       </div>
     </div>
 
-    <!-- â”€â”€ RIGHT: PHOTO PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- ──── RIGHT: PHOTO PANEL ──────────────────────────────────────────────────────────────── -->
     <div class="hero-right">
       <div class="hero-photo" role="img" aria-label="Benji in Boss hoodie with Rolls Royce and Lamborghini Urus at night"></div>
 
@@ -2798,7 +2798,7 @@ export default function Page() {
       <div class="bracket bl" aria-hidden="true"></div>
 
       <div class="issue-tag">
-        <span class="big">â„– 01</span>
+        <span class="big">№ 01</span>
         Vol. MMXXVI · Empire Issue
       </div>
 
@@ -2811,7 +2811,7 @@ export default function Page() {
       </div>
     </div>
 
-    <!-- â”€â”€ POLAROID on seam â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- ──── POLAROID on seam ──────────────────────────────────────────────────────────────────── -->
     <figure class="polaroid" aria-hidden="true">
       <img src="/images/headshot-pointing.jpg?v=2" alt="">
       <figcaption class="pcap">"yeah, you."</figcaption>
@@ -3020,7 +3020,7 @@ export default function Page() {
         <div class="courses-meta-row">
           <span><strong>04</strong>Courses</span>
           <span><strong>02</strong>Challenges</span>
-          <span><strong>â‰ˆ18.5h</strong>Of footage</span>
+          <span><strong>≈18.5h</strong>Of footage</span>
           <span><strong>$9</strong>/mo</span>
         </div>
       </div>
@@ -3182,7 +3182,7 @@ export default function Page() {
       <h2 class="ps-headline" id="proof-headline">Why Listen <em>To Me.</em></h2>
     </div>
     <div class="ps-folio">
-      NÂº <span>04</span><br>
+      Nº <span>04</span><br>
       Receipts &amp; Bio
     </div>
   </header>

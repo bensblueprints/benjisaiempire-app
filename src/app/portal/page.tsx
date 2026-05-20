@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { portalApiPath, useAirwallex } from "@/lib/payments";
 
 export const dynamic = "force-dynamic";
 
@@ -20,13 +21,26 @@ function firstName(session: { user: { name?: string | null; email: string } }) {
 export default async function PortalPage({
   searchParams,
 }: {
-  searchParams: Promise<{ upgrade?: string }>;
+  searchParams: Promise<{ upgrade?: string; billing?: string; billingError?: string }>;
 }) {
   const params = await searchParams;
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/portal");
 
+  const billingUser = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      airwallexSubscriptionId: true,
+      paymentProvider: true,
+      subscriptionStatus: true,
+    },
+  });
+
   const tier = session.user.tier;
+  const airwallexBilling = useAirwallex();
+  const manageHref = portalApiPath();
+  const showAirwallexCancel =
+    airwallexBilling && Boolean(billingUser?.airwallexSubscriptionId);
   const isInsiderOrUp = tier === "INSIDER" || tier === "WHOLESALE";
   const isAdmin = session.user.role === "ADMIN";
 
@@ -99,7 +113,7 @@ export default async function PortalPage({
           lessons, and every course you&apos;ve unlocked — all in one room.
         </p>
         <div className="portal-hero__actions">
-          <Link href="/api/stripe/portal" className="portal-hero__manage">
+          <Link href={manageHref} className="portal-hero__manage">
             Manage subscription →
           </Link>
           {isAdmin && (
@@ -109,6 +123,56 @@ export default async function PortalPage({
           )}
         </div>
       </section>
+
+      {params.billing === "cancel_scheduled" && (
+        <aside className="portal-banner" id="manage-billing">
+          <span className="portal-banner__eyebrow">Billing</span>
+          <p className="portal-banner__text">
+            Your subscription is set to cancel at the end of the current billing period.
+            You keep access until then.
+          </p>
+        </aside>
+      )}
+
+      {params.billingError && (
+        <aside className="portal-banner portal-banner--upgrade">
+          <span className="portal-banner__eyebrow">Billing</span>
+          <p className="portal-banner__text">{decodeURIComponent(params.billingError)}</p>
+        </aside>
+      )}
+
+      {showAirwallexCancel && (
+        <section
+          className="portal-callout"
+          id="manage-billing"
+          style={{ borderColor: "var(--line)" }}
+        >
+          <span className="portal-callout__eyebrow">Subscription · Airwallex</span>
+          <h2 className="portal-callout__title">Manage billing</h2>
+          <p className="portal-callout__body">
+            Airwallex does not offer a Stripe-style customer portal. Cancel here — access
+            stays until the current period ends (or cancel immediately).
+          </p>
+          <form action="/api/airwallex/cancel" method="POST" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <button
+              type="submit"
+              className="portal-callout__cta"
+              style={{ background: "transparent", color: "var(--gold)", border: "1px solid var(--gold)" }}
+            >
+              Cancel at period end
+            </button>
+            <button
+              type="submit"
+              name="immediate"
+              value="1"
+              className="portal-callout__cta"
+              style={{ background: "var(--rust)", color: "var(--cream)" }}
+            >
+              Cancel immediately
+            </button>
+          </form>
+        </section>
+      )}
 
       {/* Upgrade banner from middleware redirect */}
       {showUpgradeBanner && (

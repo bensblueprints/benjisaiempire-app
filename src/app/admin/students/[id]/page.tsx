@@ -100,6 +100,22 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
             {user.email}
           </div>
         </div>
+        {user.airwallexBillingCustomerId && (
+          <span
+            style={{
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: ".1em",
+              padding: "10px 16px",
+              border: "1px solid var(--line)",
+              color: "var(--cream-soft)",
+              borderRadius: 3,
+            }}
+          >
+            Airwallex {user.airwallexBillingCustomerId}
+          </span>
+        )}
         {user.stripeCustomerId && (
           <a
             href={`https://dashboard.stripe.com/customers/${user.stripeCustomerId}`}
@@ -154,18 +170,36 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
 
         <section style={{ background: "var(--ink-2)", border: "1px solid var(--line)", borderRadius: 6, padding: 24 }}>
           <h2 style={{ fontFamily: "Anton, sans-serif", fontSize: 22, textTransform: "uppercase", color: "var(--cream)", marginBottom: 14, letterSpacing: ".02em" }}>
-            Stripe
+            Billing
           </h2>
           <div style={fieldRow}>
-            <span style={dt}>Customer</span>
+            <span style={dt}>Provider</span>
+            <span style={{ ...dd, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
+              {user.paymentProvider ?? "—"}
+            </span>
+          </div>
+          <div style={fieldRow}>
+            <span style={dt}>Stripe customer</span>
             <span style={{ ...dd, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
               {user.stripeCustomerId ?? "—"}
             </span>
           </div>
           <div style={fieldRow}>
-            <span style={dt}>Subscription</span>
+            <span style={dt}>Stripe subscription</span>
             <span style={{ ...dd, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
               {user.stripeSubscriptionId ?? "—"}
+            </span>
+          </div>
+          <div style={fieldRow}>
+            <span style={dt}>Airwallex customer</span>
+            <span style={{ ...dd, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
+              {user.airwallexBillingCustomerId ?? "—"}
+            </span>
+          </div>
+          <div style={fieldRow}>
+            <span style={dt}>Airwallex subscription</span>
+            <span style={{ ...dd, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
+              {user.airwallexSubscriptionId ?? "—"}
             </span>
           </div>
           <div style={{ ...fieldRow, borderBottom: "none" }}>
