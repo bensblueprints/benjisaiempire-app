@@ -11,14 +11,24 @@ RUN npm install --include=dev --ignore-scripts --no-audit --no-fund
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Isolate build from Coolify runtime secrets (real DATABASE_URL breaks page data collection).
 ENV DATABASE_URL=postgresql://build:build@localhost/build
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV USE_AIRWALLEX=false
+ENV NEXT_PUBLIC_USE_AIRWALLEX=false
 ENV RESEND_API_KEY=build-placeholder
 ENV STRIPE_SECRET_KEY=sk_test_build_placeholder
 ENV STRIPE_PUBLISHABLE_KEY=pk_test_build_placeholder
 ENV EMAIL_FROM=build@example.com
+ENV AUTH_SECRET=build-placeholder-secret-min-32-chars-long
+ENV AUTH_URL=https://benjisaiempire.com
+ENV AUTH_TRUST_HOST=true
+ENV NEXT_PUBLIC_SITE_URL=https://benjisaiempire.com
+ENV ADMIN_EMAILS=build@example.com
 RUN npx prisma generate
-RUN npm run build
+RUN DATABASE_URL=postgresql://build:build@localhost/build \
+    USE_AIRWALLEX=false NEXT_PUBLIC_USE_AIRWALLEX=false \
+    npm run build
 
 FROM base AS runner
 ENV NODE_ENV=production
