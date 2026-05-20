@@ -139,11 +139,7 @@ async function createCheckoutResponse(
           subscription_data: {
             metadata: { userId: user.id, tier, email: user.email, app: "benjisaiempire" },
           },
-          customer_data: {
-            email: user.email,
-            name: user.name ?? undefined,
-            type: "INDIVIDUAL",
-          },
+          // billing_customer_id already identifies the customer — do not send customer_data.email
         },
       },
     );
