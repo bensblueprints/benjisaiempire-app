@@ -55,6 +55,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
               <Link href="/admin/courses" style={{ color: "var(--cream-soft)" }}>Courses</Link>
               <Link href="/admin/downloads" style={{ color: "var(--cream-soft)" }}>Downloads</Link>
               <Link href="/admin/students" style={{ color: "var(--cream-soft)" }}>Students</Link>
+              <Link href="/admin/community" style={{ color: "var(--cream-soft)" }}>Community</Link>
+              <Link href="/admin/events" style={{ color: "var(--cream-soft)" }}>Events</Link>
               <Link href="/" style={{ color: "var(--cream-soft)" }}>Site</Link>
             </nav>
           </div>

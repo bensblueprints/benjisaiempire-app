@@ -42,7 +42,13 @@ model User {
   accounts             Account[]
   sessions             Session[]
   progress             LessonProgress[]
+  posts                Post[]
+  postLikes            PostLike[]
+  comments             Comment[]
+  commentLikes         CommentLike[]
+  eventRsvps           EventRsvp[]
 }
+
 
 // NextAuth standard tables
 model Account {
@@ -161,4 +167,72 @@ model LessonProgress {
   lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   completedAt DateTime @default(now())
   @@id([userId, lessonId])
+}
+
+/* ───────── COMMUNITY ───────── */
+
+model Post {
+  id        String     @id @default(cuid())
+  authorId  String
+  author    User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  category  String     @default("General")
+  title     String?
+  body      String     @db.Text
+  pinned    Boolean    @default(false)
+  published Boolean    @default(true)
+  likes     PostLike[]
+  comments  Comment[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model PostLike {
+  userId    String
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@id([userId, postId])
+}
+
+model Comment {
+  id        String        @id @default(cuid())
+  postId    String
+  authorId  String
+  post      Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author    User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  body      String        @db.Text
+  likes     CommentLike[]
+  createdAt DateTime      @default(now())
+}
+
+model CommentLike {
+  userId    String
+  commentId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  @@id([userId, commentId])
+}
+
+model Event {
+  id          String      @id @default(cuid())
+  title       String
+  description String?     @db.Text
+  startsAt    DateTime
+  endsAt      DateTime?
+  joinUrl     String?
+  recurring   String?     // "weekly-tue-thu" etc.
+  published   Boolean     @default(true)
+  rsvps       EventRsvp[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model EventRsvp {
+  userId    String
+  eventId   String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@id([userId, eventId])
 }

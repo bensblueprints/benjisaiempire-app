@@ -214,6 +214,27 @@ export default async function PortalPage({
         </section>
       )}
 
+      {/* Community */}
+      <section className="portal-community">
+        <header className="portal-section-head">
+          <span className="portal-section-eyebrow">Community</span>
+          <h2 className="portal-section-title">The Lounge</h2>
+        </header>
+        <div className="portal-community__grid">
+          {[
+            { href: "/community", label: "Feed", desc: "Posts, wins, questions, and strategy from the community." },
+            { href: "/community/events", label: "Events", desc: "Live sessions every Tuesday & Thursday. RSVP for links." },
+            { href: "/community/members", label: "Members", desc: "Connect with other operators in the empire." },
+          ].map(({ href, label, desc }) => (
+            <Link key={href} href={href} className="portal-community__card">
+              <div className="portal-community__card-label">{label}</div>
+              <p className="portal-community__card-desc">{desc}</p>
+              <span className="portal-community__card-cta">Enter →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Downloads */}
       {downloads.length > 0 && (
         <section className="portal-downloads">
@@ -463,6 +484,34 @@ export default async function PortalPage({
           padding-bottom:.25rem; align-self:flex-start;
         }
         .portal-course__cta:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+        /* COMMUNITY */
+        .portal-community__grid {
+          display:grid; gap:1rem;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        }
+        .portal-community__card {
+          border: 1px solid var(--line);
+          background: var(--ink-2);
+          padding: 1.5rem 1.75rem;
+          display:flex; flex-direction:column; gap:.5rem;
+          transition: border-color .2s, transform .2s;
+          text-decoration:none;
+        }
+        .portal-community__card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .portal-community__card-label {
+          font-family:'Anton',sans-serif;
+          font-size:1.5rem; text-transform:uppercase; letter-spacing:.02em; color:var(--cream);
+        }
+        .portal-community__card-desc {
+          font-family:'Manrope',sans-serif;
+          font-size:.88rem; color:var(--cream-soft); line-height:1.5; margin:0; flex:1;
+        }
+        .portal-community__card-cta {
+          font-family:'JetBrains Mono',monospace;
+          font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+          color:var(--gold); margin-top:.5rem;
+        }
 
         /* DOWNLOADS */
         .portal-dl-list {
