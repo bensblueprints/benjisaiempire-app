@@ -169,7 +169,7 @@ model LessonProgress {
   @@id([userId, lessonId])
 }
 
-/* ───────── COMMUNITY ───────── */
+// Community
 
 model Post {
   id        String     @id @default(cuid())
