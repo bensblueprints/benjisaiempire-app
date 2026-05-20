@@ -15,4 +15,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Static files live in public/images/ and are served at /images/* by Next.js — no redirect needed.
+[[plugins]]
+  package = "./netlify/plugins/copy-public"
+
+# Static files live in public/images/ and are served at /images/* by Next.js — no redirects.
