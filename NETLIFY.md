@@ -90,10 +90,15 @@ After adding the custom domain in Netlify:
 
 ## Local CLI
 
+**Do not** run `netlify deploy` from Windows without `--build` — that uploads raw source (Netlify default 404). **Do not** use `netlify deploy --prod` on Windows at all if possible; use Linux zip API below.
+
 ```bash
 cd benjisaiempire-app
-netlify link    # pick or create site
-netlify deploy --build --prod
+git archive -o /tmp/benjisaiempire-deploy.zip HEAD
+curl -X POST "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/builds?title=Linux+API+rebuild" \
+  -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+  -H "Content-Type: application/zip" \
+  --data-binary @/tmp/benjisaiempire-deploy.zip
 ```
 
-Set `NETLIFY_AUTH_TOKEN` in the shell from `.env` (do not commit).
+Set `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` (`9a9f0daa-40ec-4baf-b855-e5ed6b22510f`) from `.env` (do not commit).
