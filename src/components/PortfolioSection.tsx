@@ -39,6 +39,15 @@ const SITES: Site[] = [
     category: "E-COMMERCE · MARKETPLACE",
     slug: "peptide-best",
   },
+  {
+    name: "Chincoteague Island Adventures",
+    url: "https://www.chincoteagueislandadventures.com",
+    domain: "chincoteagueislandadventures.com",
+    tagline:
+      "Captain Randy — wild pony tours and boat excursions on Virginia's Chincoteague Island.",
+    category: "OUTDOOR · GUIDE",
+    slug: "chincoteague-island-adventures",
+  },
 ];
 
 type LightboxSite = Site & { thumbSrc: string; fullSrc: string };
