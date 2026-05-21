@@ -2900,9 +2900,9 @@ export default function Page() {
         <li>All <strong>4 courses</strong> — Cold Calling 2.0 + AI, AI Brand Builder, AI Marketing Engine, Empire OS</li>
         <li>Every AI prompt I run — Claude, Cursor, GPT</li>
         <li>Every script, template, SOP &amp; checklist</li>
-        <li>The Starter Kit (PDF + cold-call scripts)</li>
+        <li><strong>30 Day AI Website Empire Challenge</strong> — full playbook + 30 daily dial checklists (3,000 calls)</li>
+        <li>Every script, template, SOP &amp; checklist (incl. Master Script + SKILL.md)</li>
         <li>30-Day AI Empire Challenge (daily email sequence)</li>
-        <li>30-Day Cold Calling Challenge</li>
         <li>Private AI Empire Insider community</li>
         <li>Cancel anytime · 7-day refund</li>
       </ul>
@@ -2981,13 +2981,13 @@ export default function Page() {
       </div>
       <div>
         <p class="courses-lede">
-          Four courses. Two 30-day challenges. Every prompt and script I run. GoHighLevel sub-account included.
+          The <strong>30 Day AI Website Empire Challenge</strong> is the flagship — learn the stack, then 100 dials a day for 30 days. Plus four skill courses, every prompt and script, GoHighLevel included.
           <em>All for nine dollars a month.</em>
         </p>
         <div class="courses-meta-row">
-          <span><strong>04</strong>Courses</span>
-          <span><strong>02</strong>Challenges</span>
-          <span><strong>≈18.5h</strong>Of footage</span>
+          <span><strong>01</strong>Flagship challenge</span>
+          <span><strong>04</strong>Skill courses</span>
+          <span><strong>3,000</strong>Dials in 30 days</span>
           <span><strong>$9</strong>/mo</span>
         </div>
       </div>
@@ -2995,15 +2995,37 @@ export default function Page() {
 
     <div class="courses-grid">
 
-      <!-- 01 / COURSE — Cold Calling 2.0 + AI -->
-      <a class="tile tile-01" style="--i:0" href="/courses/cold-calling/" aria-label="Cold Calling 2.0 + AI — course">
+      <!-- 01 / FLAGSHIP — 30 Day AI Website Empire Challenge -->
+      <a class="tile tile-01" style="--i:0" href="/learn/30-day-ai-website-empire-challenge" aria-label="30 Day AI Website Empire Challenge">
         <span class="tile__numeral" aria-hidden="true">01</span>
+        <div class="tile__photo">
+          <img src="/images/course-marketing-engine.jpg?v=5" alt="30 Day AI Website Empire Challenge" loading="lazy">
+        </div>
+        <div class="tile__copy">
+          <div class="tile__kicker">
+            <span class="index">N&deg; 01</span>
+            <span class="rule"></span>
+            <span class="type">Challenge &middot; Flagship</span>
+          </div>
+          <h3 class="tile__title">30 Day AI Website Empire Challenge</h3>
+          <p class="tile__tagline">&ldquo;Learn the stack. Then 100 dials a day for 30 days.&rdquo;</p>
+          <p class="tile__body">Domain, Cloudflare, GHL pipeline, free-site offer, AI redesigns, Master Script — then 3,000 dials. Do the work, don&rsquo;t make money? Full refund.</p>
+          <div class="tile__footer">
+            <span class="tile__meta">48 modules &middot; 18 learn + 30 checklists</span>
+            <span class="tile__cta">Start challenge</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 02 / COURSE — Cold Calling 2.0 + AI -->
+      <a class="tile tile-02" style="--i:1" href="/courses/cold-calling/" aria-label="Cold Calling 2.0 + AI — course">
+        <span class="tile__numeral" aria-hidden="true">02</span>
         <div class="tile__photo">
           <img src="/images/course-cold-calling.jpg?v=5" alt="Cold Calling 2.0 + AI course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
-            <span class="index">N&deg; 01</span>
+            <span class="index">N&deg; 02</span>
             <span class="rule"></span>
             <span class="type">Course</span>
           </div>
@@ -3012,28 +3034,6 @@ export default function Page() {
           <p class="tile__body">AI prospecting, the Master Script, objection handling, follow-up cadence that actually closes.</p>
           <div class="tile__footer">
             <span class="tile__meta">8 modules &middot; &asymp;4 hours</span>
-            <span class="tile__cta">Open course</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- 02 / COURSE — AI Brand Builder -->
-      <a class="tile tile-02" style="--i:1" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
-        <span class="tile__numeral" aria-hidden="true">02</span>
-        <div class="tile__photo">
-          <img src="/images/course-brand-builder.jpg?v=5" alt="AI Brand Builder course" loading="lazy">
-        </div>
-        <div class="tile__copy">
-          <div class="tile__kicker">
-            <span class="index">N&deg; 02</span>
-            <span class="rule"></span>
-            <span class="type">Course</span>
-          </div>
-          <h3 class="tile__title">AI Brand Builder</h3>
-          <p class="tile__tagline">&ldquo;Blank page to a brand that converts.&rdquo;</p>
-          <p class="tile__body">Positioning, voice, identity, content. AI as a co-pilot &mdash; not a crutch. From the guy who literally wrote the book on what NOT to do.</p>
-          <div class="tile__footer">
-            <span class="tile__meta">7 modules &middot; &asymp;3.5 hours</span>
             <span class="tile__cta">Open course</span>
           </div>
         </div>
@@ -3061,15 +3061,37 @@ export default function Page() {
         </div>
       </a>
 
-      <!-- 04 / COURSE — Empire OS -->
-      <a class="tile tile-04" style="--i:3" href="/courses/empire-os/" aria-label="Empire OS — course">
+      <!-- 04 / COURSE — AI Brand Builder -->
+      <a class="tile tile-04" style="--i:3" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
         <span class="tile__numeral" aria-hidden="true">04</span>
+        <div class="tile__photo">
+          <img src="/images/course-brand-builder.jpg?v=5" alt="AI Brand Builder course" loading="lazy">
+        </div>
+        <div class="tile__copy">
+          <div class="tile__kicker">
+            <span class="index">N&deg; 04</span>
+            <span class="rule"></span>
+            <span class="type">Course</span>
+          </div>
+          <h3 class="tile__title">AI Brand Builder</h3>
+          <p class="tile__tagline">&ldquo;Blank page to a brand that converts.&rdquo;</p>
+          <p class="tile__body">Positioning, voice, identity, content. AI as a co-pilot &mdash; not a crutch.</p>
+          <div class="tile__footer">
+            <span class="tile__meta">7 modules &middot; &asymp;3.5 hours</span>
+            <span class="tile__cta">Open course</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 05 / COURSE — Empire OS -->
+      <a class="tile tile-05" style="--i:4" href="/courses/empire-os/" aria-label="Empire OS — course">
+        <span class="tile__numeral" aria-hidden="true">05</span>
         <div class="tile__photo">
           <img src="/images/course-empire-os.jpg?v=throne" alt="Empire OS course" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker">
-            <span class="index">N&deg; 04</span>
+            <span class="index">N&deg; 05</span>
             <span class="rule"></span>
             <span class="type">Course</span>
           </div>
@@ -3083,33 +3105,11 @@ export default function Page() {
         </div>
       </a>
 
-      <!-- 05 / CHALLENGE — 30-Day AI Empire -->
-      <a class="tile tile-05" style="--i:4" href="/challenge/" aria-label="30-Day AI Empire Challenge">
-        <span class="tile__numeral" aria-hidden="true">05</span>
-        <div class="tile__photo">
-          <img src="/images/streaming-rig.jpg?v=5" alt="30-Day AI Empire Challenge" loading="lazy">
-        </div>
-        <div class="tile__copy">
-          <div class="tile__kicker">
-            <span class="index">N&deg; 05</span>
-            <span class="rule"></span>
-            <span class="type">Challenge</span>
-          </div>
-          <h3 class="tile__title">30-Day AI Empire Challenge</h3>
-          <p class="tile__tagline">&ldquo;30 emails. 30 days. One AI-powered offer.&rdquo;</p>
-          <p class="tile__body">Daily prompt + accountability nudge. Build an offer end-to-end with AI as the co-pilot.</p>
-          <div class="tile__footer">
-            <span class="tile__meta">30 days &middot; daily email</span>
-            <span class="tile__cta">Insider only</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- 06 / CHALLENGE — 30-Day Cold Calling (atmospheric finale) -->
-      <a class="tile tile-06" style="--i:5" href="/cold-call-30/" aria-label="30-Day Cold Calling Challenge">
+      <!-- 06 / FLAGSHIP CTA — Day 1 (closing spread) -->
+      <a class="tile tile-06" style="--i:5" href="/learn/30-day-ai-website-empire-challenge" aria-label="30 Day AI Website Empire Challenge — start Day 1">
         <span class="tile__numeral" aria-hidden="true">06</span>
         <div class="tile__photo">
-          <img src="/images/broll-bangkok.jpg?v=5" alt="30-Day Cold Calling Challenge" loading="lazy">
+          <img src="/images/broll-bangkok.jpg?v=5" alt="30 Day AI Website Empire Challenge" loading="lazy">
         </div>
         <div class="tile__copy">
           <div class="tile__kicker" style="grid-column:1/-1;">
@@ -3117,12 +3117,12 @@ export default function Page() {
             <span class="rule"></span>
             <span class="type">Challenge &middot; Closing Spread</span>
           </div>
-          <h3 class="tile__title">30-Day Cold Calling Challenge</h3>
-          <p class="tile__tagline">&ldquo;100 dials. 30 days. The Master Script.&rdquo;</p>
-          <p class="tile__body">Watch me dial live every Tuesday. Copy the cadence in real time.</p>
+          <h3 class="tile__title">Start Day 1 — 100 Calls</h3>
+          <p class="tile__tagline">&ldquo;Learn in Modules 1&ndash;18. Execute in Days 1&ndash;30.&rdquo;</p>
+          <p class="tile__body">No new lessons on dial days &mdash; just the checklist. 3,000 calls. Build free sites. Collect $500 builds. Refund if you do the work and still don&rsquo;t make money.</p>
           <div class="tile__footer">
-            <span class="tile__meta">30 days &middot; 100 dials</span>
-            <span class="tile__cta">Insider only</span>
+            <span class="tile__meta">Member portal &middot; Insider $9/mo</span>
+            <span class="tile__cta">Open challenge</span>
           </div>
         </div>
       </a>

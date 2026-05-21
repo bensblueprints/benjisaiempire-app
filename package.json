@@ -13,6 +13,8 @@
     "setup-stripe": "tsx scripts/setup-stripe.ts",
     "seed-curriculum": "tsx scripts/seed-curriculum.ts",
     "seed-downloads": "node scripts/seed-downloads.mjs",
+    "seed-website-sales-blueprint": "tsx scripts/seed-website-sales-blueprint.ts",
+    "seed-30-day-ai-website-empire-challenge": "tsx scripts/seed-website-sales-blueprint.ts",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
