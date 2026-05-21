@@ -124,8 +124,21 @@ New `User` fields: `paymentProvider`, `airwallexBillingCustomerId`, `airwallexSu
 
 Portal shows cancel forms when `USE_AIRWALLEX=true` and the user has `airwallexSubscriptionId`.
 
-## 7. Cutover checklist
+## 7. Post-payment access (Insider $9)
 
+After successful payment, Airwallex should fire **`billing_checkout.completed`**. The app then:
+
+1. Sets `User.tier` to `INSIDER` and `subscriptionStatus` to `ACTIVE` in Supabase
+2. Sends a **magic-link email** (Resend) with redirect to `/portal`
+3. After sign-in, `/learn/*` and member features require `INSIDER` (middleware)
+
+**Production checkout verified working** (2026-05-21): `/checkout/insider` → Airwallex hosted URL.
+
+**Required for access to work every time:** webhook in the **live** Airwallex dashboard pointing to `https://benjisaiempire.com/api/airwallex/webhook` with the same `AIRWALLEX_WEBHOOK_SECRET` as Netlify. Test one real $9 payment and confirm magic-link email + `tier=INSIDER` in Supabase.
+
+## 8. Cutover checklist
+
+- [x] Live checkout redirect for Insider (guest email → Airwallex)
 - [ ] Sandbox checkout for Insider + Wholesale
 - [ ] Webhook delivers `billing_checkout.completed` → user tier `INSIDER` / `WHOLESALE` in DB
 - [ ] Cancel at period end + immediate cancel tested
