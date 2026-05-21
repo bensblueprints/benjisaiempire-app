@@ -12,6 +12,7 @@
     "db:studio": "prisma studio",
     "setup-stripe": "tsx scripts/setup-stripe.ts",
     "seed-curriculum": "tsx scripts/seed-curriculum.ts",
+    "seed-downloads": "node scripts/seed-downloads.mjs",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {

@@ -6,10 +6,10 @@ import PortfolioSection from "@/components/PortfolioSection";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Benji's AI Empire — Free Sales Call Videos · Everything Else $9/mo · AI Business Playbook",
-  description: "I cold-call live every Tuesday on YouTube — free. For $9/mo get every AI course I teach, every prompt, every script, and a free GoHighLevel sub-account. Everything you need to build an AI business.",
+  title: "Benji's AI Empire — AI Empire Insider $9/mo · AI Business Playbook",
+  description: "For $9/mo get every AI course I teach, every prompt, every script, and a GoHighLevel sub-account. Everything you need to build an AI business.",
   alternates: { canonical: "https://benjisaiempire.com/" },
-  openGraph: { title: "Benji's AI Empire — $9/mo Gets You Everything", description: "Free cold call videos every Tuesday. $9/mo for all 4 AI courses, every prompt, every script, and a free GoHighLevel account.", url: "https://benjisaiempire.com/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=5" }], type: "website" }
+  openGraph: { title: "Benji's AI Empire — $9/mo Gets You Everything", description: "$9/mo for all 4 AI courses, every prompt, every script, and a GoHighLevel account.", url: "https://benjisaiempire.com/", images: [{ url: "https://benjisaiempire.com/images/hero-empire.jpg?v=5" }], type: "website" }
 };
 
 export default function Page() {
@@ -683,9 +683,8 @@ export default function Page() {
   }
   @media (min-width: 900px){
     .pricing-grid{
-      grid-template-columns: 1fr 1.24fr;
-      gap: clamp(18px, 2vw, 28px);
-      max-width: 880px;
+      grid-template-columns: 1fr;
+      max-width: 520px;
     }
   }
 
@@ -939,12 +938,8 @@ export default function Page() {
     margin: 12px 0 0;
   }
 
-  /* ---------- TIER 1: FREE ---------- */
-  .tier--free{ --i: 0; }
-  .tier--free .tier-name{ color: var(--ps-bone); }
-
-  /* ---------- TIER 2: INSIDER ---------- */
-  .tier--insider{ --i: 1; }
+  /* ---------- INSIDER (only public tier) ---------- */
+  .tier--insider{ --i: 0; }
   .tier--insider .tier-name{ color: var(--ps-cream); }
 
   /* ---------- TIER 3: WHOLESALE GHL — FEATURED ---------- */
@@ -2751,23 +2746,23 @@ export default function Page() {
           <span class="line l1"><span>I cold-call</span></span>
           <span class="line l2"><span>live every Tuesday<span class="amp">.</span></span></span>
           <span class="line l3"><span>You can have</span></span>
-          <span class="line l4"><span>the videos free.</span></span>
+          <span class="line l4"><span>the whole playbook.</span></span>
         </h1>
 
         <p class="hero-lede">
           I'm Benji Boyce. I run a real agency, sell real software, and ship
           real client websites with Claude Code on YouTube every week.
-          <strong>Watch me work — for free.</strong> Or grab the $9 AI Empire Insider
-          and get every course, every prompt, free GoHighLevel, the whole playbook.
+          <strong>AI Empire Insider is $9/mo</strong> — every course, every prompt,
+          GoHighLevel included, the full operator stack.
         </p>
 
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="/insider/">
+          <a class="btn btn-primary" href="/checkout/insider">
             <span>Join AI Empire Insider — $9/mo</span>
             <span class="arrow" aria-hidden="true">→</span>
           </a>
-          <a class="btn btn-ghost" href="/starter-kit/">
-            <span>Watch free first</span>
+          <a class="btn btn-ghost" href="https://www.youtube.com/channel/UCT6RXVsmGY7U_LxcUFoVC0g" target="_blank" rel="noopener noreferrer">
+            <span>Watch on YouTube</span>
             <span class="arrow" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -2873,46 +2868,19 @@ export default function Page() {
       <span class="pricing-eyebrow-meta">VOL. 02 · ISSUE 03 · OPERATOR EDITION</span>
     </div>
     <h2 class="pricing-headline">
-      Two Tiers. <span class="ph-amp">No</span> Secrets.
+      One Tier. <span class="ph-amp">No</span> Secrets.
     </h2>
     <p class="pricing-lede">
-      Free is the videos. Nine dollars a month gets you the full AI Empire playbook — every course, every prompt, every script, plus a free GoHighLevel account.
+      Nine dollars a month gets you the full AI Empire playbook — every course, every prompt, every script, plus a GoHighLevel sub-account. Cancel anytime.
     </p>
   </header>
 
   <div class="pricing-grid">
 
-    <!-- ============== TIER 01: FREE ============== -->
-    <article class="tier tier--free" aria-labelledby="tier-free-name">
-      <div class="tier-eyebrow"><span>TIER 01 / FREE</span></div>
-      <h3 class="tier-name" id="tier-free-name">FREE</h3>
-
-      <div class="tier-price-row">
-        <span class="tier-price"><span class="currency">$</span>0</span>
-        <span class="tier-price-cadence">/ forever</span>
-      </div>
-
-      <p class="tier-tagline">Watch me cold-call live every Tuesday. Free.</p>
-
-      <div class="tier-divider"><span>What's included</span></div>
-      <ul class="tier-includes">
-        <li>Full library of my sales call videos</li>
-        <li>Tuesday Cold Call Live (YouTube)</li>
-        <li>Thursday Build Day Live (YouTube)</li>
-      </ul>
-
-      <div class="tier-foot">
-        <a class="tier-cta" href="/starter-kit/">
-          <span>Watch the videos</span>
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </article>
-
-    <!-- ============== TIER 02: AI EMPIRE INSIDER ============== -->
+    <!-- ============== AI EMPIRE INSIDER ============== -->
     <article class="tier tier--insider" aria-labelledby="tier-insider-name">
-      <div class="tier-ribbon">MOST POPULAR</div>
-      <div class="tier-eyebrow"><span>TIER 02 / EVERYTHING</span></div>
+      <div class="tier-ribbon">MEMBERSHIP</div>
+      <div class="tier-eyebrow"><span>AI EMPIRE INSIDER</span></div>
       <h3 class="tier-name" id="tier-insider-name">AI EMPIRE INSIDER</h3>
 
       <div class="tier-price-row">
@@ -2940,14 +2908,14 @@ export default function Page() {
       </ul>
 
       <div class="tier-foot">
-        <a class="tier-cta tier-cta--gold" href="/insider/">
+        <a class="tier-cta tier-cta--gold" href="/checkout/insider">
           <span>Join AI Empire Insider — $9/mo</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </article>
 
-    <!-- ============== TIER 03: WHOLESALE GHL — hidden until relaunched ============== -->
+    <!-- ============== WHOLESALE GHL — hidden until relaunched ============== -->
     <article class="tier tier--featured" style="display:none" aria-labelledby="tier-wholesale-name">
       <div class="tier-ribbon">FIRST 100 SEATS · WAS $99</div>
 
@@ -3013,8 +2981,8 @@ export default function Page() {
       </div>
       <div>
         <p class="courses-lede">
-          Four courses. Two 30-day challenges. Every prompt and script I run. Free GoHighLevel sub-account.
-          <em>All for nine dollars a month</em> &mdash; or free up to the videos.
+          Four courses. Two 30-day challenges. Every prompt and script I run. GoHighLevel sub-account included.
+          <em>All for nine dollars a month.</em>
         </p>
         <div class="courses-meta-row">
           <span><strong>04</strong>Courses</span>
@@ -3132,7 +3100,7 @@ export default function Page() {
           <p class="tile__body">Daily prompt + accountability nudge. Build an offer end-to-end with AI as the co-pilot.</p>
           <div class="tile__footer">
             <span class="tile__meta">30 days &middot; daily email</span>
-            <span class="tile__cta">Enroll free</span>
+            <span class="tile__cta">Insider only</span>
           </div>
         </div>
       </a>
@@ -3154,7 +3122,7 @@ export default function Page() {
           <p class="tile__body">Watch me dial live every Tuesday. Copy the cadence in real time.</p>
           <div class="tile__footer">
             <span class="tile__meta">30 days &middot; 100 dials</span>
-            <span class="tile__cta">Enroll free</span>
+            <span class="tile__cta">Insider only</span>
           </div>
         </div>
       </a>

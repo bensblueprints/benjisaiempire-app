@@ -39,11 +39,7 @@ export default async function Topbar() {
           </span>
         </Link>
 
-        <nav className="shell-topbar__center" aria-label="Pricing tiers">
-          <Link className="shell-topbar__pill" href="/#pricing">
-            Free
-          </Link>
-          <span className="shell-topbar__pill-divider" aria-hidden="true" />
+        <nav className="shell-topbar__center" aria-label="Membership">
           <Link className="shell-topbar__pill" href="/insider/">
             Insider <em>$9</em>
           </Link>

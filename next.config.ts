@@ -9,6 +9,12 @@ const config: NextConfig = {
   eslint: { ignoreDuringBuilds: isNetlify },
   typescript: { ignoreBuildErrors: isNetlify },
   reactStrictMode: true,
+  async redirects() {
+    return [
+      { source: "/starter-kit", destination: "/insider", permanent: false },
+      { source: "/starter-kit/:path*", destination: "/insider", permanent: false },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**.youtube.com" },

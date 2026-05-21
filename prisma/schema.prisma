@@ -132,6 +132,7 @@ model Download {
   title       String
   description String?
   url         String
+  copyText    String?  @db.Text
   fileType    String?
   sortOrder   Int      @default(0)
   published   Boolean  @default(true)

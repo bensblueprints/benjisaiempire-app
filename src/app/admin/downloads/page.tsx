@@ -4,7 +4,7 @@ import DeleteButton from "@/components/admin/DeleteButton";
 
 export const dynamic = "force-dynamic";
 
-const FILE_TYPES = ["PDF", "ZIP", "MP3", "MP4", "DOCX", "XLSX", "PNG", "JPG", "Other"];
+const FILE_TYPES = ["PDF", "MD", "TXT", "ZIP", "MP3", "MP4", "DOCX", "XLSX", "PNG", "JPG", "Script", "Other"];
 
 const inp: React.CSSProperties = {
   padding: "10px 14px",
@@ -49,7 +49,7 @@ export default async function AdminDownloadsPage() {
         <div style={{ fontFamily: "Anton, sans-serif", fontSize: 22, textTransform: "uppercase", color: "var(--cream)", marginBottom: 20 }}>
           Add download
         </div>
-        <form action={createDownload} style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 80px", gap: 14, alignItems: "end" }}>
+        <form id="add-download-form" action={createDownload} style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 80px", gap: 14, alignItems: "end" }}>
           <div>
             <span style={label}>Title *</span>
             <input name="title" placeholder="Master Cold Call Script" style={inp} required />
@@ -88,7 +88,7 @@ export default async function AdminDownloadsPage() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 80px", gap: 14, marginTop: 14, alignItems: "end" }}>
           <div>
             <span style={label}>Description (optional)</span>
-            <input name="description" placeholder="Short description shown below the title" style={inp} form="add-download-form" />
+            <input name="description" placeholder="Short description shown below the title" style={inp} />
           </div>
           <div style={{ display: "flex", gap: 14, alignItems: "center", paddingBottom: 2 }}>
             <label style={{ ...label, display: "flex", gap: 8, alignItems: "center", cursor: "pointer", marginBottom: 0 }}>
@@ -100,6 +100,15 @@ export default async function AdminDownloadsPage() {
               <input name="sortOrder" type="number" defaultValue={0} style={{ ...inp, width: 80 }} />
             </div>
           </div>
+        </div>
+        <div style={{ marginTop: 14 }}>
+          <span style={label}>Copyable text (optional)</span>
+          <textarea
+            name="copyText"
+            rows={6}
+            placeholder="Paste script or skill markdown for the Copy text button in the portal"
+            style={{ ...inp, resize: "vertical", minHeight: 120, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}
+          />
         </div>
       </section>
 

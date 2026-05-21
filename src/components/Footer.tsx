@@ -24,8 +24,8 @@ export default function Footer() {
             <h3 className="shell-footer__col-head">Entry Points</h3>
             <ul className="shell-footer__list">
               <li>
-                <Link className="shell-footer__link" href="/starter-kit">
-                  Starter Kit
+                <Link className="shell-footer__link" href="/insider">
+                  AI Empire Insider
                 </Link>
               </li>
               <li>

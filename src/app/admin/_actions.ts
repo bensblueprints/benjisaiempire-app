@@ -270,11 +270,13 @@ export async function createDownload(formData: FormData) {
   if (!title || !url) throw new Error("Title and URL required");
   const rawTier = s(formData.get("tier"));
   const tier = rawTier === "FREE" ? "FREE" : rawTier === "WHOLESALE" ? "WHOLESALE" : "INSIDER";
+  const copyText = s(formData.get("copyText")).trim();
   await prisma.download.create({
     data: {
       title,
       url,
       description: s(formData.get("description")) || null,
+      copyText: copyText || null,
       fileType: s(formData.get("fileType")) || null,
       sortOrder: n(formData.get("sortOrder")),
       published: b(formData.get("published")),

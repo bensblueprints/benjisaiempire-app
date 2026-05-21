@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import PortalDownloadItem from "@/components/portal/PortalDownloadItem";
 import { portalApiPath, useAirwallex } from "@/lib/payments";
 
 export const dynamic = "force-dynamic";
@@ -204,19 +205,27 @@ export default async function PortalPage({
         </aside>
       )}
 
-      {/* FREE tier callout */}
       {tier === "FREE" && (
         <aside className="portal-callout portal-callout--free">
-          <span className="portal-callout__eyebrow">Free Tier</span>
+          <span className="portal-callout__eyebrow">Membership required</span>
           <h2 className="portal-callout__title">
-            You&apos;re in the lobby. Course room is one floor up.
+            You&apos;re signed in — courses unlock with Insider.
           </h2>
           <p className="portal-callout__body">
-            Every Tuesday cold call is free, forever. But the courses, prompts,
-            scripts, and your free GoHighLevel sub-account live inside AI Empire Insider —{" "}
-            <strong>$9/mo</strong>, cancel anytime, no contract.
+            The courses, prompts, scripts, and your GoHighLevel sub-account live
+            inside AI Empire Insider — <strong>$9/mo</strong>, cancel anytime, no
+            contract. Tuesday cold calls still stream on{" "}
+            <a
+              href="https://www.youtube.com/channel/UCT6RXVsmGY7U_LxcUFoVC0g"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--gold)" }}
+            >
+              YouTube
+            </a>
+            .
           </p>
-          <Link href="/insider" className="portal-callout__cta">
+          <Link href="/checkout/insider" className="portal-callout__cta">
             Join AI Empire Insider →
           </Link>
         </aside>
@@ -311,30 +320,15 @@ export default async function PortalPage({
           </header>
           <ul className="portal-dl-list">
             {downloads.map((d) => (
-              <li key={d.id} className="portal-dl-item">
-                <div className="portal-dl-item__meta">
-                  {d.fileType && (
-                    <span className="portal-dl-item__type">{d.fileType}</span>
-                  )}
-                  <span className={`portal-dl-item__tier portal-dl-item__tier--${d.tier.toLowerCase()}`}>
-                    {d.tier}
-                  </span>
-                </div>
-                <div className="portal-dl-item__body">
-                  <div className="portal-dl-item__title">{d.title}</div>
-                  {d.description && (
-                    <div className="portal-dl-item__desc">{d.description}</div>
-                  )}
-                </div>
-                <a
-                  href={d.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="portal-dl-item__cta"
-                >
-                  Download →
-                </a>
-              </li>
+              <PortalDownloadItem
+                key={d.id}
+                title={d.title}
+                description={d.description}
+                url={d.url}
+                fileType={d.fileType}
+                tier={d.tier}
+                copyText={d.copyText}
+              />
             ))}
           </ul>
         </section>
@@ -585,12 +579,37 @@ export default async function PortalPage({
         .portal-dl-item {
           display:grid;
           grid-template-columns: 120px 1fr auto;
-          gap: 16px; align-items:center;
+          gap: 16px; align-items:start;
           padding: 14px 20px;
           background: var(--ink-2); border: 1px solid var(--line);
           transition: border-color .2s;
         }
+        .portal-dl-item--has-copy { align-items:start; }
         .portal-dl-item:hover { border-color: var(--gold); }
+        .portal-dl-item__actions {
+          display:flex; flex-direction:column; gap:8px; align-items:flex-end;
+        }
+        .portal-dl-copy { margin-top:10px; }
+        .portal-dl-copy__toggle {
+          font-family:'JetBrains Mono',monospace;
+          font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+          color:var(--gold); background:transparent; border:none; cursor:pointer;
+          padding:0; text-decoration:underline;
+        }
+        .portal-dl-copy__pre {
+          margin:10px 0 0; padding:12px 14px;
+          max-height:280px; overflow:auto;
+          background:var(--ink); border:1px solid var(--line);
+          font-family:'JetBrains Mono',monospace;
+          font-size:.72rem; line-height:1.55; color:var(--cream-soft);
+          white-space:pre-wrap; word-break:break-word;
+        }
+        .portal-dl-item__cta--copy {
+          background:transparent; border:1px solid var(--gold);
+          color:var(--gold); cursor:pointer;
+          padding:8px 14px; border-radius:2px;
+        }
+        .portal-dl-item__cta--copy:hover { background:rgba(212,175,55,.12); }
         .portal-dl-item__meta {
           display:flex; flex-direction:column; gap:5px;
         }
