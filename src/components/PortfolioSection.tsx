@@ -1,7 +1,6 @@
-// Place this section between two existing sections in src/app/page.tsx
-// Recommended slot: after the Receipts gallery (proof-section) and before the final CTA strip
-// Import: `import PortfolioSection from "@/components/PortfolioSection";`
-// Insert: `<PortfolioSection />`
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
 
 type Site = {
   name: string;
@@ -9,129 +8,40 @@ type Site = {
   domain: string;
   tagline: string;
   category: string;
+  slug: string;
 };
 
 const SITES: Site[] = [
   {
-    name: "Lees Ferry On The Fly",
-    url: "https://leesferry.advancedmarketing.co",
-    domain: "leesferry.advancedmarketing.co",
-    tagline: "Arizona trout water, booked from the boat ramp.",
+    name: "FDH Machinery",
+    url: "https://fdh-installations.com",
+    domain: "fdh-installations.com",
+    tagline:
+      "Industrial conveyor and sorter installs — trusted by Amazon, Walmart, and Fortune 500 DCs.",
+    category: "B2B · INDUSTRIAL",
+    slug: "fdh-machinery",
+  },
+  {
+    name: "SML Wicked Striper",
+    url: "https://smlwickedstriper.com",
+    domain: "smlwickedstriper.com",
+    tagline:
+      "Captain Tommy Moore — striper charters on Smith Mountain Lake, gear and bookings included.",
     category: "OUTDOOR · GUIDE",
+    slug: "sml-wicked-striper",
   },
   {
-    name: "Cave Run Muskie",
-    url: "https://kymuskie.advancedmarketing.co",
-    domain: "kymuskie.advancedmarketing.co",
-    tagline: "Kentucky's fish of ten thousand casts.",
-    category: "OUTDOOR · GUIDE",
-  },
-  {
-    name: "Rainy Lake Fish Guiding",
-    url: "https://rainylake.advancedmarketing.co",
-    domain: "rainylake.advancedmarketing.co",
-    tagline: "Walleye and smallies on the border water.",
-    category: "OUTDOOR · GUIDE",
-  },
-  {
-    name: "Ten 2 Ten Stereo",
-    url: "https://ten2tenstereo.advancedmarketing.co",
-    domain: "ten2tenstereo.advancedmarketing.co",
-    tagline: "Car audio shop with subs that move air.",
-    category: "RETAIL · LOCAL",
-  },
-  {
-    name: "The Beach Bowl",
-    url: "https://beachbowl.advancedmarketing.co",
-    domain: "beachbowl.advancedmarketing.co",
-    tagline: "Bowling alley with a brand identity worth keeping.",
-    category: "RETAIL · LOCAL",
-  },
-  {
-    name: "Got Beef",
-    url: "https://gotbeef.us",
-    domain: "gotbeef.us",
-    tagline: "Direct-to-door beef. .us TLD, full identity build.",
-    category: "RETAIL · DTC",
-  },
-  {
-    name: "DED Gaming",
-    url: "https://ded.advancedmarketing.co",
-    domain: "ded.advancedmarketing.co",
-    tagline: "Competitive gaming brand, dressed to kill.",
-    category: "GAMING · BRAND",
-  },
-  {
-    name: "Game On Arcade",
-    url: "https://gameon.advancedmarketing.co",
-    domain: "gameon.advancedmarketing.co",
-    tagline: "Arcade nostalgia, redrawn for 2026.",
-    category: "GAMING · ARCADE",
-  },
-  {
-    name: "StarFighters Arcade",
-    url: "https://starfighters.advancedmarketing.co",
-    domain: "starfighters.advancedmarketing.co",
-    tagline: "Quarter-eating cabinet rooms, on the web.",
-    category: "GAMING · ARCADE",
-  },
-  {
-    name: "PixelJoy",
-    url: "https://pixeljoy.advancedmarketing.co",
-    domain: "pixeljoy.advancedmarketing.co",
-    tagline: "Arcade-rental shop dressed for the kid in everyone.",
-    category: "GAMING · RENTAL",
-  },
-  {
-    name: "DropCards",
-    url: "https://dropcards.advancedmarketing.co",
-    domain: "dropcards.advancedmarketing.co",
-    tagline: "Business-card SaaS, contact in two taps.",
-    category: "SAAS · TOOL",
-  },
-  {
-    name: "Cold Call Academy",
-    url: "https://coldcallacademy.com",
-    domain: "coldcallacademy.com",
-    tagline: "The course, the scripts, the receipts.",
-    category: "EDU · COURSE",
-  },
-  {
-    name: "Kilowatt",
-    url: "https://kilo.advancedmarketing.co",
-    domain: "kilo.advancedmarketing.co",
-    tagline: "Energy startup with a power-grid swagger.",
-    category: "STARTUP · ENERGY",
-  },
-  {
-    name: "Shopify Photo Gen",
-    url: "https://photos.advancedmarketing.co",
-    domain: "photos.advancedmarketing.co",
-    tagline: "AI product photos for stores that ship today.",
-    category: "SAAS · AGENCY TOOL",
-  },
-  {
-    name: "PR Agent",
-    url: "https://press.advancedmarketing.co",
-    domain: "press.advancedmarketing.co",
-    tagline: "Automated PR distribution, hands-off.",
-    category: "SAAS · AGENCY TOOL",
-  },
-  {
-    name: "Domain Checker",
-    url: "https://domains.advancedmarketing.co",
-    domain: "domains.advancedmarketing.co",
-    tagline: "The domain finder that actually finds them.",
-    category: "SAAS · AGENCY TOOL",
-  },
-  {
-    name: "GMaps Image Scraper",
-    url: "https://maps.advancedmarketing.co",
-    domain: "maps.advancedmarketing.co",
-    tagline: "Local lead-gen, scraped clean off the map.",
-    category: "SAAS · LEAD GEN",
+    name: "Peptide.best",
+    url: "https://peptide.best",
+    domain: "peptide.best",
+    tagline:
+      "Multi-brand peptide marketplace — COA-backed batches, crypto checkout, research hub.",
+    category: "E-COMMERCE · MARKETPLACE",
+    slug: "peptide-best",
   },
 ];
+
+type LightboxSite = Site & { thumbSrc: string; fullSrc: string };
 
 const CSS = `
 .portfolio-section{
@@ -164,7 +74,6 @@ const CSS = `
   padding:0 32px;
 }
 
-/* ── Masthead ─────────────────────────────────────────────────── */
 .portfolio-section .pf-masthead{
   display:grid;
   grid-template-columns: 1fr;
@@ -227,7 +136,6 @@ const CSS = `
   color:var(--cream);
 }
 
-/* gold rule between header and grid */
 .portfolio-section .pf-rule{
   display:flex; align-items:center; gap:16px;
   margin-bottom:48px;
@@ -243,16 +151,14 @@ const CSS = `
   background:linear-gradient(270deg, transparent 0%, var(--line) 100%);
 }
 
-/* ── Grid ─────────────────────────────────────────────────────── */
 .portfolio-section .pf-grid{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:40px 28px;
 }
 
 .portfolio-section .pf-card{
   display:flex; flex-direction:column;
-  text-decoration:none;
   color:inherit;
   position:relative;
   isolation:isolate;
@@ -268,6 +174,17 @@ const CSS = `
   content:""; flex:1; height:1px; background:var(--line);
 }
 
+.portfolio-section .pf-preview{
+  display:block;
+  width:100%;
+  padding:0;
+  border:none;
+  cursor:zoom-in;
+  text-align:left;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+}
 .portfolio-section .pf-frame{
   position:relative;
   width:100%;
@@ -276,57 +193,47 @@ const CSS = `
   background:var(--ink-2);
   border:1px solid rgba(212,175,55,.22);
   box-shadow: 0 1px 0 rgba(244,236,216,.04) inset;
-  transition:border-color .5s var(--ease), box-shadow .5s var(--ease), transform .8s var(--ease);
-}
-.portfolio-section .pf-frame::before{
-  /* fallback brand-name tile, sits behind the <img> */
-  content: attr(data-fallback);
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Anton',sans-serif;
-  font-size:clamp(22px, 3vw, 36px);
-  text-transform:uppercase;
-  letter-spacing:-.01em;
-  color:var(--cream-soft);
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(212,175,55,.10), transparent 60%),
-    var(--ink-2);
-  text-align:center;
-  padding:20px;
-  z-index:0;
+  transition:border-color .5s var(--ease), box-shadow .5s var(--ease);
 }
 .portfolio-section .pf-frame img{
-  position:relative; z-index:1;
-  width:100%; height:100%;
-  object-fit:cover; object-position:top center;
-  transform:scale(1);
-  transition:transform .8s var(--ease), filter .8s var(--ease);
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
   filter:saturate(1.05) contrast(1.02);
-  background:var(--ink-2);
+  transition:transform .8s var(--ease), filter .8s var(--ease);
 }
-.portfolio-section .pf-frame::after{
-  /* gold-tint frame on hover */
-  content:"";
-  position:absolute; inset:0;
-  border:1px solid transparent;
-  pointer-events:none;
+.portfolio-section .pf-zoom-hint{
+  position:absolute;
+  right:12px; bottom:12px;
   z-index:2;
-  transition:border-color .5s var(--ease);
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--cream);
+  background:rgba(11,11,12,.72);
+  border:1px solid rgba(212,175,55,.35);
+  padding:6px 10px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .35s var(--ease);
 }
-.portfolio-section .pf-card:hover .pf-frame img,
-.portfolio-section .pf-card:focus-visible .pf-frame img{
-  transform:scale(1.04);
-  filter:saturate(1.15) contrast(1.06);
-}
-.portfolio-section .pf-card:hover .pf-frame,
-.portfolio-section .pf-card:focus-visible .pf-frame{
+.portfolio-section .pf-preview:hover .pf-frame,
+.portfolio-section .pf-preview:focus-visible .pf-frame{
   border-color: rgba(212,175,55,.55);
   box-shadow: 0 18px 60px -28px rgba(212,175,55,.45),
               0 1px 0 rgba(244,236,216,.06) inset;
 }
-.portfolio-section .pf-card:hover .pf-frame::after,
-.portfolio-section .pf-card:focus-visible .pf-frame::after{
-  border-color: rgba(245,208,97,.35);
+.portfolio-section .pf-preview:hover .pf-frame img,
+.portfolio-section .pf-preview:focus-visible .pf-frame img{
+  transform:scale(1.03);
+  filter:saturate(1.12) contrast(1.05);
+}
+.portfolio-section .pf-preview:hover .pf-zoom-hint,
+.portfolio-section .pf-preview:focus-visible .pf-zoom-hint{
+  opacity:1;
 }
 
 .portfolio-section .pf-meta{
@@ -338,6 +245,10 @@ const CSS = `
   font-size:10px; letter-spacing:.3em; text-transform:uppercase;
   color:var(--cream-soft);
 }
+.portfolio-section .pf-name-link{
+  text-decoration:none;
+  color:inherit;
+}
 .portfolio-section .pf-name{
   font-family:'Anton',sans-serif;
   font-weight:400;
@@ -346,9 +257,11 @@ const CSS = `
   letter-spacing:-.005em;
   text-transform:uppercase;
   color:var(--cream);
+  margin:0;
+  transition:color .35s var(--ease);
 }
-.portfolio-section .pf-card:hover .pf-name,
-.portfolio-section .pf-card:focus-visible .pf-name{
+.portfolio-section .pf-name-link:hover .pf-name,
+.portfolio-section .pf-name-link:focus-visible .pf-name{
   color:var(--gold-bright);
 }
 .portfolio-section .pf-tag{
@@ -359,34 +272,32 @@ const CSS = `
   line-height:1.35;
   color:var(--cream-soft);
   max-width:34ch;
+  margin:0;
 }
 .portfolio-section .pf-domain{
   margin-top:6px;
   font-family:'JetBrains Mono',monospace;
   font-size:11px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--gold);
-  display:flex; align-items:center; gap:8px;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  display:inline-flex; align-items:center; gap:8px;
+  text-decoration:none;
   max-width:100%;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .portfolio-section .pf-domain::before{
   content:"↗";
-  display:inline-block;
-  font-family:'JetBrains Mono',monospace;
-  color:var(--gold);
+  flex-shrink:0;
   transform:translateY(-1px);
   transition:transform .4s var(--ease);
-  flex-shrink:0;
 }
-.portfolio-section .pf-card:hover .pf-domain::before,
-.portfolio-section .pf-card:focus-visible .pf-domain::before{
+.portfolio-section .pf-domain:hover::before,
+.portfolio-section .pf-domain:focus-visible::before{
   transform:translate(2px,-3px);
 }
 .portfolio-section .pf-domain span{
   overflow:hidden; text-overflow:ellipsis;
 }
 
-/* ── Closing rule + footnote ─────────────────────────────────── */
 .portfolio-section .pf-foot{
   margin-top:72px;
   padding-top:28px;
@@ -413,13 +324,106 @@ const CSS = `
   color:var(--cream-soft);
 }
 
-/* ── Responsive ──────────────────────────────────────────────── */
+/* Lightbox */
+.pf-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  background:rgba(8,8,9,.94);
+  backdrop-filter:blur(8px);
+  animation:pfLbIn .25s ease;
+}
+@keyframes pfLbIn{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+.pf-lightbox__bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 20px;
+  border-bottom:1px solid rgba(212,175,55,.2);
+  flex-shrink:0;
+}
+.pf-lightbox__title{
+  font-family:'Anton',sans-serif;
+  font-size:18px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--cream);
+}
+.pf-lightbox__actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.pf-lightbox__btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cream);
+  background:rgba(244,236,216,.08);
+  border:1px solid rgba(212,175,55,.35);
+  padding:8px 12px;
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease;
+}
+.pf-lightbox__btn:hover,
+.pf-lightbox__btn:focus-visible{
+  background:rgba(212,175,55,.15);
+  border-color:var(--gold);
+}
+.pf-lightbox__btn--close{
+  color:var(--gold-bright);
+}
+.pf-lightbox__stage{
+  flex:1;
+  min-height:0;
+  overflow:auto;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:24px;
+  cursor:grab;
+}
+.pf-lightbox__stage.is-dragging{ cursor:grabbing; }
+.pf-lightbox__img-wrap{
+  transform-origin:center center;
+  transition:transform .12s ease-out;
+  will-change:transform;
+}
+.pf-lightbox__img{
+  display:block;
+  max-width:none;
+  width:auto;
+  height:auto;
+  max-height:none;
+  border:1px solid rgba(212,175,55,.25);
+  box-shadow:0 24px 80px rgba(0,0,0,.55);
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.pf-lightbox__hint{
+  flex-shrink:0;
+  text-align:center;
+  padding:10px 16px 18px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--cream-soft);
+}
+
 @media (max-width: 900px){
   .portfolio-section{ padding:88px 0 100px; }
   .portfolio-section .pf-wrap{ padding:0 22px; }
   .portfolio-section .pf-masthead{ padding-bottom:36px; margin-bottom:44px; }
   .portfolio-section .pf-grid{
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap:36px 22px;
   }
 }
@@ -435,17 +439,61 @@ const CSS = `
 }
 
 @media (prefers-reduced-motion: reduce){
-  .portfolio-section .pf-frame,
-  .portfolio-section .pf-frame img{
+  .portfolio-section .pf-frame img,
+  .pf-lightbox__img-wrap{
     transition:none !important;
-    transform:none !important;
   }
+  .pf-lightbox{ animation:none; }
 }
 `;
+
+function portfolioSrc(slug: string, variant: "thumb" | "full") {
+  return `/images/portfolio/${slug}-${variant}.webp`;
+}
 
 export default function PortfolioSection() {
   const sites = SITES;
   const total = sites.length;
+  const [lightbox, setLightbox] = useState<LightboxSite | null>(null);
+  const [zoom, setZoom] = useState(1);
+
+  const openLightbox = useCallback((site: Site) => {
+    setLightbox({
+      ...site,
+      thumbSrc: portfolioSrc(site.slug, "thumb"),
+      fullSrc: portfolioSrc(site.slug, "full"),
+    });
+    setZoom(1);
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightbox(null);
+    setZoom(1);
+  }, []);
+
+  const zoomBy = useCallback((delta: number) => {
+    setZoom((z) => Math.min(4, Math.max(0.5, Math.round((z + delta) * 100) / 100)));
+  }, []);
+
+  useEffect(() => {
+    if (!lightbox) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "+" || e.key === "=") zoomBy(0.25);
+      if (e.key === "-") zoomBy(-0.25);
+      if (e.key === "0") setZoom(1);
+    };
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox, closeLightbox, zoomBy]);
 
   return (
     <section
@@ -469,10 +517,9 @@ export default function PortfolioSection() {
           </h2>
 
           <p className="pf-lede">
-            Every site below is live right now. <strong>Hosted on our own
-            Coolify box, billed at $7 a month, deployed in an afternoon.</strong>
-            {" "}Click any tile to open the real thing in a new tab — no demos,
-            no Figma, no &ldquo;coming soon.&rdquo;
+            Every site below is live right now. <strong>Click a preview to zoom
+            the full build</strong> — WebP thumbnails load fast; the hi-res shot
+            opens on click. Title or domain opens the live site in a new tab.
           </p>
         </header>
 
@@ -485,41 +532,54 @@ export default function PortfolioSection() {
 
         <div className="pf-grid">
           {sites.map((site, i) => {
-            const screenshot = `https://image.thum.io/get/width/800/crop/500/${site.url}`;
+            const thumbSrc = portfolioSrc(site.slug, "thumb");
             const num = String(i + 1).padStart(2, "0");
             return (
-              <a
-                key={site.url}
-                className="pf-card"
-                href={site.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${site.name} — open ${site.domain} in a new tab`}
-              >
+              <article key={site.url} className="pf-card">
                 <div className="pf-card-no">
                   <span>№ {num}</span>
                 </div>
 
-                <div className="pf-frame" data-fallback={site.name}>
-                  <img
-                    src={screenshot}
-                    alt={`${site.name} — live screenshot`}
-                    loading="lazy"
-                    decoding="async"
-                    width={800}
-                    height={500}
-                  />
-                </div>
+                <button
+                  type="button"
+                  className="pf-preview"
+                  onClick={() => openLightbox(site)}
+                  aria-label={`${site.name} — zoom full preview`}
+                >
+                  <div className="pf-frame">
+                    <img
+                      src={thumbSrc}
+                      alt={`${site.name} — site preview`}
+                      loading="lazy"
+                      decoding="async"
+                      width={900}
+                      height={563}
+                    />
+                    <span className="pf-zoom-hint">Click to zoom</span>
+                  </div>
+                </button>
 
                 <div className="pf-meta">
                   <div className="pf-cat">{site.category}</div>
-                  <h3 className="pf-name">{site.name}</h3>
+                  <a
+                    className="pf-name-link"
+                    href={site.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3 className="pf-name">{site.name}</h3>
+                  </a>
                   <p className="pf-tag">{site.tagline}</p>
-                  <div className="pf-domain" aria-hidden="true">
+                  <a
+                    className="pf-domain"
+                    href={site.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span>{site.domain}</span>
-                  </div>
+                  </a>
                 </div>
-              </a>
+              </article>
             );
           })}
         </div>
@@ -532,6 +592,90 @@ export default function PortfolioSection() {
           <em>Yours could ship by Friday.</em>
         </div>
       </div>
+
+      {lightbox ? (
+        <div
+          className="pf-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${lightbox.name} preview`}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeLightbox();
+          }}
+        >
+          <div className="pf-lightbox__bar">
+            <span className="pf-lightbox__title">{lightbox.name}</span>
+            <div className="pf-lightbox__actions">
+              <button
+                type="button"
+                className="pf-lightbox__btn"
+                onClick={() => zoomBy(-0.25)}
+                aria-label="Zoom out"
+              >
+                −
+              </button>
+              <button
+                type="button"
+                className="pf-lightbox__btn"
+                onClick={() => setZoom(1)}
+                aria-label="Reset zoom"
+              >
+                {Math.round(zoom * 100)}%
+              </button>
+              <button
+                type="button"
+                className="pf-lightbox__btn"
+                onClick={() => zoomBy(0.25)}
+                aria-label="Zoom in"
+              >
+                +
+              </button>
+              <a
+                className="pf-lightbox__btn"
+                href={lightbox.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open site
+              </a>
+              <button
+                type="button"
+                className="pf-lightbox__btn pf-lightbox__btn--close"
+                onClick={closeLightbox}
+                aria-label="Close preview"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+
+          <div
+            className="pf-lightbox__stage"
+            onWheel={(e) => {
+              e.preventDefault();
+              zoomBy(e.deltaY < 0 ? 0.15 : -0.15);
+            }}
+          >
+            <div
+              className="pf-lightbox__img-wrap"
+              style={{ transform: `scale(${zoom})` }}
+            >
+              {/* Full WebP loads only when lightbox opens */}
+              <img
+                className="pf-lightbox__img"
+                src={lightbox.fullSrc}
+                alt={`${lightbox.name} — full preview`}
+                decoding="async"
+                draggable={false}
+              />
+            </div>
+          </div>
+
+          <p className="pf-lightbox__hint">
+            Scroll or use + / − to zoom · Esc to close
+          </p>
+        </div>
+      ) : null}
     </section>
   );
 }
