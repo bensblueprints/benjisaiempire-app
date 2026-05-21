@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Topbar from "@/components/Topbar";
 
 export const metadata: Metadata = {
   title: "Join AI Empire Insider — Checkout",
@@ -16,20 +17,7 @@ export default async function InsiderCheckoutPage({
 
   return (
     <>
-      <header className="shell-topbar shell-topbar--bare" data-shell="topbar">
-        <div className="shell-topbar__inner" style={{ justifyContent: "center" }}>
-          <Link
-            href="/insider/"
-            className="shell-topbar__brand"
-            aria-label="Back to AI Empire Insider"
-            style={{ textAlign: "center" }}
-          >
-            <span className="shell-topbar__brand-name">Benji&apos;s AI Empire</span>
-            <span className="shell-topbar__brand-sub">AI Empire Insider · $9/mo</span>
-          </Link>
-        </div>
-      </header>
-
+      <Topbar />
       <main id="main" className="auth-shell">
         <section className="auth-card">
           <span className="auth-eyebrow">Checkout · $9 / month</span>
@@ -66,7 +54,7 @@ export default async function InsiderCheckoutPage({
 
           <p className="auth-fineprint">
             Already a member?{" "}
-            <Link href="/login" style={{ color: "var(--gold)" }}>
+            <Link href="/login?callbackUrl=/portal" style={{ color: "var(--gold)" }}>
               Sign in
             </Link>{" "}
             instead.

@@ -2357,7 +2357,6 @@ export default function Page() {
     .shell-topbar__inner { grid-template-columns: auto 1fr auto; }
   }
   @media (max-width: 560px) {
-    .shell-topbar__login { display: none; }
     .shell-topbar__brand-sub { display: none; }
     .shell-topbar__cta { padding: 9px 12px; font-size: 10px; }
   }

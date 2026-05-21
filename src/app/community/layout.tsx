@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import Topbar from "@/components/Topbar";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +11,7 @@ export default async function CommunityLayout({ children }: { children: React.Re
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
-      {/* Top bar */}
+      <Topbar />
       <header style={{
         borderBottom: "1px solid var(--line)",
         background: "var(--ink-2)",

@@ -57,8 +57,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="shell-footer__link" href="/login">
-                  Member Login
+                <Link className="shell-footer__link" href="/login?callbackUrl=/portal">
+                  Portal Login
                 </Link>
               </li>
             </ul>

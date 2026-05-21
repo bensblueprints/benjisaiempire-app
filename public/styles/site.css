@@ -209,11 +209,12 @@
 .shell-topbar__cta:hover::after {
     transform: translateX(3px);
   }
-.shell-topbar__center { display: none; }
-.shell-topbar__inner { grid-template-columns: auto 1fr auto; }
-.shell-topbar__login { display: none; }
-.shell-topbar__brand-sub { display: none; }
-.shell-topbar__cta { padding: 9px 12px; font-size: 10px; }
+@media (max-width: 900px) {
+  .shell-topbar__center { display: none; }
+  .shell-topbar__inner { grid-template-columns: auto 1fr auto; }
+  .shell-topbar__brand-sub { display: none; }
+  .shell-topbar__cta { padding: 9px 12px; font-size: 10px; }
+}
 .shell-marquee {
     position: relative;
     width: 100%;

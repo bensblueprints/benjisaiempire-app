@@ -1,8 +1,8 @@
 // Magic-link login. Server page wrapping a tiny client form.
 // No nav, no pricing, no pitch — this is auth.
 import type { Metadata } from "next";
-import Link from "next/link";
 import { signIn } from "@/lib/auth";
+import Topbar from "@/components/Topbar";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
@@ -28,23 +28,7 @@ export default async function LoginPage({
 
   return (
     <>
-      {/* Minimal masthead — logo only, no member nav */}
-      <header className="shell-topbar shell-topbar--bare" data-shell="topbar">
-        <div className="shell-topbar__inner" style={{ justifyContent: "center" }}>
-          <Link
-            href="/"
-            className="shell-topbar__brand"
-            aria-label="Benji's AI Empire — home"
-            style={{ textAlign: "center" }}
-          >
-            <span className="shell-topbar__brand-name">Benji&apos;s AI Empire</span>
-            <span className="shell-topbar__brand-sub">
-              Issue 01 &nbsp;·&nbsp; May 2026
-            </span>
-          </Link>
-        </div>
-      </header>
-
+      <Topbar />
       <main id="main" className="auth-shell">
         <section className="auth-card">
           <span className="auth-eyebrow">Member Access · Magic Link</span>

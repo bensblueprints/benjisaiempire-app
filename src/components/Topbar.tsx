@@ -52,8 +52,8 @@ export default async function Topbar() {
         <div className="shell-topbar__right">
           {!user ? (
             <>
-              <Link className="shell-topbar__login" href="/login">
-                Member Login
+              <Link className="shell-topbar__login" href="/login?callbackUrl=/portal">
+                Portal Login
               </Link>
               <Link className="shell-topbar__cta" href="/#pricing">
                 See Pricing

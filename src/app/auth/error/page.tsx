@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Topbar from "@/components/Topbar";
 
 export const metadata: Metadata = {
   title: "Sign-In Error",
@@ -36,22 +37,7 @@ export default async function AuthErrorPage({
 
   return (
     <>
-      <header className="shell-topbar shell-topbar--bare" data-shell="topbar">
-        <div className="shell-topbar__inner" style={{ justifyContent: "center" }}>
-          <Link
-            href="/"
-            className="shell-topbar__brand"
-            aria-label="Benji's AI Empire — home"
-            style={{ textAlign: "center" }}
-          >
-            <span className="shell-topbar__brand-name">Benji&apos;s AI Empire</span>
-            <span className="shell-topbar__brand-sub">
-              Issue 01 &nbsp;·&nbsp; May 2026
-            </span>
-          </Link>
-        </div>
-      </header>
-
+      <Topbar />
       <main id="main" className="err-shell">
         <section className="err-card">
           <span className="err-eyebrow">Sign-In · Failed</span>
@@ -62,7 +48,7 @@ export default async function AuthErrorPage({
           />
 
           <div className="err-actions">
-            <Link href="/login" className="err-cta">
+            <Link href="/login?callbackUrl=/portal" className="err-cta">
               Send a fresh link →
             </Link>
             <Link href="/" className="err-ghost">

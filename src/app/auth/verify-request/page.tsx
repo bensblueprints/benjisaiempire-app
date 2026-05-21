@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Topbar from "@/components/Topbar";
 
 export const metadata: Metadata = {
   title: "Check Your Inbox",
@@ -9,22 +10,7 @@ export const metadata: Metadata = {
 export default async function VerifyRequestPage() {
   return (
     <>
-      <header className="shell-topbar shell-topbar--bare" data-shell="topbar">
-        <div className="shell-topbar__inner" style={{ justifyContent: "center" }}>
-          <Link
-            href="/"
-            className="shell-topbar__brand"
-            aria-label="Benji's AI Empire — home"
-            style={{ textAlign: "center" }}
-          >
-            <span className="shell-topbar__brand-name">Benji&apos;s AI Empire</span>
-            <span className="shell-topbar__brand-sub">
-              Issue 01 &nbsp;·&nbsp; May 2026
-            </span>
-          </Link>
-        </div>
-      </header>
-
+      <Topbar />
       <main id="main" className="vr-shell">
         <section className="vr-card">
           <span className="vr-eyebrow">Magic Link Dispatched</span>
@@ -53,7 +39,7 @@ export default async function VerifyRequestPage() {
 
           <p className="vr-fineprint">
             Didn&apos;t get it?{" "}
-            <Link href="/login" className="vr-fineprint__link">
+            <Link href="/login?callbackUrl=/portal" className="vr-fineprint__link">
               Send another →
             </Link>{" "}
             &nbsp;·&nbsp; Check spam &amp; promotions tabs.
