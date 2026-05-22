@@ -1282,6 +1282,10 @@ export default function Page() {
     .tile-03 { grid-column: 1 / span 12; }      /* full-width spread */
     .tile-04 { grid-column: 2 / span 4; }
     .tile-05 { grid-column: 7 / span 6; }       /* wide */
+    .courses-soon-head { grid-column: 1 / -1; }
+    .tile-07 { grid-column: 1 / span 4; }
+    .tile-08 { grid-column: 5 / span 4; }
+    .tile-09 { grid-column: 9 / span 4; }
     .tile-06 { grid-column: 1 / span 12; }      /* atmospheric finale */
   }
 
@@ -1298,15 +1302,21 @@ export default function Page() {
     text-decoration: none;
     color: inherit;
     display: block;
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 800ms cubic-bezier(.22,1,.36,1) calc(var(--i, 0) * 80ms),
-      transform 800ms cubic-bezier(.22,1,.36,1) calc(var(--i, 0) * 80ms);
-  }
-  .tile.is-in {
     opacity: 1;
     transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tile:not(.is-in) {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 800ms cubic-bezier(.22,1,.36,1) calc(var(--i, 0) * 80ms),
+        transform 800ms cubic-bezier(.22,1,.36,1) calc(var(--i, 0) * 80ms);
+    }
+    .tile.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* preserve the editorial offsets after enter animation */
@@ -1350,6 +1360,69 @@ export default function Page() {
   .tile-04 .tile__numeral { top: -42px; left: -18px; }
   .tile-05 .tile__numeral { top: -42px; right: -18px; left: auto; }
   .tile-06 .tile__numeral { top: -88px; left: 2%; font-size: clamp(180px, 26vw, 380px); }
+  .tile-07 .tile__numeral { top: -36px; left: -12px; font-size: clamp(100px, 12vw, 160px); }
+  .tile-08 .tile__numeral { top: -36px; right: -12px; left: auto; font-size: clamp(100px, 12vw, 160px); }
+  .tile-09 .tile__numeral { top: -36px; left: -12px; font-size: clamp(100px, 12vw, 160px); }
+
+  .courses-soon-head {
+    margin: clamp(24px, 4vw, 48px) 0 0;
+    padding-top: clamp(32px, 5vw, 56px);
+    border-top: 1px solid var(--line);
+  }
+  .courses-soon-head__eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 10px;
+  }
+  .courses-soon-head__title {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 48px);
+    text-transform: uppercase;
+    color: var(--cream);
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  .tile--soon {
+    cursor: default;
+    pointer-events: none;
+  }
+  .tile--soon .tile__photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11,11,12,.15) 0%, rgba(11,11,12,.72) 100%);
+    z-index: 2;
+  }
+  .tile--soon .tile__soon-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 3;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 8px 12px;
+    border-radius: 2px;
+  }
+  .tile--soon .tile__cta {
+    color: var(--cream-soft);
+    border-color: var(--line);
+  }
+  .tile--soon .tile__cta::after { display: none; }
+  .tile--soon:hover .tile__title { color: var(--cream); }
+  .tile--soon:hover .tile__photo img { transform: none; filter: saturate(0.85) contrast(1.02); }
+
+  .tile-07 .tile__photo { aspect-ratio: 4 / 5; }
+  .tile-08 .tile__photo { aspect-ratio: 4 / 5; }
+  .tile-09 .tile__photo { aspect-ratio: 4 / 5; }
 
   /* ────────────────────────────────────────────── PHOTO ────────────────────────────────────────────── */
   .tile__photo {
@@ -1981,15 +2054,11 @@ export default function Page() {
   .proof-section .ps-stats.is-inview .ps-stat[data-counter='28'] .ps-stat-num .ps-value{
     animation: ps-up-28 1800ms cubic-bezier(.22,1,.36,1) forwards;
   }
-  .proof-section .ps-stats.is-inview .ps-stat[data-counter='31745'] .ps-stat-num .ps-value{
-    animation: ps-up-31745 1800ms cubic-bezier(.22,1,.36,1) forwards;
-  }
-  .proof-section .ps-stats.is-inview .ps-stat[data-counter='110'] .ps-stat-num .ps-value{
-    animation: ps-up-110 1800ms cubic-bezier(.22,1,.36,1) forwards;
+  .proof-section .ps-stats.is-inview .ps-stat[data-counter='250'] .ps-stat-num .ps-value{
+    animation: ps-up-250 1800ms cubic-bezier(.22,1,.36,1) forwards;
   }
   @keyframes ps-up-28 { from{--pscount:0;} to{--pscount:28;} }
-  @keyframes ps-up-31745 { from{--pscount:0;} to{--pscount:31745;} }
-  @keyframes ps-up-110 { from{--pscount:0;} to{--pscount:110;} }
+  @keyframes ps-up-250 { from{--pscount:0;} to{--pscount:250;} }
 
   /* ──── RECEIPTS GALLERY ────────────────────────────────────────────────────────────────────────────── */
   .proof-section .ps-receipts-head{
@@ -2098,7 +2167,11 @@ export default function Page() {
   .proof-section .ps-tile.t5 { grid-column: span 4; grid-row: span 4; }   /* bangkok mural */
   .proof-section .ps-tile.t6 { grid-column: span 4; grid-row: span 4; }   /* dev rig */
 
-  .proof-section .ps-tile.t1 .ps-frame{ aspect-ratio:auto; }
+  .proof-section .ps-tile.t1 .ps-frame{ aspect-ratio: 16 / 10; }
+  .proof-section .ps-tile.t1 .ps-frame img{
+    object-fit: cover;
+    object-position: center center;
+  }
   .proof-section .ps-tile.t2 .ps-frame{ aspect-ratio:auto; }
 
   /* fade stagger */
@@ -2181,8 +2254,7 @@ export default function Page() {
       animation:none !important;
     }
     .proof-section .ps-stat[data-counter='28'] .ps-value::after{ content:"2.8"; }
-    .proof-section .ps-stat[data-counter='31745'] .ps-value::after{ content:"31,745"; }
-    .proof-section .ps-stat[data-counter='110'] .ps-value::after{ content:"110"; }
+    .proof-section .ps-stat[data-counter='250'] .ps-value::after{ content:"250"; }
   }
 
 
@@ -3273,17 +3345,17 @@ export default function Page() {
       </div>
       <div class="ps-stat-label">Shopify <b>·</b> All Stores <b>·</b> 90 Days</div>
     </div>
-    <div class="ps-stat" data-counter="31745">
+    <div class="ps-stat" data-counter="250">
       <div class="ps-stat-num">
-        <span class="ps-value">31,745</span>
+        <span class="ps-value">250</span><span class="ps-suffix">K+</span>
       </div>
-      <div class="ps-stat-label">Orders <b>·</b> Same 90 Days</div>
+      <div class="ps-stat-label">Shopify Orders <b>·</b> All Stores</div>
     </div>
-    <div class="ps-stat" data-counter="110">
+    <div class="ps-stat">
       <div class="ps-stat-num">
-        <span class="ps-value">110</span><span class="ps-suffix">K</span>
+        <span class="ps-value">1</span><span class="ps-suffix">B+</span>
       </div>
-      <div class="ps-stat-label">Reddit AMA Views <b>·</b> Top 7 All-Time</div>
+      <div class="ps-stat-label">Reddit Views <b>·</b> All-Time Reach</div>
     </div>
   </div>
 
@@ -3300,9 +3372,9 @@ export default function Page() {
 
     <figure class="ps-tile t1">
       <div class="ps-frame">
-        <img src="/images/proof-shopify-2-8m.jpg?v=5" alt="Shopify dashboard showing $2.8M in 90 days across 31,745 orders" loading="lazy">
+        <img src="/images/proof-shopify-2-8m.jpg?v=6" alt="Shopify dashboard showing $2.8M revenue and 250K+ orders across stores" loading="lazy">
       </div>
-      <figcaption class="ps-cap">$2.8M &middot; 31,745 Orders &middot; 90 Days</figcaption>
+      <figcaption class="ps-cap">$2.8M &middot; 250K+ Orders &middot; Shopify</figcaption>
     </figure>
 
     <figure class="ps-tile t2">

@@ -4,8 +4,8 @@
 
 const ITEMS: { label: string; tone?: "accent" | "brand" }[] = [
   { label: "$2.8M All-Stores", tone: "accent" },
-  { label: "110K Reddit AMA", tone: "accent" },
-  { label: "31,745 Orders / 90 Days", tone: "accent" },
+  { label: "1B+ Reddit Views", tone: "accent" },
+  { label: "250K+ Shopify Orders", tone: "accent" },
   { label: "Forbes", tone: "brand" },
   { label: "Yahoo Finance", tone: "brand" },
   { label: "Nasdaq", tone: "brand" },
