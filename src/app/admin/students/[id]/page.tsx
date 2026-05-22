@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import AdminDeleteUser from "@/components/admin/AdminDeleteUser";
 import { setUserRoleFromForm, setUserTierFromForm } from "../../_actions";
 
 export const dynamic = "force-dynamic";
@@ -40,6 +42,7 @@ const dd: React.CSSProperties = {
 
 export default async function StudentDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const session = await auth();
 
   const user = await prisma.user.findUnique({ where: { id } });
   if (!user) notFound();
@@ -275,6 +278,7 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
                 <option value="FREE">FREE</option>
                 <option value="INSIDER">INSIDER</option>
                 <option value="WHOLESALE">WHOLESALE</option>
+                <option value="DONE_WITH_YOU">DONE_WITH_YOU</option>
               </select>
               <button
                 type="submit"
@@ -333,6 +337,14 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
           )}
         </div>
       </section>
+
+      {session?.user?.id ? (
+        <AdminDeleteUser
+          userId={user.id}
+          userEmail={user.email}
+          currentAdminId={session.user.id}
+        />
+      ) : null}
     </div>
   );
 }

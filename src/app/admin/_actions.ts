@@ -359,3 +359,42 @@ export async function setUserTierFromForm(userId: string, formData: FormData) {
   const tier = s(formData.get("tier")) as Tier;
   await setUserTier(userId, tier);
 }
+
+export async function deleteUserAccount(userId: string, confirmPhrase: string) {
+  const session = await requireAdmin();
+
+  if (confirmPhrase.trim().toUpperCase() !== "DELETE") {
+    throw new Error('Type DELETE to confirm.');
+  }
+
+  if (session.user.id === userId) {
+    throw new Error("You cannot delete your own account while signed in.");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { id: true, email: true, image: true, role: true },
+  });
+
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+  if (user.role === "ADMIN") {
+    const adminCount = await prisma.user.count({ where: { role: "ADMIN" } });
+    if (adminCount <= 1) {
+      throw new Error("Cannot delete the only admin account.");
+    }
+  }
+
+  if (user.image) {
+    const { deleteStoredAvatar } = await import("@/lib/avatar-storage");
+    await deleteStoredAvatar(user.image);
+  }
+
+  await prisma.user.delete({ where: { id: userId } });
+
+  revalidatePath("/admin/students");
+  revalidatePath("/portal");
+  revalidatePath("/community");
+}

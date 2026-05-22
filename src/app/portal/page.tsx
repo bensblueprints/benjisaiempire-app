@@ -7,7 +7,9 @@ import { prisma } from "@/lib/db";
 import PortalDownloadItem from "@/components/portal/PortalDownloadItem";
 import PortalSoftwareItem from "@/components/portal/PortalSoftwareItem";
 import { PORTAL_SOFTWARE_CATALOG } from "@/lib/portal-software";
-import PortalCancelMembership from "@/components/portal/PortalCancelMembership";
+import PortalCancelMembership, {
+  PortalCancelImmediately,
+} from "@/components/portal/PortalCancelMembership";
 import ProfilePhotoUploader from "@/components/community/ProfilePhotoUploader";
 import { portalApiPath, useAirwallex } from "@/lib/payments";
 import { downloadTierWhere, isPaidMember } from "@/lib/member-tiers";
@@ -245,13 +247,7 @@ export default async function PortalPage({
         <section className="portal-callout portal-callout--billing" id="manage-billing">
           <span className="portal-callout__eyebrow">Billing</span>
           <p className="portal-callout__body portal-callout__body--compact">
-            Need to end access right away?{" "}
-            <form action="/api/airwallex/cancel" method="POST" className="portal-billing-inline-form">
-              <input type="hidden" name="immediate" value="1" />
-              <button type="submit" className="portal-billing-inline-form__btn">
-                Cancel immediately
-              </button>
-            </form>
+            Need to end access right away? <PortalCancelImmediately />
           </p>
         </section>
       )}
@@ -462,11 +458,13 @@ export default async function PortalPage({
         }
         @media (min-width: 900px) {
           .portal-hero__grid {
-            grid-template-columns: 1fr minmax(280px, 340px);
+            grid-template-columns: 1fr minmax(300px, 380px);
           }
         }
         .portal-hero__profile {
           width: 100%;
+          min-width: 0;
+          max-width: 100%;
         }
         .portal-hero__meta {
           display:flex; justify-content:space-between; align-items:center;
