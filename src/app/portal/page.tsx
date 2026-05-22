@@ -27,9 +27,24 @@ function firstName(session: { user: { name?: string | null; email: string } }) {
 export default async function PortalPage({
   searchParams,
 }: {
-  searchParams: Promise<{ upgrade?: string; billing?: string; billingError?: string }>;
+  searchParams: Promise<{
+    upgrade?: string;
+    billing?: string;
+    billingError?: string;
+    emailError?: string;
+  }>;
 }) {
   const params = await searchParams;
+
+  const emailErrorMessages: Record<string, string> = {
+    missing_token: "Email confirmation link was incomplete. Request a new one from your profile.",
+    invalid_or_expired: "That confirmation link expired or is invalid. Request a new one.",
+    account_not_found: "Account not found. Sign in and try again.",
+    email_taken: "That email is already registered to another account.",
+  };
+  const emailErrorText = params.emailError
+    ? emailErrorMessages[params.emailError] ?? "Could not update your email."
+    : null;
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/portal");
 
@@ -216,6 +231,13 @@ export default async function PortalPage({
         <aside className="portal-banner portal-banner--upgrade">
           <span className="portal-banner__eyebrow">Billing</span>
           <p className="portal-banner__text">{decodeURIComponent(params.billingError)}</p>
+        </aside>
+      )}
+
+      {emailErrorText && (
+        <aside className="portal-banner portal-banner--upgrade">
+          <span className="portal-banner__eyebrow">Email</span>
+          <p className="portal-banner__text">{emailErrorText}</p>
         </aside>
       )}
 

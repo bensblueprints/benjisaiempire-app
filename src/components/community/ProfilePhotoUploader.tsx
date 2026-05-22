@@ -22,8 +22,12 @@ export default function ProfilePhotoUploader({
   const [dragOver, setDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [nameMessage, setNameMessage] = useState<string | null>(null);
+  const [newEmail, setNewEmail] = useState("");
+  const [emailMessage, setEmailMessage] = useState<string | null>(null);
+  const [emailMessageOk, setEmailMessageOk] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [namePending, startNameTransition] = useTransition();
+  const [emailPending, startEmailTransition] = useTransition();
 
   useEffect(() => {
     setPreview(imageUrl);
@@ -66,6 +70,35 @@ export default function ProfilePhotoUploader({
     },
     [imageUrl],
   );
+
+  const requestEmailChange = () => {
+    setEmailMessage(null);
+    setEmailMessageOk(false);
+    const trimmed = newEmail.trim();
+    if (!trimmed) {
+      setEmailMessage("Enter your new email.");
+      return;
+    }
+    startEmailTransition(async () => {
+      try {
+        const res = await fetch("/api/profile/email/request", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: trimmed }),
+        });
+        const data = (await res.json()) as { ok?: boolean; message?: string; error?: string };
+        if (!res.ok) {
+          throw new Error(data.error ?? "Could not send confirmation");
+        }
+        setEmailMessage(data.message ?? "Confirmation link sent. Check your inbox.");
+        setEmailMessageOk(true);
+        setNewEmail("");
+      } catch (err) {
+        setEmailMessageOk(false);
+        setEmailMessage(err instanceof Error ? err.message : "Could not send confirmation");
+      }
+    });
+  };
 
   const saveName = () => {
     setNameMessage(null);
@@ -219,17 +252,110 @@ export default function ProfilePhotoUploader({
             </p>
           )}
 
-          <div
+          <label
+            htmlFor="profile-login-email"
             style={{
+              display: "block",
               fontFamily: "JetBrains Mono, monospace",
               fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: ".1em",
               color: "var(--cream-soft)",
-              marginBottom: 12,
+              marginBottom: 6,
+            }}
+          >
+            Login email
+          </label>
+          <div
+            id="profile-login-email"
+            style={{
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 11,
+              color: "var(--cream)",
+              marginBottom: 10,
               wordBreak: "break-all",
             }}
           >
             {email}
           </div>
+          <label
+            htmlFor="profile-new-email"
+            style={{
+              display: "block",
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: ".1em",
+              color: "var(--cream-soft)",
+              marginBottom: 6,
+            }}
+          >
+            Change email
+          </label>
+          <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+            <input
+              id="profile-new-email"
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              placeholder="new@email.com"
+              autoComplete="email"
+              style={{
+                flex: 1,
+                padding: "10px 12px",
+                background: "var(--ink)",
+                border: "1px solid var(--line)",
+                borderRadius: 3,
+                color: "var(--cream)",
+                fontFamily: "Manrope, sans-serif",
+                fontSize: 14,
+              }}
+            />
+            <button
+              type="button"
+              onClick={requestEmailChange}
+              disabled={emailPending}
+              style={{
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: ".08em",
+                padding: "10px 12px",
+                background: "transparent",
+                color: "var(--gold)",
+                border: "1px solid var(--gold)",
+                borderRadius: 3,
+                cursor: emailPending ? "wait" : "pointer",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {emailPending ? "Sending…" : "Confirm"}
+            </button>
+          </div>
+          <p
+            style={{
+              fontFamily: "Manrope, sans-serif",
+              fontSize: 11,
+              color: "var(--cream-soft)",
+              margin: "0 0 12px",
+              lineHeight: 1.45,
+            }}
+          >
+            We email a link to your <strong style={{ color: "var(--cream)" }}>new</strong> address.
+            After you confirm, sign in again with that email.
+          </p>
+          {emailMessage && (
+            <p
+              style={{
+                fontFamily: "Manrope, sans-serif",
+                fontSize: 12,
+                color: emailMessage.includes("sent") ? "var(--gold)" : "var(--rust)",
+                margin: "0 0 12px",
+              }}
+            >
+              {emailMessage}
+            </p>
+          )}
 
           <div
             role="button"

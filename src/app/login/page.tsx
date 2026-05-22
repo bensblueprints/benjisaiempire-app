@@ -13,10 +13,12 @@ export const metadata: Metadata = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ callbackUrl?: string }>;
+  searchParams: Promise<{ callbackUrl?: string; emailUpdated?: string; email?: string }>;
 }) {
   const params = await searchParams;
   const callbackUrl = params.callbackUrl ?? "/portal";
+  const emailUpdated = params.emailUpdated === "1";
+  const suggestedEmail = params.email?.trim().toLowerCase() ?? "";
 
   async function sendLink(formData: FormData) {
     "use server";
@@ -39,7 +41,23 @@ export default async function LoginPage({
             brand new, same door.
           </p>
 
-          <LoginForm action={sendLink} callbackUrl={callbackUrl} />
+          {emailUpdated ? (
+            <p
+              className="auth-lede"
+              style={{ marginBottom: "1.25rem", color: "var(--gold-bright, var(--gold))" }}
+              role="status"
+            >
+              Email updated. Sign in with{" "}
+              <strong style={{ color: "var(--cream)" }}>{suggestedEmail || "your new address"}</strong>{" "}
+              — we sent a magic link when you request it below.
+            </p>
+          ) : null}
+
+          <LoginForm
+            action={sendLink}
+            callbackUrl={callbackUrl}
+            defaultEmail={suggestedEmail}
+          />
 
           <p className="auth-fineprint">
             By continuing you agree to receive a sign-in email from

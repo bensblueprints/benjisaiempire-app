@@ -5,9 +5,11 @@ import { useState, useTransition } from "react";
 export function LoginForm({
   action,
   callbackUrl,
+  defaultEmail = "",
 }: {
   action: (fd: FormData) => Promise<void>;
   callbackUrl: string;
+  defaultEmail?: string;
 }) {
   const [pending, startTransition] = useTransition();
   const [submitted, setSubmitted] = useState<string | null>(null);
@@ -70,6 +72,7 @@ export function LoginForm({
         autoComplete="email"
         required
         disabled={pending}
+        defaultValue={defaultEmail}
         placeholder="you@operator.com"
         className="auth-form__input"
       />
