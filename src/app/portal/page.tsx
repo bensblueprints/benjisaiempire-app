@@ -10,7 +10,7 @@ import { PORTAL_SOFTWARE_CATALOG } from "@/lib/portal-software";
 import PortalCancelMembership from "@/components/portal/PortalCancelMembership";
 import ProfilePhotoUploader from "@/components/community/ProfilePhotoUploader";
 import { portalApiPath, useAirwallex } from "@/lib/payments";
-import { downloadTierWhere } from "@/lib/member-tiers";
+import { downloadTierWhere, isPaidMember } from "@/lib/member-tiers";
 
 export const dynamic = "force-dynamic";
 
@@ -52,12 +52,12 @@ export default async function PortalPage({
   const showAirwallexCancel = Boolean(billingUser?.airwallexSubscriptionId);
   const showStripeCancel =
     Boolean(billingUser?.stripeCustomerId) && !billingUser?.airwallexSubscriptionId;
-  const isPaidMember = tier === "INSIDER" || tier === "WHOLESALE";
+  const paidMember = isPaidMember(tier);
   const showCancelMembership =
-    showAirwallexCancel || showStripeCancel || isPaidMember;
+    showAirwallexCancel || showStripeCancel || paidMember;
   const cancelViaBillingOnly =
-    isPaidMember && !showAirwallexCancel && !showStripeCancel;
-  const isInsiderOrUp = isPaidMember;
+    paidMember && !showAirwallexCancel && !showStripeCancel;
+  const isInsiderOrUp = paidMember;
   const isAdmin = session.user.role === "ADMIN";
 
   // Load courses w/ this user's progress (only if they can access them)

@@ -92,6 +92,20 @@ export default async function DoneForYouCheckoutPage({
               <form className="auth-form" action="/api/airwallex/checkout" method="get" style={{ margin: 0 }}>
                 <input type="hidden" name="tier" value="DONE_WITH_YOU" />
                 <input type="hidden" name="plan" value="yearly" />
+                <label htmlFor="checkout-name-yearly" className="auth-form__label">
+                  Your name
+                </label>
+                <input
+                  id="checkout-name-yearly"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  minLength={2}
+                  maxLength={80}
+                  placeholder="Benji Boyce"
+                  className="auth-form__input"
+                />
                 <label htmlFor="checkout-email-yearly" className="auth-form__label">
                   Email
                 </label>
@@ -158,6 +172,20 @@ export default async function DoneForYouCheckoutPage({
               <form className="auth-form" action="/api/airwallex/checkout" method="get" style={{ margin: 0 }}>
                 <input type="hidden" name="tier" value="DONE_WITH_YOU" />
                 <input type="hidden" name="plan" value="monthly" />
+                <label htmlFor="checkout-name-monthly" className="auth-form__label">
+                  Your name
+                </label>
+                <input
+                  id="checkout-name-monthly"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  minLength={2}
+                  maxLength={80}
+                  placeholder="Benji Boyce"
+                  className="auth-form__input"
+                />
                 <label htmlFor="checkout-email-monthly" className="auth-form__label">
                   Email
                 </label>

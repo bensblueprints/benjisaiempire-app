@@ -16,6 +16,7 @@ export function GuestCheckoutForm({
   priceLabel: string;
   submitLabel: string;
 }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export function GuestCheckoutForm({
       const res = await fetch(checkoutApiPath(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tier, email: email.trim() }),
+        body: JSON.stringify({ tier, email: email.trim(), name: name.trim() }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         url?: string;
@@ -54,6 +55,21 @@ export function GuestCheckoutForm({
       </p>
 
       <form className="auth-form" onSubmit={onSubmit} noValidate>
+        <label htmlFor="checkout-name" className="auth-form__label">
+          Your name
+        </label>
+        <input
+          id="checkout-name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          required
+          disabled={loading}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Benji Boyce"
+          className="auth-form__input"
+        />
         <label htmlFor="checkout-email" className="auth-form__label">
           Email for your account
         </label>

@@ -12,6 +12,13 @@ async function requireUser() {
   return session.user;
 }
 
+/** For server actions called from client forms — avoid redirect() (breaks RSC refresh). */
+async function requireUserOrThrow() {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Sign in to continue.");
+  return session.user;
+}
+
 async function requirePaidOrAdmin() {
   const user = await requireUser();
   if (user.role === "ADMIN") return user;
@@ -28,7 +35,7 @@ async function requireAdmin() {
 /* ── PROFILE ── */
 
 export async function uploadProfilePhoto(formData: FormData): Promise<string> {
-  const user = await requireUser();
+  const user = await requireUserOrThrow();
   const file = formData.get("photo");
   if (!(file instanceof File)) throw new Error("No image selected");
 

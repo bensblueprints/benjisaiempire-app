@@ -1,8 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
-import { uploadProfilePhoto } from "@/app/community/_actions";
 
 function initials(name: string | null | undefined, email: string): string {
   if (name?.trim()) return name.trim()[0]!.toUpperCase();
@@ -10,7 +8,7 @@ function initials(name: string | null | undefined, email: string): string {
 }
 
 export default function ProfilePhotoUploader({
-  name,
+  name: initialName,
   email,
   imageUrl,
 }: {
@@ -18,16 +16,22 @@ export default function ProfilePhotoUploader({
   email: string;
   imageUrl: string | null;
 }) {
-  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [displayName, setDisplayName] = useState(initialName ?? "");
   const [preview, setPreview] = useState<string | null>(imageUrl);
   const [dragOver, setDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [nameMessage, setNameMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [namePending, startNameTransition] = useTransition();
 
   useEffect(() => {
     setPreview(imageUrl);
   }, [imageUrl]);
+
+  useEffect(() => {
+    setDisplayName(initialName ?? "");
+  }, [initialName]);
 
   const upload = useCallback(
     (file: File) => {
@@ -43,10 +47,16 @@ export default function ProfilePhotoUploader({
       fd.set("photo", file);
       startTransition(async () => {
         try {
-          const url = await uploadProfilePhoto(fd);
-          setPreview(url);
+          const res = await fetch("/api/profile/avatar", {
+            method: "POST",
+            body: fd,
+          });
+          const data = (await res.json()) as { url?: string; error?: string };
+          if (!res.ok) {
+            throw new Error(data.error ?? "Upload failed");
+          }
+          if (data.url) setPreview(data.url);
           URL.revokeObjectURL(objectUrl);
-          router.refresh();
         } catch (err) {
           setPreview(imageUrl);
           URL.revokeObjectURL(objectUrl);
@@ -54,8 +64,34 @@ export default function ProfilePhotoUploader({
         }
       });
     },
-    [imageUrl, router],
+    [imageUrl],
   );
+
+  const saveName = () => {
+    setNameMessage(null);
+    const trimmed = displayName.trim();
+    if (!trimmed) {
+      setNameMessage("Enter your name.");
+      return;
+    }
+    startNameTransition(async () => {
+      try {
+        const res = await fetch("/api/profile/name", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: trimmed }),
+        });
+        const data = (await res.json()) as { name?: string; error?: string };
+        if (!res.ok) {
+          throw new Error(data.error ?? "Could not save name");
+        }
+        if (data.name) setDisplayName(data.name);
+        setNameMessage("Saved.");
+      } catch (err) {
+        setNameMessage(err instanceof Error ? err.message : "Could not save name");
+      }
+    });
+  };
 
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -111,22 +147,78 @@ export default function ProfilePhotoUploader({
               style={{ width: 72, height: 72, objectFit: "cover" }}
             />
           ) : (
-            initials(name, email)
+            initials(displayName, email)
           )}
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div
+          <label
+            htmlFor="profile-display-name"
             style={{
-              fontFamily: "Manrope, sans-serif",
-              fontWeight: 700,
-              color: "var(--cream)",
-              fontSize: 14,
-              marginBottom: 4,
+              display: "block",
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: ".1em",
+              color: "var(--cream-soft)",
+              marginBottom: 6,
             }}
           >
-            {name ?? "Member"}
+            Display name
+          </label>
+          <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
+            <input
+              id="profile-display-name"
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              placeholder="Your name"
+              maxLength={80}
+              style={{
+                flex: 1,
+                padding: "10px 12px",
+                background: "var(--ink)",
+                border: "1px solid var(--line)",
+                borderRadius: 3,
+                color: "var(--cream)",
+                fontFamily: "Manrope, sans-serif",
+                fontSize: 14,
+              }}
+            />
+            <button
+              type="button"
+              onClick={saveName}
+              disabled={namePending}
+              style={{
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: ".08em",
+                padding: "10px 12px",
+                background: "var(--gold)",
+                color: "var(--ink)",
+                border: "none",
+                borderRadius: 3,
+                cursor: namePending ? "wait" : "pointer",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {namePending ? "Saving…" : "Save"}
+            </button>
           </div>
+          {nameMessage && (
+            <p
+              style={{
+                fontFamily: "Manrope, sans-serif",
+                fontSize: 12,
+                color: nameMessage === "Saved." ? "var(--gold)" : "var(--rust)",
+                margin: "0 0 10px",
+              }}
+            >
+              {nameMessage}
+            </p>
+          )}
+
           <div
             style={{
               fontFamily: "JetBrains Mono, monospace",

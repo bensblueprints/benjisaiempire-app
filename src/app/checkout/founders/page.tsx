@@ -35,6 +35,20 @@ export default async function FoundersCheckoutPage({
 
           <form className="auth-form" action="/api/airwallex/checkout" method="get">
             <input type="hidden" name="tier" value="WHOLESALE" />
+            <label htmlFor="checkout-name" className="auth-form__label">
+              Your name
+            </label>
+            <input
+              id="checkout-name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              required
+              minLength={2}
+              maxLength={80}
+              placeholder="Benji Boyce"
+              className="auth-form__input"
+            />
             <label htmlFor="checkout-email" className="auth-form__label">
               Email for your membership
             </label>

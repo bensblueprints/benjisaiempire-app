@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import path from "path";
 import { readFile } from "fs/promises";
+import { getAvatarBlobStore } from "@/lib/avatar-storage";
+import { isNetlifyRuntime } from "@/lib/netlify-runtime";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,27 +21,32 @@ export async function GET(req: Request): Promise<Response> {
     return NextResponse.json({ error: "Invalid key" }, { status: 400 });
   }
 
-  if (process.env.NETLIFY === "true") {
-    const { getStore } = await import("@netlify/blobs");
-    const store = getStore("member-avatars");
-    const blob = await store.get(key, { type: "arrayBuffer" });
-    if (!blob) return NextResponse.json({ error: "Not found" }, { status: 404 });
-    const ext = path.extname(key).slice(1).toLowerCase();
-    return new NextResponse(blob, {
-      headers: {
-        "Content-Type": MIME[ext] ?? "image/jpeg",
-        "Cache-Control": "public, max-age=86400",
-      },
-    });
+  const ext = path.extname(key).slice(1).toLowerCase();
+  const contentType = MIME[ext] ?? "image/jpeg";
+
+  if (isNetlifyRuntime()) {
+    try {
+      const store = await getAvatarBlobStore();
+      const blob = await store.get(key, { type: "arrayBuffer" });
+      if (!blob) return NextResponse.json({ error: "Not found" }, { status: 404 });
+      return new NextResponse(blob, {
+        headers: {
+          "Content-Type": contentType,
+          "Cache-Control": "public, max-age=86400",
+        },
+      });
+    } catch (err) {
+      console.error("[api/avatars/file] blob read failed:", err);
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
   }
 
   const filepath = path.join(process.cwd(), "public", "avatars", key);
   try {
     const data = await readFile(filepath);
-    const ext = path.extname(key).slice(1).toLowerCase();
     return new NextResponse(data, {
       headers: {
-        "Content-Type": MIME[ext] ?? "image/jpeg",
+        "Content-Type": contentType,
         "Cache-Control": "public, max-age=86400",
       },
     });

@@ -7,7 +7,11 @@ import {
   newRequestId,
 } from "@/lib/airwallex";
 import { env } from "@/lib/env";
-import { findOrCreateUserByEmail, normalizeCheckoutEmail } from "@/lib/checkout-user";
+import {
+  findOrCreateUserByEmail,
+  normalizeCheckoutEmail,
+  normalizeCheckoutName,
+} from "@/lib/checkout-user";
 import { type CheckoutTier, guestCheckoutPath } from "@/lib/payments";
 import {
   type DfyBillingPlan,
@@ -186,14 +190,19 @@ async function createGuestCheckoutResponse(
   email: string,
   tier: CheckoutTier,
   plan: DfyBillingPlan,
+  name?: string | null,
 ): Promise<Response> {
   const normalized = normalizeCheckoutEmail(email);
   if (!normalized) {
     return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
   }
+  const displayName = normalizeCheckoutName(name);
+  if (!displayName) {
+    return NextResponse.json({ error: "Your name is required" }, { status: 400 });
+  }
 
   try {
-    const user = await findOrCreateUserByEmail(normalized);
+    const user = await findOrCreateUserByEmail(normalized, displayName);
     if (!user) {
       return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
     }
@@ -241,9 +250,10 @@ export async function GET(req: Request): Promise<Response> {
     }
 
     const email = url.searchParams.get("email");
+    const name = url.searchParams.get("name");
     if (email) {
       return redirectFromCheckoutResult(
-        await createGuestCheckoutResponse(email, tierRaw, plan),
+        await createGuestCheckoutResponse(email, tierRaw, plan, name),
       );
     }
 
@@ -255,9 +265,14 @@ export async function GET(req: Request): Promise<Response> {
 
 export async function POST(req: Request): Promise<Response> {
   try {
-    let body: { tier?: string; email?: string; plan?: string } = {};
+    let body: { tier?: string; email?: string; plan?: string; name?: string } = {};
     try {
-      body = (await req.json()) as { tier?: string; email?: string; plan?: string };
+      body = (await req.json()) as {
+        tier?: string;
+        email?: string;
+        plan?: string;
+        name?: string;
+      };
     } catch {
       return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
     }
@@ -277,7 +292,7 @@ export async function POST(req: Request): Promise<Response> {
     }
 
     if (body.email) {
-      return createGuestCheckoutResponse(body.email, tier, plan);
+      return createGuestCheckoutResponse(body.email, tier, plan, body.name);
     }
 
     return NextResponse.json(
