@@ -33,7 +33,7 @@ export const PORTAL_SOFTWARE_CATALOG: PortalSoftwareEntry[] = [
     slug: "wispr-flow",
     title: "Wispr Flow — Unlimited Voice Dictation",
     description:
-      "Talk in any app — email, Slack, Cursor, docs — and get polished text instantly. Unlimited voice dictation on Mac, Windows, iPhone, and Android. $49 for life (one-time).",
+      "Talk in any app — email, Slack, Cursor, docs — and get polished text instantly. Unlimited voice dictation on Mac and Windows. $49 for life (one-time).",
     url: WISPR_FLOW_URL,
     buttonLabel: "Get Wispr Flow — $49 lifetime →",
     badge: "Voice dictation",
