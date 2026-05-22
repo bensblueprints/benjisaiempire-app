@@ -1,27 +1,31 @@
-import { Resend } from "resend";
 import { env } from "@/lib/env";
 
-let client: Resend | null = null;
+type ResendErrorBody = { message?: string; name?: string };
 
-function resend(): Resend {
-  if (!client) client = new Resend(env.RESEND_API_KEY);
-  return client;
-}
-
+/** Send HTML/text email via Resend REST API (avoids bundling @react-email/render). */
 export async function sendTransactionalEmail(opts: {
   to: string;
   subject: string;
   html: string;
   text?: string;
 }): Promise<void> {
-  const { error } = await resend().emails.send({
-    from: env.EMAIL_FROM,
-    to: opts.to,
-    subject: opts.subject,
-    html: opts.html,
-    text: opts.text,
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: env.EMAIL_FROM,
+      to: [opts.to],
+      subject: opts.subject,
+      html: opts.html,
+      text: opts.text,
+    }),
   });
-  if (error) {
-    throw new Error(error.message ?? "Failed to send email");
+
+  const data = (await res.json().catch(() => ({}))) as ResendErrorBody;
+  if (!res.ok) {
+    throw new Error(data.message ?? data.name ?? "Failed to send email");
   }
 }
