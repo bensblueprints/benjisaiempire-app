@@ -5,10 +5,47 @@ type Lesson = {
   id: string;
   slug: string;
   title: string;
+  videoUrl?: string | null;
   durationMinutes: number | null;
   sortOrder: number;
   progress?: { userId: string; lessonId: string }[];
 };
+
+const iconWrap: React.CSSProperties = {
+  width: 16,
+  height: 16,
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexShrink: 0,
+  color: "var(--gold)",
+};
+
+function LessonTypeIcon({ hasVideo }: { hasVideo: boolean }) {
+  const label = hasVideo ? "Video lesson" : "Article lesson";
+  if (hasVideo) {
+    return (
+      <span aria-label={label} title={label} style={iconWrap}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="2" y="5" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.75" />
+          <path d="M16 10l6-3.5v11L16 14V10z" fill="currentColor" />
+        </svg>
+      </span>
+    );
+  }
+  return (
+    <span aria-label={label} title={label} style={{ ...iconWrap, color: "var(--cream-soft)" }}>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M6 4h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2z"
+          stroke="currentColor"
+          strokeWidth="1.75"
+        />
+        <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      </svg>
+    </span>
+  );
+}
 
 type Module = {
   id: string;
@@ -133,6 +170,7 @@ export default function CourseSidebar({
                 {m.lessons.map((l, li) => {
                   const isCurrent = l.slug === currentLessonSlug;
                   const isDone = (l.progress?.length ?? 0) > 0;
+                  const hasVideo = Boolean(l.videoUrl?.trim());
                   return (
                     <li key={l.id}>
                       <Link
@@ -140,9 +178,9 @@ export default function CourseSidebar({
                         aria-current={isCurrent ? "page" : undefined}
                         style={{
                           display: "grid",
-                          gridTemplateColumns: "auto 1fr auto",
+                          gridTemplateColumns: "auto auto 1fr auto",
                           alignItems: "center",
-                          gap: 10,
+                          gap: 8,
                           padding: "8px 10px",
                           borderRadius: 2,
                           background: isCurrent
@@ -172,6 +210,7 @@ export default function CourseSidebar({
                         >
                           {isDone ? "✓" : String(li + 1).padStart(2, "0")}
                         </span>
+                        <LessonTypeIcon hasVideo={hasVideo} />
                         <span
                           style={{
                             fontWeight: isCurrent ? 600 : 400,
