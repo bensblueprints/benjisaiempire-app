@@ -2705,6 +2705,13 @@ export default function Page() {
     color:var(--cream-soft);
     border:1px solid var(--line); padding:6px 12px; border-radius:2px;
   }
+  .vsl-video-title{
+    font-family:'Anton',sans-serif; font-weight:400;
+    font-size:clamp(22px,3.8vw,42px);
+    text-transform:uppercase; line-height:1.1;
+    color:var(--gold-bright); letter-spacing:.02em;
+    text-align:center; max-width:800px;
+  }
   .vsl-player-wrap{
     width:100%; max-width:800px;
     border-radius:4px; overflow:hidden;
@@ -2860,12 +2867,13 @@ export default function Page() {
       <span class="vsl-topic">Cold Calling + AI</span>
     </div>
 
+    <h3 class="vsl-video-title">Watch Me Call And Close A Deal EASY!!!!!!</h3>
+
     <div class="vsl-player-wrap">
       <div class="vsl-player">
-        <!-- Replace VIDEO_ID below with your VSL video ID from YouTube -->
         <iframe
-          src="https://www.youtube.com/embed/NBUdUZKN7Ts?rel=0&modestbranding=1&color=white"
-          title="Benji Boyce — AI Empire: Watch Before You Join"
+          src="https://www.youtube.com/embed/qk-fOcz-4aw?start=393&rel=0&modestbranding=1&color=white"
+          title="Watch Me Call And Close A Deal EASY"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
