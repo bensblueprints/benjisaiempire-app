@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
+    "@netlify/blobs": "^10.7.8",
     "@prisma/client": "^5.22.0",
     "@tiptap/extension-image": "^2.10.3",
     "@tiptap/extension-link": "^2.10.3",

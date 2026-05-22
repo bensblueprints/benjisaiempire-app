@@ -4,6 +4,7 @@ import Link from "next/link";
 import { createPost } from "./_actions";
 import DeletePostButton from "@/components/community/DeletePostButton";
 import LikeButton from "@/components/community/LikeButton";
+import ProfilePhotoUploader from "@/components/community/ProfilePhotoUploader";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,14 @@ export default async function CommunityPage({
   const session = await auth();
   const userId = session?.user?.id ?? "";
   const userTier = session?.user?.tier ?? "FREE";
+
+  const profileUser =
+    userId
+      ? await prisma.user.findUnique({
+          where: { id: userId },
+          select: { name: true, email: true, image: true },
+        })
+      : null;
   const isAdmin = session?.user?.role === "ADMIN";
   const canPost = isAdmin || userTier !== "FREE";
 
@@ -182,6 +191,14 @@ export default async function CommunityPage({
 
       {/* Sidebar */}
       <aside style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        {profileUser && (
+          <ProfilePhotoUploader
+            name={profileUser.name}
+            email={profileUser.email}
+            imageUrl={profileUser.image}
+          />
+        )}
+
         {/* Category filter */}
         <section style={{ background: "var(--ink-2)", border: "1px solid var(--line)", borderRadius: 6, padding: 20 }}>
           <div style={{ fontFamily: "Anton, sans-serif", fontSize: 14, textTransform: "uppercase", color: "var(--cream)", letterSpacing: ".04em", marginBottom: 12 }}>Categories</div>

@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 
 type Props = {
+  id: string;
   title: string;
   description: string | null;
   url: string;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export default function PortalDownloadItem({
+  id,
   title,
   description,
   url,
@@ -19,6 +21,10 @@ export default function PortalDownloadItem({
   tier,
   copyText,
 }: Props) {
+  const downloadHref =
+    url.startsWith("http://") || url.startsWith("https://")
+      ? url
+      : `/api/downloads/${id}`;
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -81,11 +87,11 @@ export default function PortalDownloadItem({
           </button>
         )}
         <a
-          href={url}
+          href={downloadHref}
           target="_blank"
           rel="noopener noreferrer"
           className="portal-dl-item__cta"
-          download
+          download={!downloadHref.startsWith("http")}
         >
           Download →
         </a>

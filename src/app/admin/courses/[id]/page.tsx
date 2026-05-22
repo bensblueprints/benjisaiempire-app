@@ -2,19 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import CourseForm from "@/components/admin/CourseForm";
-import ModuleForm from "@/components/admin/ModuleForm";
+import CourseModulesBuilder from "@/components/admin/CourseModulesBuilder";
 import DeleteButton from "@/components/admin/DeleteButton";
-import {
-  updateCourse,
-  deleteCourse,
-  createModule,
-  updateModule,
-  deleteModule,
-  createLesson,
-  deleteLesson,
-  createModuleDownload,
-  deleteModuleDownload,
-} from "../../_actions";
+import { updateCourse, deleteCourse } from "../../_actions";
 
 export const dynamic = "force-dynamic";
 
@@ -26,18 +16,6 @@ const sectionTitle: React.CSSProperties = {
   color: "var(--cream)",
   marginBottom: 18,
 };
-
-const inp: React.CSSProperties = {
-  padding: "8px 12px",
-  background: "var(--ink)",
-  border: "1px solid var(--line)",
-  borderRadius: 3,
-  color: "var(--cream)",
-  fontFamily: "Manrope, sans-serif",
-  fontSize: 13,
-};
-
-const FILE_TYPES = ["PDF", "ZIP", "MP3", "MP4", "DOCX", "XLSX", "PNG", "JPG", "Other"];
 
 export default async function EditCoursePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -54,6 +32,28 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
     },
   });
   if (!course) notFound();
+
+  const builderModules = course.modules.map((m) => ({
+    id: m.id,
+    title: m.title,
+    summary: m.summary,
+    sortOrder: m.sortOrder,
+    lessons: m.lessons.map((l) => ({
+      id: l.id,
+      title: l.title,
+      slug: l.slug,
+      sortOrder: l.sortOrder,
+      durationMinutes: l.durationMinutes,
+      published: l.published,
+    })),
+    downloads: m.downloads.map((dl) => ({
+      id: dl.id,
+      title: dl.title,
+      url: dl.url,
+      fileType: dl.fileType,
+      sortOrder: dl.sortOrder,
+    })),
+  }));
 
   return (
     <div>
@@ -108,170 +108,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ id:
         />
       </section>
 
-      <section>
-        <h2 style={sectionTitle}>Modules ({course.modules.length})</h2>
-
-        <div style={{ display: "grid", gap: 18, marginBottom: 32 }}>
-          {course.modules.map((m) => (
-            <div key={m.id} style={{ background: "var(--ink-2)", border: "1px solid var(--line)", borderRadius: 6, padding: 24 }}>
-
-              {/* Module header: form + delete */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 24, marginBottom: 18 }}>
-                <div style={{ flex: 1 }}>
-                  <ModuleForm
-                    module={{ id: m.id, title: m.title, summary: m.summary, sortOrder: m.sortOrder }}
-                    action={updateModule.bind(null, m.id)}
-                    submitLabel="Save module"
-                  />
-                </div>
-                <DeleteButton
-                  onConfirm={deleteModule.bind(null, m.id)}
-                  label="Delete module"
-                  message={`Delete module "${m.title}" and all its lessons?`}
-                />
-              </div>
-
-              {/* Lessons */}
-              <div style={{ borderTop: "1px solid var(--line)", paddingTop: 18 }}>
-                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".14em", color: "var(--cream-soft)", marginBottom: 12 }}>
-                  Lessons ({m.lessons.length})
-                </div>
-                <div style={{ display: "grid", gap: 6 }}>
-                  {m.lessons.map((l) => (
-                    <div
-                      key={l.id}
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "32px 2fr 1.5fr 80px 80px 100px 1fr",
-                        gap: 14,
-                        alignItems: "center",
-                        padding: "10px 14px",
-                        background: "var(--ink)",
-                        border: "1px solid var(--line)",
-                        borderRadius: 3,
-                      }}
-                    >
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "var(--gold)" }}>
-                        {String(l.sortOrder).padStart(2, "0")}
-                      </div>
-                      <div style={{ fontFamily: "Manrope, sans-serif", color: "var(--cream)" }}>{l.title}</div>
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--cream-soft)" }}>/{l.slug}</div>
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--cream-soft)", textAlign: "right" }}>
-                        {l.durationMinutes ?? "—"}m
-                      </div>
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--cream-soft)", textAlign: "right" }}>
-                        #{l.sortOrder}
-                      </div>
-                      <div>
-                        <span style={{
-                          fontFamily: "JetBrains Mono, monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: ".1em",
-                          padding: "3px 7px", borderRadius: 2,
-                          background: l.published ? "rgba(212,175,55,.15)" : "var(--ink-3)",
-                          color: l.published ? "var(--gold)" : "var(--cream-soft)",
-                          border: l.published ? "1px solid var(--gold)" : "1px solid var(--line)",
-                        }}>
-                          {l.published ? "Published" : "Draft"}
-                        </span>
-                      </div>
-                      <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
-                        <Link
-                          href={`/admin/lessons/${l.id}`}
-                          style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "var(--gold)", textTransform: "uppercase", letterSpacing: ".08em" }}
-                        >
-                          Edit
-                        </Link>
-                        <DeleteButton
-                          onConfirm={deleteLesson.bind(null, l.id)}
-                          label="X"
-                          message={`Delete lesson "${l.title}"?`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <form
-                  action={createLesson.bind(null, m.id)}
-                  style={{ marginTop: 14, display: "flex", gap: 10, alignItems: "center" }}
-                >
-                  <input
-                    name="title"
-                    placeholder="New lesson title..."
-                    style={{ flex: 1, padding: "10px 14px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "Manrope, sans-serif", fontSize: 14 }}
-                    required
-                  />
-                  <input
-                    name="sortOrder"
-                    type="number"
-                    defaultValue={m.lessons.length}
-                    style={{ width: 70, padding: "10px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3, color: "var(--cream)", fontFamily: "JetBrains Mono, monospace" }}
-                  />
-                  <button type="submit" style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, textTransform: "uppercase", letterSpacing: ".1em", padding: "10px 16px", border: "1px solid var(--gold)", color: "var(--gold)", borderRadius: 3, background: "transparent" }}>
-                    + Add lesson
-                  </button>
-                </form>
-              </div>
-
-              {/* Module Downloads */}
-              <div style={{ borderTop: "1px solid var(--line)", paddingTop: 18, marginTop: 4 }}>
-                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".14em", color: "var(--cream-soft)", marginBottom: 12 }}>
-                  Downloads ({m.downloads.length})
-                </div>
-                <div style={{ display: "grid", gap: 6, marginBottom: 10 }}>
-                  {m.downloads.map((dl) => (
-                    <div
-                      key={dl.id}
-                      style={{ display: "grid", gridTemplateColumns: "32px 1fr 1.5fr 70px 36px", gap: 12, alignItems: "center", padding: "8px 12px", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: 3 }}
-                    >
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--gold)" }}>#{dl.sortOrder}</div>
-                      <div style={{ fontFamily: "Manrope, sans-serif", fontSize: 13, color: "var(--cream)" }}>{dl.title}</div>
-                      <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--cream-soft)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{dl.url}</div>
-                      <div>
-                        {dl.fileType && (
-                          <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, letterSpacing: ".1em", padding: "2px 6px", background: "var(--ink-3)", color: "var(--cream-soft)", borderRadius: 2 }}>
-                            {dl.fileType}
-                          </span>
-                        )}
-                      </div>
-                      <DeleteButton
-                        onConfirm={deleteModuleDownload.bind(null, dl.id)}
-                        label="X"
-                        message={`Remove download "${dl.title}"?`}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <form
-                  action={createModuleDownload.bind(null, m.id)}
-                  style={{ display: "grid", gridTemplateColumns: "2fr 2fr 80px 60px 80px", gap: 8, alignItems: "center" }}
-                >
-                  <input name="title" placeholder="File title..." required style={inp} />
-                  <input name="url" type="url" placeholder="https://..." required style={{ ...inp, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
-                  <select name="fileType" style={{ ...inp, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>
-                    <option value="">Type</option>
-                    {FILE_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
-                  </select>
-                  <input name="sortOrder" type="number" defaultValue={m.downloads.length} style={{ ...inp, fontFamily: "JetBrains Mono, monospace", fontSize: 12 }} />
-                  <button type="submit" style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".08em", padding: "9px 12px", border: "1px solid var(--gold)", color: "var(--gold)", borderRadius: 3, background: "transparent", cursor: "pointer" }}>
-                    + Add
-                  </button>
-                </form>
-              </div>
-
-            </div>
-          ))}
-        </div>
-
-        <div style={{ background: "var(--ink-2)", border: "1px dashed var(--line)", borderRadius: 6, padding: 24 }}>
-          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, textTransform: "uppercase", letterSpacing: ".14em", color: "var(--gold)", marginBottom: 14 }}>
-            + Add module
-          </div>
-          <ModuleForm
-            action={createModule.bind(null, course.id)}
-            submitLabel="Create module"
-          />
-        </div>
-      </section>
+      <CourseModulesBuilder courseId={course.id} initialModules={builderModules} />
     </div>
   );
 }

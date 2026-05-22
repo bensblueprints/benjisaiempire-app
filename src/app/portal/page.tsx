@@ -5,6 +5,8 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import PortalDownloadItem from "@/components/portal/PortalDownloadItem";
+import PortalCancelMembership from "@/components/portal/PortalCancelMembership";
+import ProfilePhotoUploader from "@/components/community/ProfilePhotoUploader";
 import { portalApiPath, useAirwallex } from "@/lib/payments";
 
 export const dynamic = "force-dynamic";
@@ -32,16 +34,22 @@ export default async function PortalPage({
     where: { id: session.user.id },
     select: {
       airwallexSubscriptionId: true,
+      stripeCustomerId: true,
       paymentProvider: true,
       subscriptionStatus: true,
+      name: true,
+      email: true,
+      image: true,
     },
   });
 
   const tier = session.user.tier;
   const airwallexBilling = useAirwallex();
   const manageHref = portalApiPath();
-  const showAirwallexCancel =
-    airwallexBilling && Boolean(billingUser?.airwallexSubscriptionId);
+  const showAirwallexCancel = Boolean(billingUser?.airwallexSubscriptionId);
+  const showStripeCancel =
+    Boolean(billingUser?.stripeCustomerId) && !billingUser?.airwallexSubscriptionId;
+  const showCancelMembership = showAirwallexCancel || showStripeCancel;
   const isInsiderOrUp = tier === "INSIDER" || tier === "WHOLESALE";
   const isAdmin = session.user.role === "ADMIN";
 
@@ -123,6 +131,12 @@ export default async function PortalPage({
             </Link>
           )}
         </div>
+        {showCancelMembership && billingUser && (
+          <PortalCancelMembership
+            stripeCustomer={showStripeCancel}
+            airwallexSubscription={showAirwallexCancel}
+          />
+        )}
       </section>
 
       {params.billing === "cancel_scheduled" && (
@@ -143,35 +157,17 @@ export default async function PortalPage({
       )}
 
       {showAirwallexCancel && (
-        <section
-          className="portal-callout"
-          id="manage-billing"
-          style={{ borderColor: "var(--line)" }}
-        >
-          <span className="portal-callout__eyebrow">Subscription · Airwallex</span>
-          <h2 className="portal-callout__title">Manage billing</h2>
-          <p className="portal-callout__body">
-            Airwallex does not offer a Stripe-style customer portal. Cancel here — access
-            stays until the current period ends (or cancel immediately).
+        <section className="portal-callout portal-callout--billing" id="manage-billing">
+          <span className="portal-callout__eyebrow">Billing</span>
+          <p className="portal-callout__body portal-callout__body--compact">
+            Need to end access right away?{" "}
+            <form action="/api/airwallex/cancel" method="POST" className="portal-billing-inline-form">
+              <input type="hidden" name="immediate" value="1" />
+              <button type="submit" className="portal-billing-inline-form__btn">
+                Cancel immediately
+              </button>
+            </form>
           </p>
-          <form action="/api/airwallex/cancel" method="POST" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <button
-              type="submit"
-              className="portal-callout__cta"
-              style={{ background: "transparent", color: "var(--gold)", border: "1px solid var(--gold)" }}
-            >
-              Cancel at period end
-            </button>
-            <button
-              type="submit"
-              name="immediate"
-              value="1"
-              className="portal-callout__cta"
-              style={{ background: "var(--rust)", color: "var(--cream)" }}
-            >
-              Cancel immediately
-            </button>
-          </form>
         </section>
       )}
 
@@ -293,6 +289,15 @@ export default async function PortalPage({
           <span className="portal-section-eyebrow">Community</span>
           <h2 className="portal-section-title">The Lounge</h2>
         </header>
+        {billingUser && (
+          <div className="portal-profile-upload">
+            <ProfilePhotoUploader
+              name={billingUser.name}
+              email={billingUser.email}
+              imageUrl={billingUser.image}
+            />
+          </div>
+        )}
         <div className="portal-community__grid">
           {[
             { href: "/community", label: "Feed", desc: "Posts, wins, questions, and strategy from the community." },
@@ -322,6 +327,7 @@ export default async function PortalPage({
             {downloads.map((d) => (
               <PortalDownloadItem
                 key={d.id}
+                id={d.id}
                 title={d.title}
                 description={d.description}
                 url={d.url}
@@ -394,6 +400,73 @@ export default async function PortalPage({
           font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
           color: var(--cream-soft); border-bottom:1px solid var(--line);
           padding-bottom: .25rem;
+        }
+        .portal-cancel-membership {
+          margin-top: 1.25rem;
+          padding-top: 0.75rem;
+          border-top: 1px solid var(--line);
+        }
+        .portal-cancel-membership__link {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.68rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--cream-soft);
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+        .portal-cancel-membership__link:hover { color: var(--rust); }
+        .portal-cancel-membership__confirm { margin-top: 0.35rem; }
+        .portal-cancel-membership__hint {
+          font-family: 'Manrope', sans-serif;
+          font-size: 0.8rem;
+          color: var(--cream-soft);
+          margin: 0 0 0.65rem;
+        }
+        .portal-cancel-membership__form {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem 0.75rem;
+        }
+        .portal-cancel-membership__btn {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.65rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 6px 12px;
+          border-radius: 2px;
+          cursor: pointer;
+          border: 1px solid var(--line);
+          background: var(--ink-2);
+          color: var(--cream-soft);
+        }
+        .portal-cancel-membership__btn:hover { border-color: var(--rust); color: var(--rust); }
+        .portal-cancel-membership__btn--ghost { background: transparent; }
+        .portal-callout--billing {
+          border-color: var(--line);
+          padding: 1rem 1.25rem;
+        }
+        .portal-callout__body--compact { margin: 0; font-size: 0.85rem; }
+        .portal-billing-inline-form { display: inline; }
+        .portal-billing-inline-form__btn {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.68rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--rust);
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+        .portal-profile-upload {
+          max-width: 420px;
+          margin-bottom: 1.5rem;
         }
         .portal-hero__admin:hover { color: var(--cream); border-color: var(--cream); }
 

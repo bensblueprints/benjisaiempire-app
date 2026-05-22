@@ -134,6 +134,29 @@ export async function deleteModule(id: string) {
   if (mod) revalidatePath(`/admin/courses/${mod.courseId}`);
 }
 
+export async function reorderModules(courseId: string, orderedIds: string[]) {
+  await requireAdmin();
+  if (!orderedIds.length) return;
+
+  const owned = await prisma.module.findMany({
+    where: { courseId, id: { in: orderedIds } },
+    select: { id: true },
+  });
+  if (owned.length !== orderedIds.length) {
+    throw new Error("Invalid module order");
+  }
+
+  await prisma.$transaction(
+    orderedIds.map((id, index) =>
+      prisma.module.update({
+        where: { id },
+        data: { sortOrder: index },
+      }),
+    ),
+  );
+  revalidatePath(`/admin/courses/${courseId}`);
+}
+
 /* ───────── LESSONS ───────── */
 
 export async function createLesson(moduleId: string, formData: FormData) {
@@ -266,8 +289,20 @@ export async function deleteModuleDownload(id: string) {
 export async function createDownload(formData: FormData) {
   await requireAdmin();
   const title = s(formData.get("title")).trim();
-  const url = s(formData.get("url")).trim();
-  if (!title || !url) throw new Error("Title and URL required");
+  let url = s(formData.get("url")).trim();
+  let fileType = s(formData.get("fileType")).trim() || null;
+
+  const file = formData.get("file");
+  if (file instanceof File && file.size > 0) {
+    const { saveUploadedDownload } = await import("@/lib/member-download-storage");
+    const saved = await saveUploadedDownload(file);
+    url = saved.url;
+    if (!fileType) fileType = saved.fileType;
+  }
+
+  if (!title) throw new Error("Title is required");
+  if (!url) throw new Error("Upload a file or paste a download URL");
+
   const rawTier = s(formData.get("tier"));
   const tier = rawTier === "FREE" ? "FREE" : rawTier === "WHOLESALE" ? "WHOLESALE" : "INSIDER";
   const copyText = s(formData.get("copyText")).trim();
@@ -277,7 +312,7 @@ export async function createDownload(formData: FormData) {
       url,
       description: s(formData.get("description")) || null,
       copyText: copyText || null,
-      fileType: s(formData.get("fileType")) || null,
+      fileType,
       sortOrder: n(formData.get("sortOrder")),
       published: b(formData.get("published")),
       tier: tier as "FREE" | "INSIDER" | "WHOLESALE",
@@ -289,6 +324,11 @@ export async function createDownload(formData: FormData) {
 
 export async function deleteDownload(id: string) {
   await requireAdmin();
+  const row = await prisma.download.findUnique({ where: { id } });
+  if (row?.url) {
+    const { deleteStoredDownload } = await import("@/lib/member-download-storage");
+    await deleteStoredDownload(row.url);
+  }
   await prisma.download.delete({ where: { id } });
   revalidatePath("/admin/downloads");
   revalidatePath("/portal");

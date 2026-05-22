@@ -36,11 +36,16 @@ export default function ModuleForm({
   action,
   submitLabel,
   onAfterSubmit,
+  hideSortOrder,
+  defaultSortOrder,
 }: {
   module?: ModuleFormData;
   action: (formData: FormData) => Promise<void>;
   submitLabel?: string;
   onAfterSubmit?: () => void;
+  /** Hide manual sort field — order is managed by drag-and-drop in the course builder */
+  hideSortOrder?: boolean;
+  defaultSortOrder?: number;
 }) {
   const [isPending, startTransition] = useTransition();
 
@@ -61,28 +66,45 @@ export default function ModuleForm({
     });
   }
 
+  const sortOrderValue = mod?.sortOrder ?? defaultSortOrder ?? 0;
+
   return (
     <form onSubmit={handleSubmit} style={{ display: "grid", gap: 14 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr", gap: 14 }}>
-        <div>
-          <label style={labelStyle}>Title</label>
-          <input
-            name="title"
-            defaultValue={mod?.title ?? ""}
-            required
-            style={inputStyle}
-          />
+      {hideSortOrder ? (
+        <>
+          <input type="hidden" name="sortOrder" value={sortOrderValue} />
+          <div>
+            <label style={labelStyle}>Title</label>
+            <input
+              name="title"
+              defaultValue={mod?.title ?? ""}
+              required
+              style={inputStyle}
+            />
+          </div>
+        </>
+      ) : (
+        <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr", gap: 14 }}>
+          <div>
+            <label style={labelStyle}>Title</label>
+            <input
+              name="title"
+              defaultValue={mod?.title ?? ""}
+              required
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <label style={labelStyle}>Sort order</label>
+            <input
+              name="sortOrder"
+              type="number"
+              defaultValue={sortOrderValue}
+              style={{ ...inputStyle, fontFamily: "JetBrains Mono, monospace" }}
+            />
+          </div>
         </div>
-        <div>
-          <label style={labelStyle}>Sort order</label>
-          <input
-            name="sortOrder"
-            type="number"
-            defaultValue={mod?.sortOrder ?? 0}
-            style={{ ...inputStyle, fontFamily: "JetBrains Mono, monospace" }}
-          />
-        </div>
-      </div>
+      )}
       <div>
         <label style={labelStyle}>Summary</label>
         <textarea

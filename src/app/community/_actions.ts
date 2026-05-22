@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { deleteStoredAvatar, saveAvatarUpload } from "@/lib/avatar-storage";
 
 async function requireUser() {
   const session = await auth();
@@ -22,6 +23,34 @@ async function requireAdmin() {
   const user = await requireUser();
   if (user.role !== "ADMIN") throw new Error("Forbidden");
   return user;
+}
+
+/* ── PROFILE ── */
+
+export async function uploadProfilePhoto(formData: FormData): Promise<string> {
+  const user = await requireUser();
+  const file = formData.get("photo");
+  if (!(file instanceof File)) throw new Error("No image selected");
+
+  const existing = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: { image: true },
+  });
+
+  const imageUrl = await saveAvatarUpload(user.id, file);
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { image: imageUrl },
+  });
+
+  if (existing?.image && existing.image !== imageUrl) {
+    await deleteStoredAvatar(existing.image);
+  }
+
+  revalidatePath("/community");
+  revalidatePath("/community/members");
+  revalidatePath("/portal");
+  return imageUrl;
 }
 
 /* ── POSTS ── */
