@@ -14,6 +14,8 @@ Choose a real business (friend, prior lead, or Maps search). Get their URL befor
 
 ## Lesson 9.2 — Build session
 
+**Watch:** [Setting Up Your Website Database SUPABASE](https://www.youtube.com/watch?v=Tv_33_RNaxs)
+
 Follow SKILL.md end to end. Timer goal: one sitting.
 
 **Checklist**

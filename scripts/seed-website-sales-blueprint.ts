@@ -11,6 +11,9 @@ import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const ROOT = path.join(__dirname, "..", "curriculum", "website-sales-blueprint", "modules");
+const VIDEOS_PATH = path.join(__dirname, "..", "curriculum", "website-sales-blueprint", "videos.json");
+
+type VideoMeta = { videoUrl: string; title?: string; durationMinutes?: number };
 
 const COURSE = {
   slug: "30-day-ai-website-empire-challenge",
@@ -233,7 +236,14 @@ Missed yesterday? Do **not** skip logging. Add a make-up block today or split 50
 `;
 }
 
+function loadVideoMap(): Record<string, VideoMeta> {
+  if (!fs.existsSync(VIDEOS_PATH)) return {};
+  return JSON.parse(fs.readFileSync(VIDEOS_PATH, "utf8")) as Record<string, VideoMeta>;
+}
+
 async function main() {
+  const videoMap = loadVideoMap();
+
   await prisma.course.updateMany({
     where: { slug: DEPRECATED_SLUG },
     data: { published: false },
@@ -288,9 +298,22 @@ async function main() {
       const L = lessons[idx];
       const slug = slugify(L.num, L.title);
       const bodyJson = markdownToTipTap(L.bodyMd) as unknown as Prisma.InputJsonValue;
+      const video = videoMap[L.num];
+      const videoData = video
+        ? {
+            videoUrl: video.videoUrl,
+            durationMinutes: video.durationMinutes ?? null,
+          }
+        : { videoUrl: null, durationMinutes: null };
       await prisma.lesson.upsert({
         where: { moduleId_slug: { moduleId: dbModule.id, slug } },
-        update: { title: L.title, body: bodyJson, sortOrder: idx + 1, published: true },
+        update: {
+          title: L.title,
+          body: bodyJson,
+          sortOrder: idx + 1,
+          published: true,
+          ...videoData,
+        },
         create: {
           moduleId: dbModule.id,
           slug,
@@ -298,8 +321,10 @@ async function main() {
           body: bodyJson,
           sortOrder: idx + 1,
           published: true,
+          ...videoData,
         },
       });
+      if (video) console.log(`  video ${L.num}: ${video.title ?? video.videoUrl}`);
       lessonCount++;
     }
     console.log(`Module ${sortOrder}: ${meta.title} (${lessons.length} lessons)`);

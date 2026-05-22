@@ -1,0 +1,32 @@
+{
+  "3.1": {
+    "videoUrl": "https://www.youtube.com/watch?v=qyrj-SILyB8",
+    "title": "Setting Up Space Mail Email",
+    "durationMinutes": 12
+  },
+  "4.1": {
+    "videoUrl": "https://www.youtube.com/watch?v=I9LTCK4J7sw",
+    "title": "Sign Up To Cloud Flare And Configure DNS",
+    "durationMinutes": 15
+  },
+  "4.2": {
+    "videoUrl": "https://www.youtube.com/watch?v=A1K_aoROTTM",
+    "title": "Setting Up DNS ON CLOUDFLARE",
+    "durationMinutes": 18
+  },
+  "4.3": {
+    "videoUrl": "https://www.youtube.com/watch?v=OEWiGHIc0ns",
+    "title": "Setting Up Netlify For Web Hosting",
+    "durationMinutes": 14
+  },
+  "8.1": {
+    "videoUrl": "https://www.youtube.com/watch?v=pBxTJ6rb1GY",
+    "title": "Github Sign Up Where Your Code Lives",
+    "durationMinutes": 10
+  },
+  "9.2": {
+    "videoUrl": "https://www.youtube.com/watch?v=Tv_33_RNaxs",
+    "title": "Setting Up Your Website Database SUPABASE",
+    "durationMinutes": 16
+  }
+}

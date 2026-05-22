@@ -6,6 +6,8 @@ sortOrder: 3
 
 ## Lesson 3.1 — Create the mailbox
 
+**Watch:** [Setting Up Space Mail Email](https://www.youtube.com/watch?v=qyrj-SILyB8)
+
 Use Spaceship email, Cloudflare Email Routing, or forward to Gmail — pick one stack and finish it today.
 
 **Minimum**

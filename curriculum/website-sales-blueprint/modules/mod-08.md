@@ -6,6 +6,8 @@ sortOrder: 8
 
 ## Lesson 8.1 — Pipeline order
 
+**Watch:** [Github Sign Up Where Your Code Lives](https://www.youtube.com/watch?v=pBxTJ6rb1GY)
+
 1. GitHub repo
 2. Blank deploy to Netlify (pipeline wired)
 3. Scrape/audit site
