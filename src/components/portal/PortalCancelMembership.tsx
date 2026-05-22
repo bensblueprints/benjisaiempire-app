@@ -4,19 +4,30 @@ import { useState } from "react";
 import Link from "next/link";
 
 type Props = {
-  /** Stripe customer — opens hosted billing portal (cancel there) */
   stripeCustomer: boolean;
-  /** Airwallex — in-app cancel form */
   airwallexSubscription: boolean;
+  manageHref: string;
+  /** Paid tier but no Stripe/Airwallex IDs on file (e.g. manual/admin grant) */
+  billingPortalOnly?: boolean;
 };
 
 export default function PortalCancelMembership({
   stripeCustomer,
   airwallexSubscription,
+  manageHref,
+  billingPortalOnly,
 }: Props) {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  if (!stripeCustomer && !airwallexSubscription) return null;
+  if (billingPortalOnly) {
+    return (
+      <p className="portal-cancel-membership">
+        <Link href={manageHref} className="portal-cancel-membership__link">
+          Cancel membership
+        </Link>
+      </p>
+    );
+  }
 
   if (stripeCustomer && !airwallexSubscription) {
     return (
@@ -27,6 +38,8 @@ export default function PortalCancelMembership({
       </p>
     );
   }
+
+  if (!airwallexSubscription) return null;
 
   return (
     <div className="portal-cancel-membership">

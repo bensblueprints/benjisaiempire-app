@@ -73,7 +73,9 @@ export default function CourseModulesBuilder({
 }) {
   const router = useRouter();
   const [modules, setModules] = useState(initialModules);
-  const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
+  const [expanded, setExpanded] = useState<Set<string>>(() =>
+    initialModules.length > 0 ? new Set([initialModules[0]!.id]) : new Set(),
+  );
 
   const modulesKey = initialModules.map((m) => `${m.id}:${m.title}:${m.lessons.length}`).join("|");
   useEffect(() => {
@@ -185,7 +187,8 @@ export default function CourseModulesBuilder({
           lineHeight: 1.5,
         }}
       >
-        Drag the handle to reorder modules. Click a module header to expand or collapse its lessons and downloads.
+        Modules start <strong style={{ color: "var(--cream)" }}>collapsed</strong> — click a row to expand lessons and downloads.
+        Drag the <strong style={{ color: "var(--gold)" }}>≡</strong> handle to reorder.
       </p>
 
       <div style={{ display: "grid", gap: 12, marginBottom: 32 }}>

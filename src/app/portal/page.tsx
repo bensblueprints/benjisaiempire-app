@@ -49,8 +49,12 @@ export default async function PortalPage({
   const showAirwallexCancel = Boolean(billingUser?.airwallexSubscriptionId);
   const showStripeCancel =
     Boolean(billingUser?.stripeCustomerId) && !billingUser?.airwallexSubscriptionId;
-  const showCancelMembership = showAirwallexCancel || showStripeCancel;
-  const isInsiderOrUp = tier === "INSIDER" || tier === "WHOLESALE";
+  const isPaidMember = tier === "INSIDER" || tier === "WHOLESALE";
+  const showCancelMembership =
+    showAirwallexCancel || showStripeCancel || isPaidMember;
+  const cancelViaBillingOnly =
+    isPaidMember && !showAirwallexCancel && !showStripeCancel;
+  const isInsiderOrUp = isPaidMember;
   const isAdmin = session.user.role === "ADMIN";
 
   // Load courses w/ this user's progress (only if they can access them)
@@ -102,41 +106,56 @@ export default async function PortalPage({
     <div className="portal-shell">
       {/* Hero strip */}
       <section className="portal-hero">
-        <div className="portal-hero__meta">
-          <span className="portal-hero__date">
-            Issue 01 · {new Date().toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-          <span className={`portal-hero__pill portal-hero__pill--${tier.toLowerCase()}`}>
-            {tier}
-          </span>
-        </div>
-        <h1 className="portal-hero__title">
-          Welcome back,&nbsp;{firstName(session)}.
-        </h1>
-        <p className="portal-hero__lede">
-          The build floor is open. Today&apos;s call sheet, this week&apos;s
-          lessons, and every course you&apos;ve unlocked — all in one room.
-        </p>
-        <div className="portal-hero__actions">
-          <Link href={manageHref} className="portal-hero__manage">
-            Manage subscription →
-          </Link>
-          {isAdmin && (
-            <Link href="/admin" className="portal-hero__admin">
-              Admin Console
-            </Link>
+        <div className="portal-hero__grid">
+          <div className="portal-hero__main">
+            <div className="portal-hero__meta">
+              <span className="portal-hero__date">
+                Issue 01 · {new Date().toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
+              <span className={`portal-hero__pill portal-hero__pill--${tier.toLowerCase()}`}>
+                {tier}
+              </span>
+            </div>
+            <h1 className="portal-hero__title">
+              Welcome back,&nbsp;{firstName(session)}.
+            </h1>
+            <p className="portal-hero__lede">
+              The build floor is open. Today&apos;s call sheet, this week&apos;s
+              lessons, and every course you&apos;ve unlocked — all in one room.
+            </p>
+            <div className="portal-hero__actions">
+              <Link href={manageHref} className="portal-hero__manage">
+                Manage subscription →
+              </Link>
+              {isAdmin && (
+                <Link href="/admin" className="portal-hero__admin">
+                  Admin Console
+                </Link>
+              )}
+            </div>
+            {showCancelMembership && (
+              <PortalCancelMembership
+                stripeCustomer={showStripeCancel}
+                airwallexSubscription={showAirwallexCancel}
+                manageHref={manageHref}
+                billingPortalOnly={cancelViaBillingOnly}
+              />
+            )}
+          </div>
+          {billingUser && (
+            <div className="portal-hero__profile">
+              <ProfilePhotoUploader
+                name={billingUser.name}
+                email={billingUser.email}
+                imageUrl={billingUser.image}
+              />
+            </div>
           )}
         </div>
-        {showCancelMembership && billingUser && (
-          <PortalCancelMembership
-            stripeCustomer={showStripeCancel}
-            airwallexSubscription={showAirwallexCancel}
-          />
-        )}
       </section>
 
       {params.billing === "cancel_scheduled" && (
@@ -289,15 +308,6 @@ export default async function PortalPage({
           <span className="portal-section-eyebrow">Community</span>
           <h2 className="portal-section-title">The Lounge</h2>
         </header>
-        {billingUser && (
-          <div className="portal-profile-upload">
-            <ProfilePhotoUploader
-              name={billingUser.name}
-              email={billingUser.email}
-              imageUrl={billingUser.image}
-            />
-          </div>
-        )}
         <div className="portal-community__grid">
           {[
             { href: "/community", label: "Feed", desc: "Posts, wins, questions, and strategy from the community." },
@@ -352,6 +362,19 @@ export default async function PortalPage({
           border-top: 3px solid var(--gold);
           border-bottom: 1px solid var(--line);
           padding: 2.5rem 0 3rem;
+        }
+        .portal-hero__grid {
+          display: grid;
+          gap: 2rem;
+          align-items: start;
+        }
+        @media (min-width: 900px) {
+          .portal-hero__grid {
+            grid-template-columns: 1fr minmax(280px, 340px);
+          }
+        }
+        .portal-hero__profile {
+          width: 100%;
         }
         .portal-hero__meta {
           display:flex; justify-content:space-between; align-items:center;
@@ -463,10 +486,6 @@ export default async function PortalPage({
           padding: 0;
           cursor: pointer;
           text-decoration: underline;
-        }
-        .portal-profile-upload {
-          max-width: 420px;
-          margin-bottom: 1.5rem;
         }
         .portal-hero__admin:hover { color: var(--cream); border-color: var(--cream); }
 

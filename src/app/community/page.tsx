@@ -56,9 +56,9 @@ export default async function CommunityPage({
   });
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 32 }}>
+    <div className="community-layout">
       {/* Main feed */}
-      <div>
+      <div className="community-layout__feed">
         {/* Post composer */}
         {canPost ? (
           <section style={{ background: "var(--ink-2)", border: "1px solid var(--line)", borderRadius: 6, padding: 24, marginBottom: 28 }}>
@@ -189,8 +189,8 @@ export default async function CommunityPage({
         </div>
       </div>
 
-      {/* Sidebar */}
-      <aside style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      {/* Sidebar — first on mobile so profile upload is visible */}
+      <aside className="community-layout__sidebar" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         {profileUser && (
           <ProfilePhotoUploader
             name={profileUser.name}

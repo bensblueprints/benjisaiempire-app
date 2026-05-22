@@ -49,9 +49,32 @@ export default async function CommunityLayout({ children }: { children: React.Re
         </div>
       </header>
 
-      <main style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>
+      <main className="community-main">
         {children}
       </main>
+      <style>{`
+        .community-main {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 32px 24px;
+        }
+        .community-layout {
+          display: grid;
+          gap: 28px;
+        }
+        .community-layout__sidebar {
+          order: -1;
+        }
+        @media (min-width: 960px) {
+          .community-layout {
+            grid-template-columns: 1fr 300px;
+            gap: 32px;
+          }
+          .community-layout__sidebar {
+            order: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 }
