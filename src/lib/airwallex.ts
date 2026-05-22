@@ -54,6 +54,12 @@ export const AIRWALLEX_CONFIG = {
   get wholesalePriceId() {
     return process.env.AIRWALLEX_PRICE_WHOLESALE ?? "";
   },
+  get dwyMonthlyPriceId() {
+    return process.env.AIRWALLEX_PRICE_DONE_WITH_YOU_MONTHLY ?? "";
+  },
+  get dwyYearlyPriceId() {
+    return process.env.AIRWALLEX_PRICE_DONE_WITH_YOU_YEARLY ?? "";
+  },
   sandbox: sandboxMode(),
   baseUrl: getAirwallexBaseUrl(),
 } as const;

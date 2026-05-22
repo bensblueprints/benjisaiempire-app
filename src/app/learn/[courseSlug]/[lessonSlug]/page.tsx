@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import VideoEmbed from "@/components/VideoEmbed";
 import CourseSidebar from "@/components/CourseSidebar";
 import MarkCompleteButton from "@/components/MarkCompleteButton";
+import GhlResourceBlock, { isGhlModule } from "@/components/learn/GhlResourceBlock";
 import { RenderTiptap } from "@/lib/render-tiptap";
 
 export const dynamic = "force-dynamic";
@@ -79,6 +80,7 @@ export default async function LessonPage(
   const next = idx < flat.length - 1 ? flat[idx + 1] : null;
 
   const initialCompleted = lesson.progress.length > 0;
+  const showGhlResources = isGhlModule(lesson.module.title, lesson.module.sortOrder);
 
   return (
     <div
@@ -158,6 +160,8 @@ export default async function LessonPage(
         {/* Video */}
         {lesson.videoUrl && <VideoEmbed videoUrl={lesson.videoUrl} />}
 
+        {showGhlResources && <GhlResourceBlock downloads={lesson.module.downloads} />}
+
         {/* Body */}
         <div style={{ marginTop: 8 }}>
           <RenderTiptap doc={lesson.body} />
@@ -232,8 +236,8 @@ export default async function LessonPage(
           </section>
         )}
 
-        {/* Module Downloads */}
-        {lesson.module.downloads.length > 0 && (
+        {/* Module Downloads (non-GHL modules; GHL uses callout above) */}
+        {!showGhlResources && lesson.module.downloads.length > 0 && (
           <section
             aria-label="Module downloads"
             style={{

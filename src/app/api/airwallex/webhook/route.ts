@@ -10,7 +10,7 @@ import { sendMagicLink } from "@/lib/send-magic-link";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Tier = "FREE" | "INSIDER" | "WHOLESALE";
+type Tier = "FREE" | "INSIDER" | "WHOLESALE" | "DONE_WITH_YOU";
 
 type AirwallexSubscription = {
   id?: string;
@@ -44,7 +44,7 @@ const STATUS_MAP: Record<string, "ACTIVE" | "TRIALING" | "PAST_DUE" | "CANCELED"
 
 function tierFromMetadata(meta: Record<string, string> | undefined): Tier {
   const t = meta?.tier;
-  if (t === "INSIDER" || t === "WHOLESALE" || t === "FREE") return t;
+  if (t === "INSIDER" || t === "WHOLESALE" || t === "DONE_WITH_YOU" || t === "FREE") return t;
   return "FREE";
 }
 

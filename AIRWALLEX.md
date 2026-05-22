@@ -63,6 +63,10 @@ Products/prices created in sandbox **do not** appear in live (and vice versa). C
 8. Click the new price in the drawer’s price table → copy **Price ID** (`pri_...`) → `AIRWALLEX_PRICE_INSIDER` in `.env` / Coolify.
 9. Back to **Products** list → **New product** again.
 10. **Product 2:** Name `Wholesale GHL` → **Create product** → **New price** → **$49.00** / month (same settings as step 7) → copy `pri_...` → `AIRWALLEX_PRICE_WHOLESALE`.
+11. **Product 3 — Done For You Coaching** (live IDs):
+    - Monthly **$599** — product `prd_sgpd22q4dhirqvi7yhx` → price `pri_sgpdzdfflhirqw5zhu7` → `AIRWALLEX_PRICE_DONE_WITH_YOU_MONTHLY`
+    - Yearly **$4,997** — product `prd_sgpdc77rchirqwwy9eg` → price `pri_sgpd22q4dhirqxtq9cr` → `AIRWALLEX_PRICE_DONE_WITH_YOU_YEARLY`  
+    Fallback: hosted links in `AIRWALLEX_CHECKOUT_DFY_MONTHLY_URL` / `AIRWALLEX_CHECKOUT_DFY_YEARLY_URL` if API checkout is not used.
 
 Help article (same flow): [Customers, products, and prices](https://help.airwallex.com/hc/en-gb/articles/14622840540943) · API reference: [Products](https://www.airwallex.com/docs/billing/billing-components/products) · [Prices](https://www.airwallex.com/docs/billing/billing-components/prices)
 

@@ -683,8 +683,9 @@ export default function Page() {
   }
   @media (min-width: 900px){
     .pricing-grid{
-      grid-template-columns: 1fr;
-      max-width: 520px;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1280px;
+      gap: clamp(20px, 2.4vw, 28px);
     }
   }
 
@@ -938,9 +939,32 @@ export default function Page() {
     margin: 12px 0 0;
   }
 
-  /* ---------- INSIDER (only public tier) ---------- */
+  /* ---------- INSIDER ---------- */
   .tier--insider{ --i: 0; }
   .tier--insider .tier-name{ color: var(--ps-cream); }
+
+  /* ---------- DONE FOR YOU COACHING ---------- */
+  .tier--coaching{
+    --i: 1;
+    border-color: rgba(212,175,55,.35);
+    background: linear-gradient(165deg, rgba(212,175,55,.1) 0%, var(--ps-ink-2) 42%);
+  }
+  .tier--coaching .tier-eyebrow{ color: var(--ps-gold); }
+  .tier--coaching .tier-name{ color: var(--ps-gold-bright, var(--ps-gold)); }
+  .tier-price-row--stacked{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .tier-price-secondary{
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tier-price-secondary .tier-price{
+    font-size: clamp(40px, 4.5vw, 64px);
+  }
 
   /* ---------- TIER 3: WHOLESALE GHL — FEATURED ---------- */
   .tier--featured{
@@ -2868,10 +2892,10 @@ export default function Page() {
       <span class="pricing-eyebrow-meta">VOL. 02 · ISSUE 03 · OPERATOR EDITION</span>
     </div>
     <h2 class="pricing-headline">
-      One Tier. <span class="ph-amp">No</span> Secrets.
+      DIY or <span class="ph-amp">Done For You</span>.
     </h2>
     <p class="pricing-lede">
-      Nine dollars a month gets you the full AI Empire playbook — every course, every prompt, every script, plus a GoHighLevel sub-account. Cancel anytime.
+      <strong>$9/mo</strong> gets the full empire self-paced. <strong>Done For You Coaching</strong> adds the 30 Day Challenge plus <strong>one hour with Ben every week</strong> — launch pricing for the first 5 operators only.
     </p>
   </header>
 
@@ -2912,6 +2936,49 @@ export default function Page() {
           <span>Join AI Empire Insider — $9/mo</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
+      </div>
+    </article>
+
+    <!-- ============== DONE FOR YOU COACHING ============== -->
+    <article class="tier tier--coaching" aria-labelledby="tier-coaching-name">
+      <div class="tier-ribbon">FIRST 5 SPOTS · LAUNCH PRICING</div>
+      <div class="tier-eyebrow"><span>DONE FOR YOU COACHING</span></div>
+      <h3 class="tier-name" id="tier-coaching-name">Done For You Coaching</h3>
+
+      <div class="tier-price-row tier-price-row--stacked">
+        <div class="tier-price-secondary">
+          <span class="tier-price-strike" aria-label="Was 1000 per month">$1,000</span>
+          <span class="tier-price"><span class="currency">$</span>599</span>
+          <span class="tier-price-cadence">/ month</span>
+        </div>
+        <div class="tier-price-secondary" style="margin-top:10px">
+          <span class="tier-price-strike" aria-label="Was 9997 per year">$9,997</span>
+          <span class="tier-price"><span class="currency">$</span>4,997</span>
+          <span class="tier-price-cadence">/ year</span>
+        </div>
+      </div>
+      <span class="tier-perminute">
+        <span class="dot" aria-hidden="true"></span>
+        1 hour / week with Ben · live on Zoom
+      </span>
+
+      <p class="tier-tagline">We build the machine together — you still make 100 dials a day, but you are not guessing alone.</p>
+
+      <div class="tier-divider"><span>What's included</span></div>
+      <ul class="tier-includes">
+        <li><strong>Everything in AI Empire Insider</strong> — all courses, prompts, GHL sub-account</li>
+        <li><strong>30 Day AI Website Empire Challenge</strong> — full curriculum + daily dial checklists</li>
+        <li><strong>52 hours/year</strong> of live coaching (1 hr × 52 weeks)</li>
+        <li>Accountability, script review, pipeline + offer feedback</li>
+        <li>Launch price locked for <strong>first 5 members</strong> — then rates go up</li>
+      </ul>
+
+      <div class="tier-foot">
+        <a class="tier-cta tier-cta--gold" href="/checkout/done-with-you">
+          <span>Apply for Done For You Coaching</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="tier-fineprint">Choose monthly or yearly at checkout · 7-day refund on first payment</p>
       </div>
     </article>
 

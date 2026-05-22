@@ -25,6 +25,10 @@ export function portalApiPath(): string {
 }
 
 /** Guest checkout landing (email → hosted payment). */
-export function guestCheckoutPath(tier: "INSIDER" | "WHOLESALE"): string {
-  return tier === "WHOLESALE" ? "/checkout/founders" : "/checkout/insider";
+export type CheckoutTier = "INSIDER" | "WHOLESALE" | "DONE_WITH_YOU";
+
+export function guestCheckoutPath(tier: CheckoutTier): string {
+  if (tier === "WHOLESALE") return "/checkout/founders";
+  if (tier === "DONE_WITH_YOU") return "/checkout/done-with-you";
+  return "/checkout/insider";
 }

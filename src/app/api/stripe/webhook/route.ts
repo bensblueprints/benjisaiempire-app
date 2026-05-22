@@ -6,7 +6,7 @@ import { prisma } from "@/lib/db";
 export const runtime = "nodejs"; // raw body needs Node, not Edge
 export const dynamic = "force-dynamic";
 
-type Tier = "FREE" | "INSIDER" | "WHOLESALE";
+type Tier = "FREE" | "INSIDER" | "WHOLESALE" | "DONE_WITH_YOU";
 
 const STATUS_MAP: Record<Stripe.Subscription.Status, "ACTIVE" | "TRIALING" | "PAST_DUE" | "CANCELED" | "INCOMPLETE"> = {
   active: "ACTIVE",

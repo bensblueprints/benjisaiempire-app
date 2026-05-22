@@ -19,6 +19,7 @@ enum Tier {
   FREE
   INSIDER
   WHOLESALE
+  DONE_WITH_YOU
 }
 
 enum SubStatus {

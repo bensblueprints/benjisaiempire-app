@@ -5,9 +5,12 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import PortalDownloadItem from "@/components/portal/PortalDownloadItem";
+import PortalSoftwareItem from "@/components/portal/PortalSoftwareItem";
+import { PORTAL_SOFTWARE_CATALOG } from "@/lib/portal-software";
 import PortalCancelMembership from "@/components/portal/PortalCancelMembership";
 import ProfilePhotoUploader from "@/components/community/ProfilePhotoUploader";
 import { portalApiPath, useAirwallex } from "@/lib/payments";
+import { downloadTierWhere } from "@/lib/member-tiers";
 
 export const dynamic = "force-dynamic";
 
@@ -76,13 +79,54 @@ export default async function PortalPage({
       })
     : [];
 
+  const tierFilter = downloadTierWhere(tier, isAdmin);
+
   const downloads = await prisma.download.findMany({
     where: {
       published: true,
-      tier: isAdmin ? undefined : tier === "WHOLESALE" ? { in: ["FREE", "INSIDER", "WHOLESALE"] } : tier === "INSIDER" ? { in: ["FREE", "INSIDER"] } : "FREE",
+      NOT: { fileType: "Software" },
+      tier: tierFilter,
     },
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
+
+  const softwareFromDb = await prisma.download.findMany({
+    where: {
+      published: true,
+      fileType: "Software",
+      tier: tierFilter,
+    },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+  });
+
+  const software =
+    softwareFromDb.length > 0
+      ? softwareFromDb.map((row) => {
+          const catalog = PORTAL_SOFTWARE_CATALOG.find((c) => c.title === row.title);
+          return {
+            id: row.id,
+            title: row.title,
+            description: row.description ?? "",
+            url: row.url,
+            buttonLabel: catalog?.buttonLabel ?? "Get access →",
+            badge: catalog?.badge,
+            tier: row.tier,
+          };
+        })
+      : PORTAL_SOFTWARE_CATALOG.filter((entry) => {
+          if (isAdmin) return true;
+          if (tier === "WHOLESALE") return true;
+          if (tier === "INSIDER") return entry.tier !== "WHOLESALE";
+          return entry.tier === "FREE";
+        }).map((entry) => ({
+          id: entry.slug,
+          title: entry.title,
+          description: entry.description,
+          url: entry.url,
+          buttonLabel: entry.buttonLabel,
+          badge: entry.badge,
+          tier: entry.tier,
+        }));
 
   type CourseRow = (typeof courses)[number];
 
@@ -322,6 +366,32 @@ export default async function PortalPage({
           ))}
         </div>
       </section>
+
+      {/* Software */}
+      {software.length > 0 && (isInsiderOrUp || isAdmin) && (
+        <section className="portal-software">
+          <header className="portal-section-head">
+            <span className="portal-section-eyebrow">Partner stack</span>
+            <h2 className="portal-section-title">Software</h2>
+            <span className="portal-section-meta">
+              {software.length} {software.length === 1 ? "tool" : "tools"}
+            </span>
+          </header>
+          <ul className="portal-sw-list">
+            {software.map((s) => (
+              <PortalSoftwareItem
+                key={s.id}
+                title={s.title}
+                description={s.description}
+                url={s.url}
+                buttonLabel={s.buttonLabel}
+                badge={s.badge}
+                tier={s.tier}
+              />
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Downloads */}
       {downloads.length > 0 && (
@@ -661,6 +731,90 @@ export default async function PortalPage({
           font-family:'JetBrains Mono',monospace;
           font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
           color:var(--gold); margin-top:.5rem;
+        }
+
+        /* SOFTWARE */
+        .portal-sw-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: grid;
+          gap: 12px;
+        }
+        .portal-sw-item {
+          display: grid;
+          grid-template-columns: 140px 1fr auto;
+          gap: 20px;
+          align-items: center;
+          padding: 20px 24px;
+          background: rgba(212, 175, 55, 0.06);
+          border: 1px solid var(--gold);
+        }
+        .portal-sw-item__meta {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .portal-sw-item__badge {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.62rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 4px 8px;
+          background: var(--gold);
+          color: var(--ink);
+          align-self: flex-start;
+        }
+        .portal-sw-item__tier {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.6rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          padding: 2px 7px;
+          align-self: flex-start;
+        }
+        .portal-sw-item__tier--insider {
+          background: rgba(212, 175, 55, 0.12);
+          color: var(--gold);
+          border: 1px solid var(--gold);
+        }
+        .portal-sw-item__body { display: flex; flex-direction: column; gap: 6px; }
+        .portal-sw-item__title {
+          font-family: 'Manrope', sans-serif;
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: var(--cream);
+          margin: 0;
+        }
+        .portal-sw-item__desc {
+          font-family: 'Manrope', sans-serif;
+          font-size: 0.88rem;
+          color: var(--cream-soft);
+          line-height: 1.45;
+          margin: 0;
+        }
+        .portal-sw-item__cta {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.78rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 14px 22px;
+          background: var(--gold);
+          color: var(--ink);
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: 2px;
+          white-space: nowrap;
+        }
+        .portal-sw-item__cta:hover {
+          filter: brightness(1.08);
+        }
+        @media (max-width: 720px) {
+          .portal-sw-item {
+            grid-template-columns: 1fr;
+            align-items: start;
+          }
+          .portal-sw-item__cta { justify-self: start; }
         }
 
         /* DOWNLOADS */

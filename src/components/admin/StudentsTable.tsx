@@ -8,7 +8,7 @@ type Student = {
   email: string;
   name: string | null;
   role: "USER" | "ADMIN";
-  tier: "FREE" | "INSIDER" | "WHOLESALE";
+  tier: "FREE" | "INSIDER" | "WHOLESALE" | "DONE_WITH_YOU";
   stripeSubscriptionId: string | null;
   subscriptionStatus: string | null;
   createdAt: string;
@@ -18,6 +18,7 @@ const tierColors: Record<string, string> = {
   FREE: "var(--cream-soft)",
   INSIDER: "var(--gold)",
   WHOLESALE: "var(--gold-bright)",
+  DONE_WITH_YOU: "var(--gold-bright)",
 };
 
 function pill(text: string, color: string, border?: string): React.ReactNode {

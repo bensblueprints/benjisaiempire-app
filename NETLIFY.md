@@ -46,6 +46,8 @@ Copy values from 1Password / local `.env` into **Site configuration → Environm
 - `AIRWALLEX_PAYMENT_ACCOUNT_ID`
 - `AIRWALLEX_PRICE_INSIDER`
 - `AIRWALLEX_PRICE_WHOLESALE`
+- `AIRWALLEX_PRICE_DONE_WITH_YOU_MONTHLY` — `pri_sgpdzdfflhirqw5zhu7` ($599/mo; product `prd_sgpd22q4dhirqvi7yhx`)
+- `AIRWALLEX_PRICE_DONE_WITH_YOU_YEARLY` — `pri_sgpd22q4dhirqxtq9cr` ($4,997/yr; product `prd_sgpdc77rchirqwwy9eg`)
 - `AIRWALLEX_SANDBOX`
 
 **Webhook URL in Airwallex dashboard:** `https://benjisaiempire.com/api/webhooks/airwallex` (production; not Coolify URL).

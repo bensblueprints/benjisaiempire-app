@@ -25,7 +25,11 @@ export default async function middleware(req: NextRequest) {
   }
 
   // /learn requires INSIDER or WHOLESALE
-  if (pathname.startsWith("/learn") && !["INSIDER", "WHOLESALE"].includes(session.user.tier) && session.user.role !== "ADMIN") {
+  if (
+    pathname.startsWith("/learn") &&
+    !["INSIDER", "WHOLESALE", "DONE_WITH_YOU"].includes(session.user.tier) &&
+    session.user.role !== "ADMIN"
+  ) {
     const url = req.nextUrl.clone();
     url.pathname = "/portal";
     url.searchParams.set("upgrade", "1");
