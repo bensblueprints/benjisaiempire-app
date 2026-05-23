@@ -6,6 +6,7 @@ import {
 } from "@/lib/airwallex";
 import { normalizeCheckoutEmail } from "@/lib/checkout-user";
 import { sendMagicLink } from "@/lib/send-magic-link";
+import { handleStoryboardBillingCheckoutCompleted } from "@/lib/storyboard-licensing/service";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -210,7 +211,12 @@ export async function POST(req: Request): Promise<Response> {
 
   try {
     if (name === "billing_checkout.completed" && data) {
-      await handleBillingCheckoutCompleted(data as AirwallexBillingCheckout);
+      const checkout = data as AirwallexBillingCheckout;
+      if (checkout.metadata?.product === "storyboard-batch-cropper") {
+        await handleStoryboardBillingCheckoutCompleted(checkout);
+      } else {
+        await handleBillingCheckoutCompleted(checkout);
+      }
     } else if (name.startsWith("subscription.") && data) {
       await applySubscription(data as AirwallexSubscription);
     } else {

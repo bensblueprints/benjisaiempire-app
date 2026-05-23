@@ -48,9 +48,18 @@ Copy values from 1Password / local `.env` into **Site configuration → Environm
 - `AIRWALLEX_PRICE_WHOLESALE`
 - `AIRWALLEX_PRICE_DONE_WITH_YOU_MONTHLY` — `pri_sgpdzdfflhirqw5zhu7` ($599/mo; product `prd_sgpd22q4dhirqvi7yhx`)
 - `AIRWALLEX_PRICE_DONE_WITH_YOU_YEARLY` — `pri_sgpd22q4dhirqxtq9cr` ($4,997/yr; product `prd_sgpdc77rchirqwwy9eg`)
+- `AIRWALLEX_PRICE_STORYBOARD` — `pri_sgpd22q4dhit1y8xhdf` ($9.99 one-time Storyboard Batch Cropper)
+- `NEXT_PUBLIC_STORYBOARD_APP_URL` — `https://storyboard.benjisaiempire.com`
 - `AIRWALLEX_SANDBOX`
 
-**Webhook URL in Airwallex dashboard:** `https://benjisaiempire.com/api/webhooks/airwallex` (production; not Coolify URL).
+**Storyboard software webhooks** (same secret as membership; handled in `/api/airwallex/webhook` when `metadata.product=storyboard-batch-cropper`):
+
+- Checkout API: `https://benjisaiempire.com/api/v1/checkout/create`
+- Dedicated webhook (optional duplicate): `https://benjisaiempire.com/api/v1/webhooks/airwallex`
+- Store pages: `https://benjisaiempire.com/software/`
+- App: `https://storyboard.benjisaiempire.com` (separate Netlify site `5a0467b0-90ef-4ed0-8b93-e15e279fa721`)
+
+**Webhook URL in Airwallex dashboard:** `https://benjisaiempire.com/api/airwallex/webhook` (production; not Coolify URL).
 
 ### Stripe (legacy, optional when Airwallex active)
 
@@ -79,6 +88,16 @@ After adding the custom domain in Netlify:
    - **www**: CNAME to your Netlify site subdomain (e.g. `benjisaiempire-app.netlify.app`) or Netlify DNS target shown in dashboard.
 3. SSL: Full (strict) in Cloudflare is fine once Netlify provisions cert.
 4. Remove or repoint Coolify/Traefik DNS if apex still points at `server.advancedmarketing.co`.
+
+### Storyboard app subdomain (`storyboard.benjisaiempire.com`)
+
+Separate Netlify site: **storyboard-batch-cropper** (`5a0467b0-90ef-4ed0-8b93-e15e279fa721`).
+
+1. Netlify → storyboard-batch-cropper site → **Domain management** → add `storyboard.benjisaiempire.com`.
+2. Cloudflare DNS:
+   - **CNAME** `storyboard` → `storyboard-batch-cropper.netlify.app` (or Netlify’s shown target).
+   - Gray cloud (DNS only) recommended until SSL is active.
+3. License API stays on apex: `https://benjisaiempire.com/api/v1/*` (CORS allows the storyboard subdomain).
 
 ## Dashboard checklist
 
