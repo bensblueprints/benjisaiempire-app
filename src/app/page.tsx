@@ -2164,8 +2164,9 @@ export default function Page() {
   .proof-section .ps-tile.t2 { grid-column: span 5; grid-row: span 3; }   /* grant cardone */
   .proof-section .ps-tile.t3 { grid-column: span 5; grid-row: span 2; }   /* meta ads */
   .proof-section .ps-tile.t4 { grid-column: span 4; grid-row: span 4; }   /* petronas */
-  .proof-section .ps-tile.t5 { grid-column: span 4; grid-row: span 4; }   /* bangkok mural */
-  .proof-section .ps-tile.t6 { grid-column: span 4; grid-row: span 4; }   /* dev rig */
+  .proof-section .ps-tile.t5 { grid-column: span 4; grid-row: span 4; }   /* mclaren */
+  .proof-section .ps-tile.t6 { grid-column: span 4; grid-row: span 4; }   /* throne */
+  .proof-section .ps-tile.t7 { grid-column: span 4; grid-row: span 4; }   /* floyd — when uploaded */
 
   .proof-section .ps-tile.t1 .ps-frame{ aspect-ratio: 16 / 10; }
   .proof-section .ps-tile.t1 .ps-frame img{
@@ -2181,6 +2182,7 @@ export default function Page() {
   .proof-section .ps-tile.t4 .ps-frame{ --frame-delay:180ms; }
   .proof-section .ps-tile.t5 .ps-frame{ --frame-delay:240ms; }
   .proof-section .ps-tile.t6 .ps-frame{ --frame-delay:300ms; }
+  .proof-section .ps-tile.t7 .ps-frame{ --frame-delay:360ms; }
 
   /* tiny corner badge on the hero proof tile */
   .proof-section .ps-tile.t1 .ps-frame::after{
@@ -2211,7 +2213,8 @@ export default function Page() {
     .proof-section .ps-tile.t3{ grid-column: span 5; grid-row: span 4; }
     .proof-section .ps-tile.t4{ grid-column: span 6; grid-row: span 4; }
     .proof-section .ps-tile.t5{ grid-column: span 6; grid-row: span 4; }
-    .proof-section .ps-tile.t6{ grid-column: span 12; grid-row: span 4; }
+    .proof-section .ps-tile.t6{ grid-column: span 6; grid-row: span 4; }
+    .proof-section .ps-tile.t7{ grid-column: span 12; grid-row: span 4; }
   }
 
   @media (max-width: 720px){
@@ -2234,7 +2237,8 @@ export default function Page() {
     .proof-section .ps-tile.t3,
     .proof-section .ps-tile.t4,
     .proof-section .ps-tile.t5,
-    .proof-section .ps-tile.t6{
+    .proof-section .ps-tile.t6,
+    .proof-section .ps-tile.t7{
       grid-column: span 1; grid-row: auto;
     }
     .proof-section .ps-tile .ps-frame{ aspect-ratio: 4/3; }
@@ -3438,7 +3442,7 @@ export default function Page() {
     <h3 class="ps-receipts-title">The <em>Receipts.</em></h3>
     <div class="ps-receipts-meta">
       Field Notes <b>·</b> 2024&ndash;2026<br>
-      Six Frames <b>·</b> Verified
+      Seven Frames <b>·</b> Verified
     </div>
   </div>
 
@@ -3474,16 +3478,23 @@ export default function Page() {
 
     <figure class="ps-tile t5">
       <div class="ps-frame">
-        <img src="/images/proof-floyd-mayweather.jpg?v=1" alt="Benji Boyce with Floyd Mayweather" loading="lazy">
+        <img src="/images/lifestyle-mclaren.jpg?v=7" alt="Benji Boyce with McLaren — the receipts" loading="lazy">
       </div>
-      <figcaption class="ps-cap">With Floyd Mayweather</figcaption>
+      <figcaption class="ps-cap">McLaren &middot; The Receipts</figcaption>
     </figure>
 
     <figure class="ps-tile t6">
       <div class="ps-frame">
-        <img src="/images/hero-throne.jpg?v=5" alt="Benji Boyce — built on AI" loading="lazy">
+        <img src="/images/hero-throne.jpg?v=7" alt="Benji Boyce in the king's chair with gold chains" loading="lazy">
       </div>
-      <figcaption class="ps-cap">Built On AI &middot; 2026</figcaption>
+      <figcaption class="ps-cap">The King&rsquo;s Chair &middot; Built On AI</figcaption>
+    </figure>
+
+    <figure class="ps-tile t7" id="proof-floyd">
+      <div class="ps-frame">
+        <img src="/images/proof-floyd-mayweather.jpg?v=1" alt="Benji Boyce with Floyd Mayweather" loading="lazy">
+      </div>
+      <figcaption class="ps-cap">With Floyd Mayweather</figcaption>
     </figure>
 
   </div>
