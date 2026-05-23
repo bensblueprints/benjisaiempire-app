@@ -13,6 +13,15 @@ type Site = {
 
 const SITES: Site[] = [
   {
+    name: "Lees Ferry On The Fly",
+    url: "https://leesferryonthefly.com",
+    domain: "leesferryonthefly.com",
+    tagline:
+      "Guided fly fishing & kayak shuttle on the Colorado River at Lees Ferry, AZ — bookings, trips, and river intel.",
+    category: "OUTDOOR · GUIDE",
+    slug: "lees-ferry-on-the-fly",
+  },
+  {
     name: "FDH Machinery",
     url: "https://fdh-installations.com",
     domain: "fdh-installations.com",

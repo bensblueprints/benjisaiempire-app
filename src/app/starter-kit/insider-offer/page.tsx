@@ -282,8 +282,8 @@ export default function Page() {
       <div class="proof__rail">Receipts</div>
       <div class="proof__numbers">
         <div class="proof__stat">
-          <p class="proof__big">$2.8M</p>
-          <p class="proof__label">Shopify Revenue Tracked</p>
+          <p class="proof__big">$25M+</p>
+          <p class="proof__label">Ecommerce Sales</p>
         </div>
         <div class="proof__stat">
           <p class="proof__big">250K+</p>

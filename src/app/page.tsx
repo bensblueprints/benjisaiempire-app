@@ -2051,13 +2051,13 @@ export default function Page() {
   .proof-section .ps-stat[data-counter] .ps-stat-num .ps-value::after{
     content: counter(ps-c);
   }
-  .proof-section .ps-stats.is-inview .ps-stat[data-counter='28'] .ps-stat-num .ps-value{
-    animation: ps-up-28 1800ms cubic-bezier(.22,1,.36,1) forwards;
+  .proof-section .ps-stats.is-inview .ps-stat[data-counter='25'] .ps-stat-num .ps-value{
+    animation: ps-up-25 1800ms cubic-bezier(.22,1,.36,1) forwards;
   }
   .proof-section .ps-stats.is-inview .ps-stat[data-counter='250'] .ps-stat-num .ps-value{
     animation: ps-up-250 1800ms cubic-bezier(.22,1,.36,1) forwards;
   }
-  @keyframes ps-up-28 { from{--pscount:0;} to{--pscount:28;} }
+  @keyframes ps-up-25 { from{--pscount:0;} to{--pscount:25;} }
   @keyframes ps-up-250 { from{--pscount:0;} to{--pscount:250;} }
 
   /* ──── RECEIPTS GALLERY ────────────────────────────────────────────────────────────────────────────── */
@@ -2253,7 +2253,7 @@ export default function Page() {
     .proof-section .ps-stats.is-inview .ps-stat .ps-stat-num .ps-value{
       animation:none !important;
     }
-    .proof-section .ps-stat[data-counter='28'] .ps-value::after{ content:"2.8"; }
+    .proof-section .ps-stat[data-counter='25'] .ps-value::after{ content:"25"; }
     .proof-section .ps-stat[data-counter='250'] .ps-value::after{ content:"250"; }
   }
 
@@ -3128,13 +3128,13 @@ export default function Page() {
       </div>
       <div>
         <p class="courses-lede">
-          The <strong>30 Day AI Website Empire Challenge</strong> is the flagship — learn the stack, then 100 dials a day for 30 days. Plus four skill courses, every prompt and script, GoHighLevel included.
+          The <strong>30 Day AI Website Empire Challenge</strong> is the flagship — learn the stack, then 100 dials a day for 30 days. Four skill courses live now, three more dropping soon. Every prompt, script, and GoHighLevel included.
           <em>All for nine dollars a month.</em>
         </p>
         <div class="courses-meta-row">
           <span><strong>01</strong>Flagship challenge</span>
-          <span><strong>04</strong>Skill courses</span>
-          <span><strong>3,000</strong>Dials in 30 days</span>
+          <span><strong>04</strong>Live courses</span>
+          <span><strong>03</strong>Coming soon</span>
           <span><strong>$9</strong>/mo</span>
         </div>
       </div>
@@ -3143,7 +3143,7 @@ export default function Page() {
     <div class="courses-grid">
 
       <!-- 01 / FLAGSHIP — 30 Day AI Website Empire Challenge -->
-      <a class="tile tile-01" style="--i:0" href="/learn/30-day-ai-website-empire-challenge" aria-label="30 Day AI Website Empire Challenge">
+      <a class="tile tile-01 is-in" style="--i:0" href="/learn/30-day-ai-website-empire-challenge" aria-label="30 Day AI Website Empire Challenge">
         <span class="tile__numeral" aria-hidden="true">01</span>
         <div class="tile__photo">
           <img src="/images/course-marketing-engine.jpg?v=5" alt="30 Day AI Website Empire Challenge" loading="lazy">
@@ -3165,7 +3165,7 @@ export default function Page() {
       </a>
 
       <!-- 02 / COURSE — Cold Calling 2.0 + AI -->
-      <a class="tile tile-02" style="--i:1" href="/courses/cold-calling/" aria-label="Cold Calling 2.0 + AI — course">
+      <a class="tile tile-02 is-in" style="--i:1" href="/courses/cold-calling/" aria-label="Cold Calling 2.0 + AI — course">
         <span class="tile__numeral" aria-hidden="true">02</span>
         <div class="tile__photo">
           <img src="/images/course-cold-calling.jpg?v=5" alt="Cold Calling 2.0 + AI course" loading="lazy">
@@ -3187,7 +3187,7 @@ export default function Page() {
       </a>
 
       <!-- 03 / COURSE — AI Marketing Engine (full-bleed spread) -->
-      <a class="tile tile-03" style="--i:2" href="/courses/marketing-engine/" aria-label="AI Marketing Engine — course">
+      <a class="tile tile-03 is-in" style="--i:2" href="/courses/marketing-engine/" aria-label="AI Marketing Engine — course">
         <span class="tile__numeral" aria-hidden="true">03</span>
         <div class="tile__photo">
           <img src="/images/course-marketing-engine.jpg?v=5" alt="AI Marketing Engine course" loading="lazy">
@@ -3209,7 +3209,7 @@ export default function Page() {
       </a>
 
       <!-- 04 / COURSE — AI Brand Builder -->
-      <a class="tile tile-04" style="--i:3" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
+      <a class="tile tile-04 is-in" style="--i:3" href="/courses/brand-builder/" aria-label="AI Brand Builder — course">
         <span class="tile__numeral" aria-hidden="true">04</span>
         <div class="tile__photo">
           <img src="/images/course-brand-builder.jpg?v=5" alt="AI Brand Builder course" loading="lazy">
@@ -3231,7 +3231,7 @@ export default function Page() {
       </a>
 
       <!-- 05 / COURSE — Empire OS -->
-      <a class="tile tile-05" style="--i:4" href="/courses/empire-os/" aria-label="Empire OS — course">
+      <a class="tile tile-05 is-in" style="--i:4" href="/courses/empire-os/" aria-label="Empire OS — course">
         <span class="tile__numeral" aria-hidden="true">05</span>
         <div class="tile__photo">
           <img src="/images/course-empire-os.jpg?v=throne" alt="Empire OS course" loading="lazy">
@@ -3252,8 +3252,82 @@ export default function Page() {
         </div>
       </a>
 
+      <div class="courses-soon-head">
+        <p class="courses-soon-head__eyebrow">Dropping inside Insider</p>
+        <h3 class="courses-soon-head__title">Coming Soon</h3>
+      </div>
+
+      <!-- 07 / COMING SOON — AI Brand Launch -->
+      <article class="tile tile-07 tile--soon is-in" style="--i:6" aria-label="AI Brand Launch — coming soon">
+        <span class="tile__numeral" aria-hidden="true">07</span>
+        <div class="tile__photo">
+          <span class="tile__soon-badge">Coming Soon</span>
+          <img src="/images/course-brand-builder.jpg?v=7" alt="AI Brand Launch course preview" loading="lazy">
+        </div>
+        <div class="tile__copy">
+          <div class="tile__kicker">
+            <span class="index">N&deg; 07</span>
+            <span class="rule"></span>
+            <span class="type">Course &middot; Soon</span>
+          </div>
+          <h3 class="tile__title">AI Brand Launch</h3>
+          <p class="tile__tagline">&ldquo;Build a physical product brand with AI.&rdquo;</p>
+          <p class="tile__body">Packaging, labels, mockups, and launch creative &mdash; from blank SKU to shelf-ready brand without a design agency.</p>
+          <div class="tile__footer">
+            <span class="tile__meta">Insider $9/mo</span>
+            <span class="tile__cta">Coming soon</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 08 / COMING SOON — AI Film Director -->
+      <article class="tile tile-08 tile--soon is-in" style="--i:7" aria-label="AI Film Director — coming soon">
+        <span class="tile__numeral" aria-hidden="true">08</span>
+        <div class="tile__photo">
+          <span class="tile__soon-badge">Coming Soon</span>
+          <img src="/images/course-marketing-engine.jpg?v=7" alt="AI Film Director course preview" loading="lazy">
+        </div>
+        <div class="tile__copy">
+          <div class="tile__kicker">
+            <span class="index">N&deg; 08</span>
+            <span class="rule"></span>
+            <span class="type">Course &middot; Soon</span>
+          </div>
+          <h3 class="tile__title">AI Film Director</h3>
+          <p class="tile__tagline">&ldquo;Cinematic commercials &amp; short films with AI.&rdquo;</p>
+          <p class="tile__body">Storyboard, shot list, prompts, and edit rhythm for ads that look like you hired a crew &mdash; from your phone.</p>
+          <div class="tile__footer">
+            <span class="tile__meta">Insider $9/mo</span>
+            <span class="tile__cta">Coming soon</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 09 / COMING SOON — AI Print Designer -->
+      <article class="tile tile-09 tile--soon is-in" style="--i:8" aria-label="AI Print Designer — coming soon">
+        <span class="tile__numeral" aria-hidden="true">09</span>
+        <div class="tile__photo">
+          <span class="tile__soon-badge">Coming Soon</span>
+          <img src="/images/course-dev-rig.jpg?v=7" alt="AI Print Designer course preview" loading="lazy">
+        </div>
+        <div class="tile__copy">
+          <div class="tile__kicker">
+            <span class="index">N&deg; 09</span>
+            <span class="rule"></span>
+            <span class="type">Course &middot; Soon</span>
+          </div>
+          <h3 class="tile__title">AI Print Designer</h3>
+          <p class="tile__tagline">&ldquo;Clients from Facebook groups. Residual print income.&rdquo;</p>
+          <p class="tile__body">Win local businesses in FB groups, sell merch &amp; print design, and stack recurring orders with AI mockups.</p>
+          <div class="tile__footer">
+            <span class="tile__meta">Insider $9/mo</span>
+            <span class="tile__cta">Coming soon</span>
+          </div>
+        </div>
+      </article>
+
       <!-- 06 / FLAGSHIP CTA — Day 1 (closing spread) -->
-      <a class="tile tile-06" style="--i:5" href="/learn/30-day-ai-website-empire-challenge" aria-label="30 Day AI Website Empire Challenge — start Day 1">
+      <a class="tile tile-06 is-in" style="--i:9" href="/learn/30-day-ai-website-empire-challenge" aria-label="30 Day AI Website Empire Challenge — start Day 1">
         <span class="tile__numeral" aria-hidden="true">06</span>
         <div class="tile__photo">
           <img src="/images/broll-bangkok.jpg?v=5" alt="30 Day AI Website Empire Challenge" loading="lazy">
@@ -3328,22 +3402,22 @@ export default function Page() {
 
     <aside class="ps-anchor">
       <div class="ps-anchor-frame">
-        <img src="/images/headshot-mural.jpg?v=5" alt="Ben in front of a street-art mural in Bangkok" loading="lazy">
+        <img src="/images/hero-throne.jpg?v=7" alt="Benji Boyce in the king's chair" loading="lazy">
       </div>
       <div class="ps-anchor-cap">
-        Bangkok &middot; Street Lab
-        <small>Field Office &middot; 2025</small>
+        The King&rsquo;s Chair &middot; Built On AI
+        <small>Operator Portrait &middot; 2026</small>
       </div>
     </aside>
   </div>
 
   <!-- ZONE 4 · STATS REGISTER -->
   <div class="ps-stats" id="ps-stats">
-    <div class="ps-stat" data-counter="28">
+    <div class="ps-stat" data-counter="25">
       <div class="ps-stat-num">
-        <span class="ps-prefix">$</span><span class="ps-value">2.8</span><span class="ps-suffix">M</span>
+        <span class="ps-prefix">$</span><span class="ps-value">25</span><span class="ps-suffix">M+</span>
       </div>
-      <div class="ps-stat-label">Shopify <b>·</b> All Stores <b>·</b> 90 Days</div>
+      <div class="ps-stat-label">Ecommerce Sales <b>·</b> All Stores</div>
     </div>
     <div class="ps-stat" data-counter="250">
       <div class="ps-stat-num">
@@ -3372,9 +3446,9 @@ export default function Page() {
 
     <figure class="ps-tile t1">
       <div class="ps-frame">
-        <img src="/images/proof-shopify-2-8m.jpg?v=6" alt="Shopify dashboard showing $2.8M revenue and 250K+ orders across stores" loading="lazy">
+        <img src="/images/proof-shopify-2-8m.jpg?v=7" alt="Shopify Plus dashboard — ecommerce revenue proof" loading="lazy">
       </div>
-      <figcaption class="ps-cap">$2.8M &middot; 250K+ Orders &middot; Shopify</figcaption>
+      <figcaption class="ps-cap">Shopify Plus Dashboard &middot; Verified</figcaption>
     </figure>
 
     <figure class="ps-tile t2">
@@ -3400,9 +3474,9 @@ export default function Page() {
 
     <figure class="ps-tile t5">
       <div class="ps-frame">
-        <img src="/images/lifestyle-mclaren.jpg?v=5" alt="McLaren — the receipts" loading="lazy">
+        <img src="/images/proof-floyd-mayweather.jpg?v=1" alt="Benji Boyce with Floyd Mayweather" loading="lazy">
       </div>
-      <figcaption class="ps-cap">McLaren &middot; The Receipts</figcaption>
+      <figcaption class="ps-cap">With Floyd Mayweather</figcaption>
     </figure>
 
     <figure class="ps-tile t6">
@@ -3439,6 +3513,9 @@ export default function Page() {
         });
       }, { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
       tiles.forEach(function (t) { io.observe(t); });
+      setTimeout(function () {
+        tiles.forEach(function (t) { t.classList.add('is-in'); });
+      }, 1200);
     })();`}</Script>
       <Script id="page-init-1" strategy="afterInteractive">{`(function(){
       var stats = document.getElementById('ps-stats');

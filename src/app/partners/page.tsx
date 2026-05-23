@@ -381,7 +381,7 @@ export default function Page() {
             </div>
             <div class="partner-card__what">E-com · the cannabis stack</div>
             <p class="partner-card__why">
-              Runs the cannabis store that did $2.8M last year. Themes are overpriced, apps are
+              Runs the cannabis stores that did $25M+ in ecommerce sales. Themes are overpriced, apps are
               overpriced, but it converts and it doesn't go down on Black Friday.
             </p>
             <span class="partner-card__cta">Visit Shopify</span>

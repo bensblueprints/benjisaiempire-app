@@ -3,7 +3,7 @@
 // Styles already shipped in /public/styles/site.css under .shell-marquee.
 
 const ITEMS: { label: string; tone?: "accent" | "brand" }[] = [
-  { label: "$2.8M All-Stores", tone: "accent" },
+  { label: "$25M+ Ecommerce Sales", tone: "accent" },
   { label: "1B+ Reddit Views", tone: "accent" },
   { label: "250K+ Shopify Orders", tone: "accent" },
   { label: "Forbes", tone: "brand" },
