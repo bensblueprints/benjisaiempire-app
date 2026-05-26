@@ -84,7 +84,7 @@ export default function Page() {
   }
   .pp-list li {
     display: grid;
-    grid-template-columns: 16px 1fr;
+    grid-template-columns: 22px 1fr;
     gap: 12px;
     font-family: 'Fraunces', serif;
     font-size: clamp(15px, 1.1vw, 17px);

@@ -120,11 +120,12 @@ export default function Page() {
     width: 32px; height: 1px; background: var(--gold);
   }
   .wd-loopflo {
-    min-height: 700px;
+    min-height: 800px;
     border: 1px solid var(--line);
     background: #fff;
     border-radius: 2px;
     display: block;
+    width: 100%;
   }
   .wd-what {
     padding: clamp(56px, 7vw, 96px) 0;
@@ -246,7 +247,9 @@ export default function Page() {
                 width="640"
                 height="360"
                 frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
                 title="Free website consultation overview"
               />
             </div>
