@@ -101,6 +101,8 @@ export default function Footer() {
             </span>
             <span className="shell-footer__divider" aria-hidden="true" />
             <span>All Rights Reserved</span>
+            <span className="shell-footer__divider" aria-hidden="true" />
+            <Link className="shell-footer__link" href="/privacy-policy">Privacy Policy</Link>
           </div>
           <span className="shell-footer__tag">Built In Public Since 2024</span>
         </div>
