@@ -83,6 +83,26 @@ export default function Page() {
     display: inline-flex; align-items: center; gap: 8px;
   }
   .wd-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .wd-video-section {
+    padding: clamp(56px, 7vw, 96px) 0;
+    border-top: 1px solid var(--line);
+  }
+  .wd-video-wrap {
+    margin-top: 32px;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .wd-video-wrap iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
   .wd-booking {
     background: var(--ink-2);
     border-top: 1px solid var(--line);
@@ -211,6 +231,24 @@ export default function Page() {
                 <h3>Done in 7 Days</h3>
                 <p>No month-long agency timelines. Book the call Monday, live site by Friday.</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── VIDEO ── */}
+        <section className="wd-video-section">
+          <div className="wd-wrap">
+            <p className="wd-section-head">Watch First</p>
+            <h2 className="wd-h2">See what we <span className="gold">build</span>.</h2>
+            <div className="wd-video-wrap">
+              <iframe
+                src="https://share.descript.com/embed/23nzBqhVAJh"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allowFullScreen
+                title="Free website consultation overview"
+              />
             </div>
           </div>
         </section>
