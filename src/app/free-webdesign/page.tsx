@@ -5,7 +5,7 @@ import CalendlyWidget from "./CalendlyWidget";
 
 export const metadata: Metadata = {
   title: "Free Website for Your Business · Benji's AI Empire",
-  description: "Get a fast, conversion-focused website built for your local business — no upfront cost. Book a free 15-minute consultation.",
+  description: "We build your website before the call. Book a free 15-minute walkthrough and see the finished site — live, ready to launch. No upfront cost.",
   alternates: { canonical: "https://benjisaiempire.com/free-webdesign/" },
   openGraph: {
     title: "Free Website for Your Business",
@@ -119,12 +119,12 @@ export default function Page() {
     content: ""; display: inline-block;
     width: 32px; height: 1px; background: var(--gold);
   }
-  .wd-calendly {
+  .wd-loopflo {
     min-height: 700px;
     border: 1px solid var(--line);
     background: #fff;
     border-radius: 2px;
-    overflow: hidden;
+    display: block;
   }
   .wd-what {
     padding: clamp(56px, 7vw, 96px) 0;
@@ -190,22 +190,22 @@ export default function Page() {
         {/* ── HERO ── */}
         <section className="wd-hero">
           <div className="wd-wrap">
-            <p className="wd-eyebrow">Free · Web Design Consultation</p>
+            <p className="wd-eyebrow">Free · Web Design</p>
             <h1 className="wd-h1">
-              Get a <span className="gold">Free</span><br />
-              Website for<br />
-              <span className="italic">Your Business</span>
+              Your website<br />
+              is <span className="gold">already</span><br />
+              <span className="italic">built.</span>
             </h1>
             <p className="wd-lede">
-              We build fast, conversion-focused websites for local businesses —
-              <strong> no upfront cost.</strong> Book a 15-minute call and we&apos;ll show
-              you exactly what we&apos;d build for you.
+              We build your site <strong>before the call.</strong> Book a 15-minute walkthrough
+              and we&apos;ll show you the finished website — live, on your domain, ready to launch.
+              No commitment. No upfront cost.
             </p>
             <div className="wd-proof">
+              <span className="wd-badge"><span className="dot" aria-hidden="true" />Built before the call</span>
               <span className="wd-badge"><span className="dot" aria-hidden="true" />No upfront cost</span>
-              <span className="wd-badge"><span className="dot" aria-hidden="true" />Done in 7 days</span>
               <span className="wd-badge"><span className="dot" aria-hidden="true" />Local business specialists</span>
-              <span className="wd-badge"><span className="dot" aria-hidden="true" />15-min call</span>
+              <span className="wd-badge"><span className="dot" aria-hidden="true" />15-min walkthrough</span>
             </div>
           </div>
         </section>
@@ -213,23 +213,23 @@ export default function Page() {
         {/* ── WHAT YOU GET ── */}
         <section className="wd-what">
           <div className="wd-wrap">
-            <p className="wd-section-head">What You Get</p>
-            <h2 className="wd-h2">Everything to <span className="gold">convert</span> visitors.</h2>
+            <p className="wd-section-head">How It Works</p>
+            <h2 className="wd-h2">See it <span className="gold">live</span> before you decide.</h2>
             <div className="wd-what__grid">
               <div className="wd-card">
                 <div className="wd-card__num">01</div>
-                <h3>Fast &amp; Mobile-First</h3>
-                <p>Built for speed on every device. A slow site loses customers before they read a word.</p>
+                <h3>We Build It First</h3>
+                <p>We research your business and build your full website before you ever get on a call with us.</p>
               </div>
               <div className="wd-card">
                 <div className="wd-card__num">02</div>
-                <h3>Lead Capture Built In</h3>
-                <p>Contact forms, click-to-call buttons, and booking widgets wired up on day one.</p>
+                <h3>You See It Live</h3>
+                <p>On the 15-minute walkthrough we show you the finished site — real copy, real design, ready to launch.</p>
               </div>
               <div className="wd-card">
                 <div className="wd-card__num">03</div>
-                <h3>Done in 7 Days</h3>
-                <p>No month-long agency timelines. Book the call Monday, live site by Friday.</p>
+                <h3>You Decide</h3>
+                <p>Love it? We hand it over. Not quite right? We revise. No commitment, no upfront cost.</p>
               </div>
             </div>
           </div>
@@ -256,8 +256,8 @@ export default function Page() {
         {/* ── CALENDLY BOOKING ── */}
         <section className="wd-booking">
           <div className="wd-wrap">
-            <p className="wd-booking__label">Book Your Free Call</p>
-            <CalendlyWidget url="https://calendly.com/ben-advancedmarketing/free-website-consultation" />
+            <p className="wd-booking__label">Book Your Free Walkthrough</p>
+            <CalendlyWidget />
           </div>
         </section>
       </main>
