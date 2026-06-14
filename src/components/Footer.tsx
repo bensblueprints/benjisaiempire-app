@@ -90,6 +90,12 @@ export default function Footer() {
                   <span className="shell-footer__link-meta">YouTube</span>
                 </a>
               </li>
+              <li>
+                <Link className="shell-footer__link" href="/podcast">
+                  Up For AI Debate{" "}
+                  <span className="shell-footer__link-meta">Podcast</span>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
