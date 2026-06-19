@@ -16,6 +16,8 @@ RUN npm run build
 
 FROM base AS runner
 ENV NODE_ENV=production
+# yt-dlp + ffmpeg power the JARVIS shorts downloader (YouTube/Instagram/Facebook).
+RUN apk add --no-cache yt-dlp ffmpeg
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
